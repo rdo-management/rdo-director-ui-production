@@ -1,0 +1,1 @@
+window.tripleOUiConfig = {"keystone_url":"http://tripleo-04.tripleo.lab.eng.bos.redhat.com:5000/v2.0","tripleo_api_url":"http://tripleo-04.tripleo.lab.eng.bos.redhat.com:8585/v1","validations_url":"http://tripleo-04.tripleo.lab.eng.bos.redhat.com:5001/v1","heat_api_url":"http://tripleo-04.tripleo.lab.eng.bos.redhat.com:8004/v1"};
