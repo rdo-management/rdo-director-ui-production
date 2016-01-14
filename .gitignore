@@ -1,3 +1,6 @@
+app.conf
+/static/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -55,3 +58,4 @@ docs/_build/
 
 # PyBuilder
 target/
+tripleo_ui/static/js/tripleo_ui_config.js
