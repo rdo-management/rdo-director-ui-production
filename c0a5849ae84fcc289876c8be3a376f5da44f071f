@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa81d914_b23fc8d5",
+        "filename": "README.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003878
+      },
+      "writtenOn": "2016-01-19T14:15:49Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "c0a5849ae84fcc289876c8be3a376f5da44f071f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa81d914_723550f6",
+        "filename": "setup.cfg",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003878
+      },
+      "writtenOn": "2016-01-19T14:15:49Z",
+      "side": 1,
+      "message": "remove the whitespace",
+      "revId": "c0a5849ae84fcc289876c8be3a376f5da44f071f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
