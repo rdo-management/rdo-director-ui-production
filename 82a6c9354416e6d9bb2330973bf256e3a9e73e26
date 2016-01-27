@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fa81d914_2ecc33bc",
+        "filename": "rdo_director_ui/__init__.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006073
+      },
+      "writtenOn": "2016-01-27T14:43:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa81d914_b120894a",
+      "revId": "82a6c9354416e6d9bb2330973bf256e3a9e73e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa81d914_9d871ed7",
         "filename": "rdo_director_ui/templates/index.html",
         "patchSetId": 7
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "fa81d914_8e47df1c",
+        "filename": "rdo_director_ui/templates/index.html",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1006073
+      },
+      "writtenOn": "2016-01-27T14:43:59Z",
+      "side": 1,
+      "message": "If we change this, I\u0027d rather do it in the original frontend application project first (which this project will strictly follow as far as the frontend sources go).",
+      "parentUuid": "fa81d914_9d871ed7",
+      "range": {
+        "startLine": 4,
+        "startChar": 10,
+        "endLine": 4,
+        "endChar": 17
+      },
+      "revId": "82a6c9354416e6d9bb2330973bf256e3a9e73e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa81d914_11c07529",
         "filename": "requirements.txt",
         "patchSetId": 7
@@ -53,6 +95,24 @@
       "writtenOn": "2016-01-27T10:25:20Z",
       "side": 1,
       "message": "It might be a good idea to match the versions here: https://github.com/openstack/requirements/blob/master/global-requirements.txt",
+      "revId": "82a6c9354416e6d9bb2330973bf256e3a9e73e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa81d914_0ed5af42",
+        "filename": "requirements.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1006073
+      },
+      "writtenOn": "2016-01-27T14:43:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa81d914_11c07529",
       "revId": "82a6c9354416e6d9bb2330973bf256e3a9e73e26",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
