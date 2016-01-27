@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "fa81d914_ce1637f1",
+        "filename": "rdo_director_ui/templates/index.html",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1003514
+      },
+      "writtenOn": "2016-01-27T14:56:04Z",
+      "side": 1,
+      "message": "Good point.",
+      "parentUuid": "fa81d914_8e47df1c",
+      "range": {
+        "startLine": 4,
+        "startChar": 10,
+        "endLine": 4,
+        "endChar": 17
+      },
+      "revId": "82a6c9354416e6d9bb2330973bf256e3a9e73e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa81d914_11c07529",
         "filename": "requirements.txt",
         "patchSetId": 7
