@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da86d52c_4c570f03",
+        "filename": "setup.cfg",
+        "patchSetId": 11
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1004021
+      },
+      "writtenOn": "2016-02-15T15:10:03Z",
+      "side": 1,
+      "message": "The name should probably be tripleo-ui. Most, if not all, openstack projects use that convention. Example: https://github.com/openstack/python-tripleoclient/blob/master/setup.cfg#L2",
+      "revId": "2c8ecdae21c0657cb63fc2b7c481f854a639fe4e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
