@@ -74,37 +74,33 @@
 	
 	var _AuthenticatedContent2 = _interopRequireDefault(_AuthenticatedContent);
 	
-	var _DeletePlan = __webpack_require__(720);
+	var _DeletePlan = __webpack_require__(725);
 	
 	var _DeletePlan2 = _interopRequireDefault(_DeletePlan);
 	
-	var _IntrospectedNodesTabPane = __webpack_require__(721);
-	
-	var _IntrospectedNodesTabPane2 = _interopRequireDefault(_IntrospectedNodesTabPane);
-	
-	var _DeploymentConfiguration = __webpack_require__(736);
+	var _DeploymentConfiguration = __webpack_require__(726);
 	
 	var _DeploymentConfiguration2 = _interopRequireDefault(_DeploymentConfiguration);
 	
-	var _DeploymentPlan = __webpack_require__(737);
+	var _DeploymentPlan = __webpack_require__(727);
 	
 	var _DeploymentPlan2 = _interopRequireDefault(_DeploymentPlan);
 	
-	var _EditPlan = __webpack_require__(758);
+	var _EditPlan = __webpack_require__(755);
 	
 	var _EditPlan2 = _interopRequireDefault(_EditPlan);
 	
-	var _EnvironmentConfiguration = __webpack_require__(764);
+	var _EnvironmentConfiguration = __webpack_require__(769);
 	
 	var _EnvironmentConfiguration2 = _interopRequireDefault(_EnvironmentConfiguration);
 	
-	var _plans = __webpack_require__(738);
+	var _stacks = __webpack_require__(729);
 	
-	var _ListPlans = __webpack_require__(772);
+	var _ListPlans = __webpack_require__(776);
 	
 	var _ListPlans2 = _interopRequireDefault(_ListPlans);
 	
-	var _Login = __webpack_require__(774);
+	var _Login = __webpack_require__(783);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
@@ -112,43 +108,43 @@
 	
 	var _LoginActions2 = _interopRequireDefault(_LoginActions);
 	
-	var _MaintenanceNodesTabPane = __webpack_require__(776);
+	var _MaintenanceNodesTabPane = __webpack_require__(785);
 	
 	var _MaintenanceNodesTabPane2 = _interopRequireDefault(_MaintenanceNodesTabPane);
 	
-	var _NewPlan = __webpack_require__(777);
+	var _NewPlan = __webpack_require__(787);
 	
 	var _NewPlan2 = _interopRequireDefault(_NewPlan);
 	
-	var _Nodes = __webpack_require__(780);
+	var _Nodes = __webpack_require__(790);
 	
 	var _Nodes2 = _interopRequireDefault(_Nodes);
 	
-	var _NodesAssignment = __webpack_require__(781);
+	var _NodesAssignment = __webpack_require__(791);
 	
 	var _NodesAssignment2 = _interopRequireDefault(_NodesAssignment);
 	
-	var _NotificationActions = __webpack_require__(665);
+	var _NotificationActions = __webpack_require__(666);
 	
 	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
 	
-	var _Parameters = __webpack_require__(782);
+	var _Parameters = __webpack_require__(792);
 	
 	var _Parameters2 = _interopRequireDefault(_Parameters);
 	
-	var _Plans = __webpack_require__(790);
+	var _Plans = __webpack_require__(800);
 	
 	var _Plans2 = _interopRequireDefault(_Plans);
 	
-	var _ProvisionedNodesTabPane = __webpack_require__(791);
+	var _DeployedNodesTabPane = __webpack_require__(801);
 	
-	var _ProvisionedNodesTabPane2 = _interopRequireDefault(_ProvisionedNodesTabPane);
+	var _DeployedNodesTabPane2 = _interopRequireDefault(_DeployedNodesTabPane);
 	
-	var _RegisterNodesDialog = __webpack_require__(792);
+	var _RegisterNodesDialog = __webpack_require__(802);
 	
 	var _RegisterNodesDialog2 = _interopRequireDefault(_RegisterNodesDialog);
 	
-	var _RegisteredNodesTabPane = __webpack_require__(799);
+	var _RegisteredNodesTabPane = __webpack_require__(810);
 	
 	var _RegisteredNodesTabPane2 = _interopRequireDefault(_RegisteredNodesTabPane);
 	
@@ -156,7 +152,7 @@
 	
 	var _TempStorage2 = _interopRequireDefault(_TempStorage);
 	
-	var _store = __webpack_require__(681);
+	var _store = __webpack_require__(682);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -182,8 +178,8 @@
 	
 	  function checkRunningDeployment(nextState, replaceState) {
 	    var state = _store2.default.getState();
-	    var currentPlanName = state.plans.currentPlanName;
-	    if ((0, _plans.getCurrentStackDeploymentProgress)(state)) {
+	    var currentPlanName = state.currentPlan.currentPlanName;
+	    if ((0, _stacks.getCurrentStackDeploymentProgress)(state)) {
 	      _store2.default.dispatch(_NotificationActions2.default.notify({
 	        title: 'Not allowed',
 	        message: 'A deployment for the plan ' + currentPlanName + ' is already in progress.',
@@ -217,7 +213,9 @@
 	            _react2.default.createElement(_reactRouter.Route, { path: 'environment', component: _EnvironmentConfiguration2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'parameters', component: _Parameters2.default })
 	          ),
-	          _react2.default.createElement(_reactRouter.Route, { path: ':roleName/assignNodes', component: _NodesAssignment2.default, onEnter: checkRunningDeployment })
+	          _react2.default.createElement(_reactRouter.Route, { path: ':roleName/assignNodes',
+	            component: _NodesAssignment2.default,
+	            onEnter: checkRunningDeployment })
 	        ),
 	        _react2.default.createElement(_reactRouter.Redirect, { from: 'nodes', to: 'nodes/registered' }),
 	        _react2.default.createElement(
@@ -228,8 +226,7 @@
 	            { path: 'registered', component: _RegisteredNodesTabPane2.default },
 	            _react2.default.createElement(_reactRouter.Route, { path: 'register', component: _RegisterNodesDialog2.default })
 	          ),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'introspected', component: _IntrospectedNodesTabPane2.default }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'provisioned', component: _ProvisionedNodesTabPane2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'deployed', component: _DeployedNodesTabPane2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'maintenance', component: _MaintenanceNodesTabPane2.default })
 	        ),
 	        _react2.default.createElement(_reactRouter.Redirect, { from: 'plans', to: 'plans/list' }),
@@ -37675,19 +37672,19 @@
 	
 	var _LoginActions2 = _interopRequireDefault(_LoginActions);
 	
-	var _NavBar = __webpack_require__(708);
+	var _NavBar = __webpack_require__(713);
 	
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 	
-	var _NotificationsToaster = __webpack_require__(710);
+	var _NotificationsToaster = __webpack_require__(715);
 	
 	var _NotificationsToaster2 = _interopRequireDefault(_NotificationsToaster);
 	
-	var _ValidationsActions = __webpack_require__(712);
+	var _ValidationsActions = __webpack_require__(717);
 	
 	var _ValidationsActions2 = _interopRequireDefault(_ValidationsActions);
 	
-	var _ValidationsList = __webpack_require__(716);
+	var _ValidationsList = __webpack_require__(721);
 	
 	var _ValidationsList2 = _interopRequireDefault(_ValidationsList);
 	
@@ -37782,6 +37779,7 @@
 	                    runValidationStage: this.props.runValidationStage,
 	                    runValidation: this.props.runValidation,
 	                    stopValidation: this.props.stopValidation,
+	                    toggleValidationStageVisibility: this.props.toggleValidationStageVisibility,
 	                    validationStages: this.props.validationStages })
 	                )
 	              )
@@ -37808,6 +37806,7 @@
 	  runValidation: _react2.default.PropTypes.func.isRequired,
 	  runValidationStage: _react2.default.PropTypes.func.isRequired,
 	  stopValidation: _react2.default.PropTypes.func.isRequired,
+	  toggleValidationStageVisibility: _react2.default.PropTypes.func.isRequired,
 	  user: _reactImmutableProptypes2.default.map,
 	  validationStages: _reactImmutableProptypes2.default.map.isRequired,
 	  validationStagesLoaded: _react2.default.PropTypes.bool.isRequired,
@@ -37830,6 +37829,9 @@
 	    },
 	    logoutUser: function logoutUser() {
 	      return dispatch(_LoginActions2.default.logoutUser());
+	    },
+	    toggleValidationStageVisibility: function toggleValidationStageVisibility(uuid) {
+	      dispatch(_ValidationsActions2.default.toggleValidationStageVisibility(uuid));
 	    }
 	  };
 	};
@@ -43029,7 +43031,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.getValidationsStatusCounts = exports.getValidationStages = undefined;
+	exports.getValidationStageUuidByName = exports.getValidationStageByName = exports.getValidationsStatusCounts = exports.getValidationStages = undefined;
 	
 	var _reselect = __webpack_require__(558);
 	
@@ -43066,6 +43068,21 @@
 	    return validation.status;
 	  }));
 	});
+	
+	var getValidationStageByName = exports.getValidationStageByName = function getValidationStageByName(validationStages, name) {
+	  return validationStages.find(function (stage) {
+	    return stage.get('stage') === name;
+	  });
+	};
+	
+	var getValidationStageUuidByName = exports.getValidationStageUuidByName = function getValidationStageUuidByName(validationStages, name) {
+	  var validation = getValidationStageByName(validationStages, name);
+	  if (validation) {
+	    return validation.get('uuid');
+	  } else {
+	    return validation;
+	  }
+	};
 
 /***/ },
 /* 558 */
@@ -43202,6 +43219,7 @@
 	var ValidationStage = exports.ValidationStage = (0, _immutable.Record)({
 	  description: '',
 	  name: '',
+	  visible: false,
 	  stage: '',
 	  status: '',
 	  uuid: '',
@@ -63046,31 +63064,31 @@
 	
 	var _normalizr = __webpack_require__(597);
 	
+	var _CurrentPlanActions = __webpack_require__(665);
+	
+	var _CurrentPlanActions2 = _interopRequireDefault(_CurrentPlanActions);
+	
 	var _history = __webpack_require__(551);
 	
 	var _history2 = _interopRequireDefault(_history);
 	
-	var _NotificationActions = __webpack_require__(665);
+	var _NotificationActions = __webpack_require__(666);
 	
 	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
 	
-	var _PlansConstants = __webpack_require__(677);
+	var _PlansConstants = __webpack_require__(678);
 	
 	var _PlansConstants2 = _interopRequireDefault(_PlansConstants);
 	
-	var _plans = __webpack_require__(678);
+	var _plans = __webpack_require__(679);
 	
-	var _TripleOApiService = __webpack_require__(679);
+	var _TripleOApiService = __webpack_require__(680);
 	
 	var _TripleOApiService2 = _interopRequireDefault(_TripleOApiService);
 	
-	var _TripleOApiErrorHandler = __webpack_require__(706);
+	var _TripleOApiErrorHandler = __webpack_require__(712);
 	
 	var _TripleOApiErrorHandler2 = _interopRequireDefault(_TripleOApiErrorHandler);
-	
-	var _HeatApiService = __webpack_require__(707);
-	
-	var _HeatApiService2 = _interopRequireDefault(_HeatApiService);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -63086,63 +63104,19 @@
 	      payload: plans
 	    };
 	  },
-	  planDetected: function planDetected(currentPlanName, conflict) {
-	    return {
-	      type: _PlansConstants2.default.PLAN_DETECTED,
-	      payload: {
-	        currentPlanName: currentPlanName,
-	        conflict: conflict
-	      }
-	    };
-	  },
-	  detectPlan: function detectPlan(plans) {
+	  fetchPlans: function fetchPlans() {
 	    var _this = this;
 	
-	    return function (dispatch, getState) {
-	      var state = getState();
-	      var plans = state.plans.get('all').map(function (plan) {
-	        return plan.get('name');
-	      });
-	      var conflict = void 0;
-	      var currentPlanName = state.plans.get('currentPlanName');
-	      var previousPlan = currentPlanName || getStoredPlan();
-	      // No plans present.
-	      if (plans.size < 1) {
-	        if (!previousPlan) {
-	          currentPlanName = undefined;
-	        }
-	      }
-	      // Plans present.
-	      // No previously chosen plan.
-	      else if (!previousPlan) {
-	          currentPlanName = plans.first();
-	        }
-	        // Previously chosen plan doesn't exist any more.
-	        else if (!plans.includes(previousPlan)) {
-	            conflict = previousPlan;
-	            currentPlanName = plans.first();
-	          }
-	          // No plan in state, but in localStorage
-	          else if (!currentPlanName && previousPlan) {
-	              currentPlanName = previousPlan;
-	            }
-	      storePlan(currentPlanName);
-	      dispatch(_this.planDetected(currentPlanName, conflict));
-	    };
-	  },
-	  fetchPlans: function fetchPlans() {
-	    var _this2 = this;
-	
 	    return function (dispatch) {
-	      dispatch(_this2.requestPlans());
+	      dispatch(_this.requestPlans());
 	      _TripleOApiService2.default.getPlans().then(function (response) {
 	        var normalizedData = (0, _normalizr.normalize)(response.plans, (0, _normalizr.arrayOf)(_plans.planSchema));
-	        dispatch(_this2.receivePlans(normalizedData));
-	        dispatch(_this2.detectPlan(normalizedData));
+	        dispatch(_this.receivePlans(normalizedData));
+	        dispatch(_CurrentPlanActions2.default.detectPlan(normalizedData));
 	      }).catch(function (error) {
 	        console.error('Error retrieving plans PlansActions.fetchPlans', error.stack || error); //eslint-disable-line no-console
-	        dispatch(_this2.receivePlans((0, _normalizr.normalize)([], (0, _normalizr.arrayOf)(_plans.planSchema))));
-	        dispatch(_this2.detectPlan((0, _normalizr.normalize)([], (0, _normalizr.arrayOf)(_plans.planSchema))));
+	        dispatch(_this.receivePlans((0, _normalizr.normalize)([], (0, _normalizr.arrayOf)(_plans.planSchema))));
+	        dispatch(_CurrentPlanActions2.default.detectPlan((0, _normalizr.normalize)([], (0, _normalizr.arrayOf)(_plans.planSchema))));
 	        var errorHandler = new _TripleOApiErrorHandler2.default(error);
 	        errorHandler.errors.forEach(function (error) {
 	          dispatch(_NotificationActions2.default.notify(error));
@@ -63162,12 +63136,12 @@
 	    };
 	  },
 	  fetchPlan: function fetchPlan(planName) {
-	    var _this3 = this;
+	    var _this2 = this;
 	
 	    return function (dispatch) {
-	      dispatch(_this3.requestPlan());
+	      dispatch(_this2.requestPlan());
 	      _TripleOApiService2.default.getPlan(planName).then(function (response) {
-	        dispatch(_this3.receivePlan(response.plan));
+	        dispatch(_this2.receivePlan(response.plan));
 	      }).catch(function (error) {
 	        console.error('Error retrieving plan PlansActions.fetchPlan', error); //eslint-disable-line no-console
 	        var errorHandler = new _TripleOApiErrorHandler2.default(error);
@@ -63175,25 +63149,6 @@
 	          dispatch(_NotificationActions2.default.notify(error));
 	        });
 	      });
-	    };
-	  },
-	  choosePlan: function choosePlan(planName) {
-	    var _this4 = this;
-	
-	    return function (dispatch) {
-	      dispatch(_NotificationActions2.default.notify({
-	        title: 'Plan Activated',
-	        message: 'The plan ' + planName + ' was activated.',
-	        type: 'success'
-	      }));
-	      storePlan(planName);
-	      dispatch(_this4.planChosen(planName));
-	    };
-	  },
-	  planChosen: function planChosen(planName) {
-	    return {
-	      type: _PlansConstants2.default.PLAN_CHOSEN,
-	      payload: planName
 	    };
 	  },
 	  updatingPlan: function updatingPlan(planName) {
@@ -63209,13 +63164,13 @@
 	    };
 	  },
 	  updatePlan: function updatePlan(planName, planFiles) {
-	    var _this5 = this;
+	    var _this3 = this;
 	
 	    return function (dispatch) {
-	      dispatch(_this5.updatingPlan(planName));
+	      dispatch(_this3.updatingPlan(planName));
 	      _TripleOApiService2.default.updatePlan(planName, planFiles).then(function (result) {
-	        dispatch(_this5.planUpdated(planName));
-	        dispatch(_this5.fetchPlans());
+	        dispatch(_this3.planUpdated(planName));
+	        dispatch(_this3.fetchPlans());
 	        _history2.default.pushState(null, '/plans/list');
 	        dispatch(_NotificationActions2.default.notify({
 	          title: 'Plan Updated',
@@ -63242,13 +63197,13 @@
 	    };
 	  },
 	  createPlan: function createPlan(planName, planFiles) {
-	    var _this6 = this;
+	    var _this4 = this;
 	
 	    return function (dispatch) {
-	      dispatch(_this6.creatingPlan());
+	      dispatch(_this4.creatingPlan());
 	      _TripleOApiService2.default.createPlan(planName, planFiles).then(function (result) {
-	        dispatch(_this6.planCreated(planName));
-	        dispatch(_this6.fetchPlans());
+	        dispatch(_this4.planCreated(planName));
+	        dispatch(_this4.fetchPlans());
 	        _history2.default.pushState(null, '/plans/list');
 	        dispatch(_NotificationActions2.default.notify({
 	          title: 'Plan Created',
@@ -63277,14 +63232,14 @@
 	    };
 	  },
 	  deletePlan: function deletePlan(planName) {
-	    var _this7 = this;
+	    var _this5 = this;
 	
 	    return function (dispatch) {
-	      dispatch(_this7.deletingPlan(planName));
+	      dispatch(_this5.deletingPlan(planName));
 	      _history2.default.pushState(null, '/plans/list');
 	      _TripleOApiService2.default.deletePlan(planName).then(function (response) {
-	        dispatch(_this7.planDeleted(planName));
-	        dispatch(_this7.fetchPlans());
+	        dispatch(_this5.planDeleted(planName));
+	        dispatch(_this5.fetchPlans());
 	        dispatch(_NotificationActions2.default.notify({
 	          title: 'Plan Deleted',
 	          message: 'The plan ' + planName + ' was successfully deleted.',
@@ -63292,61 +63247,15 @@
 	        }));
 	      }).catch(function (error) {
 	        console.error('Error retrieving plan TripleOApiService.deletePlan', error); //eslint-disable-line no-console
-	        dispatch(_this7.planDeleted(planName));
+	        dispatch(_this5.planDeleted(planName));
 	        var errorHandler = new _TripleOApiErrorHandler2.default(error);
 	        errorHandler.errors.forEach(function (error) {
 	          dispatch(_NotificationActions2.default.notify(error));
 	        });
 	      });
 	    };
-	  },
-	  fetchStacksPending: function fetchStacksPending() {
-	    return {
-	      type: _PlansConstants2.default.FETCH_STACK_PENDING
-	    };
-	  },
-	  fetchStacksSuccess: function fetchStacksSuccess(data) {
-	    return {
-	      type: _PlansConstants2.default.FETCH_STACK_SUCCESS,
-	      payload: data
-	    };
-	  },
-	  fetchStacksFailed: function fetchStacksFailed(error) {
-	    return {
-	      type: _PlansConstants2.default.FETCH_STACK_FAILED
-	    };
-	  },
-	  fetchStacks: function fetchStacks(planName) {
-	    var _this8 = this;
-	
-	    return function (dispatch) {
-	      dispatch(_this8.fetchStacksPending());
-	      _HeatApiService2.default.getStacks().then(function (response) {
-	        dispatch(_this8.fetchStacksSuccess(response.stacks));
-	      }).catch(function (error) {
-	        dispatch(_this8.fetchStacksFailed(error));
-	      });
-	    };
 	  }
 	};
-	
-	
-	function storePlan(name) {
-	  if (window && window.localStorage) {
-	    if (!name) {
-	      window.localStorage.removeItem('currentPlanName');
-	    } else {
-	      window.localStorage.setItem('currentPlanName', name);
-	    }
-	  }
-	}
-	
-	function getStoredPlan() {
-	  if (window && window.localStorage) {
-	    return window.localStorage.getItem('currentPlanName');
-	  }
-	  return null;
-	}
 
 /***/ },
 /* 597 */
@@ -65911,13 +65820,117 @@
 	  value: true
 	});
 	
-	var _shortid = __webpack_require__(666);
+	var _NotificationActions = __webpack_require__(666);
+	
+	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
+	
+	var _PlansConstants = __webpack_require__(678);
+	
+	var _PlansConstants2 = _interopRequireDefault(_PlansConstants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  detectPlan: function detectPlan(plans) {
+	    var _this = this;
+	
+	    return function (dispatch, getState) {
+	      var state = getState();
+	      var plans = state.plans.get('all').map(function (plan) {
+	        return plan.get('name');
+	      });
+	      var conflict = void 0;
+	      var currentPlanName = state.currentPlan.get('currentPlanName');
+	      var previousPlan = currentPlanName || getStoredPlan();
+	      // No plans present.
+	      if (plans.size < 1) {
+	        if (!previousPlan) {
+	          currentPlanName = undefined;
+	        }
+	      }
+	      // Plans present.
+	      // No previously chosen plan.
+	      else if (!previousPlan) {
+	          currentPlanName = plans.first();
+	        }
+	        // Previously chosen plan doesn't exist any more.
+	        else if (!plans.includes(previousPlan)) {
+	            conflict = previousPlan;
+	            currentPlanName = plans.first();
+	          }
+	          // No plan in state, but in localStorage
+	          else if (!currentPlanName && previousPlan) {
+	              currentPlanName = previousPlan;
+	            }
+	      storePlan(currentPlanName);
+	      dispatch(_this.planDetected(currentPlanName, conflict));
+	    };
+	  },
+	  planDetected: function planDetected(currentPlanName, conflict) {
+	    return {
+	      type: _PlansConstants2.default.PLAN_DETECTED,
+	      payload: {
+	        currentPlanName: currentPlanName,
+	        conflict: conflict
+	      }
+	    };
+	  },
+	  choosePlan: function choosePlan(planName) {
+	    var _this2 = this;
+	
+	    return function (dispatch) {
+	      dispatch(_NotificationActions2.default.notify({
+	        title: 'Plan Activated',
+	        message: 'The plan ' + planName + ' was activated.',
+	        type: 'success'
+	      }));
+	      storePlan(planName);
+	      dispatch(_this2.planChosen(planName));
+	    };
+	  },
+	  planChosen: function planChosen(planName) {
+	    return {
+	      type: _PlansConstants2.default.PLAN_CHOSEN,
+	      payload: planName
+	    };
+	  }
+	};
+	
+	
+	function storePlan(name) {
+	  if (window && window.localStorage) {
+	    if (!name) {
+	      window.localStorage.removeItem('currentPlanName');
+	    } else {
+	      window.localStorage.setItem('currentPlanName', name);
+	    }
+	  }
+	}
+	
+	function getStoredPlan() {
+	  if (window && window.localStorage) {
+	    return window.localStorage.getItem('currentPlanName');
+	  }
+	  return null;
+	}
+
+/***/ },
+/* 666 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _shortid = __webpack_require__(667);
 	
 	var _shortid2 = _interopRequireDefault(_shortid);
 	
-	var _notifications = __webpack_require__(675);
+	var _notifications = __webpack_require__(676);
 	
-	var _NotificationConstants = __webpack_require__(676);
+	var _NotificationConstants = __webpack_require__(677);
 	
 	var _NotificationConstants2 = _interopRequireDefault(_NotificationConstants);
 	
@@ -65946,23 +65959,23 @@
 	};
 
 /***/ },
-/* 666 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	module.exports = __webpack_require__(667);
-
-
-/***/ },
 /* 667 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	module.exports = __webpack_require__(668);
+
+
+/***/ },
+/* 668 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 	
-	var alphabet = __webpack_require__(668);
-	var encode = __webpack_require__(670);
-	var decode = __webpack_require__(672);
-	var isValid = __webpack_require__(673);
+	var alphabet = __webpack_require__(669);
+	var encode = __webpack_require__(671);
+	var decode = __webpack_require__(673);
+	var isValid = __webpack_require__(674);
 	
 	// Ignore all milliseconds before a certain time to reduce the size of the date entropy without sacrificing uniqueness.
 	// This number should be updated every year or so to keep the generated id short.
@@ -65977,7 +65990,7 @@
 	// has a unique value for worker
 	// Note: I don't know if this is automatically set when using third
 	// party cluster solutions such as pm2.
-	var clusterWorkerId = __webpack_require__(674) || 0;
+	var clusterWorkerId = __webpack_require__(675) || 0;
 	
 	// Counter is used when shortid is called multiple times in one second.
 	var counter;
@@ -66060,12 +66073,12 @@
 
 
 /***/ },
-/* 668 */
+/* 669 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var randomFromSeed = __webpack_require__(669);
+	var randomFromSeed = __webpack_require__(670);
 	
 	var ORIGINAL = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
 	var alphabet;
@@ -66164,7 +66177,7 @@
 
 
 /***/ },
-/* 669 */
+/* 670 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -66195,12 +66208,12 @@
 
 
 /***/ },
-/* 670 */
+/* 671 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var randomByte = __webpack_require__(671);
+	var randomByte = __webpack_require__(672);
 	
 	function encode(lookup, number) {
 	    var loopCounter = 0;
@@ -66220,7 +66233,7 @@
 
 
 /***/ },
-/* 671 */
+/* 672 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -66240,11 +66253,11 @@
 
 
 /***/ },
-/* 672 */
+/* 673 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var alphabet = __webpack_require__(668);
+	var alphabet = __webpack_require__(669);
 	
 	/**
 	 * Decode the id to get the version and worker
@@ -66263,11 +66276,11 @@
 
 
 /***/ },
-/* 673 */
+/* 674 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var alphabet = __webpack_require__(668);
+	var alphabet = __webpack_require__(669);
 	
 	function isShortId(id) {
 	    if (!id || typeof id !== 'string' || id.length < 6 ) {
@@ -66288,7 +66301,7 @@
 
 
 /***/ },
-/* 674 */
+/* 675 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -66297,7 +66310,7 @@
 
 
 /***/ },
-/* 675 */
+/* 676 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66320,7 +66333,7 @@
 	});
 
 /***/ },
-/* 676 */
+/* 677 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66342,7 +66355,7 @@
 	});
 
 /***/ },
-/* 677 */
+/* 678 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66371,14 +66384,11 @@
 	  CREATING_PLAN: null,
 	  PLAN_CREATED: null,
 	  UPDATING_PLAN: null,
-	  PLAN_UPDATED: null,
-	  FETCH_STACK_PENDING: null,
-	  FETCH_STACK_SUCCESS: null,
-	  FETCH_STACK_FAILED: null
+	  PLAN_UPDATED: null
 	});
 
 /***/ },
-/* 678 */
+/* 679 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66393,7 +66403,7 @@
 	var planSchema = exports.planSchema = new _normalizr.Schema('plan', { idAttribute: 'name' });
 
 /***/ },
-/* 679 */
+/* 680 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66416,7 +66426,7 @@
 	
 	var _when2 = _interopRequireDefault(_when);
 	
-	var _utils = __webpack_require__(680);
+	var _utils = __webpack_require__(681);
 	
 	var _APIEndpointUrls = __webpack_require__(593);
 	
@@ -66631,7 +66641,7 @@
 	exports.default = new TripleOApiService();
 
 /***/ },
-/* 680 */
+/* 681 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66643,7 +66653,7 @@
 	exports.getAuthTokenId = getAuthTokenId;
 	exports.getTenantId = getTenantId;
 	
-	var _store = __webpack_require__(681);
+	var _store = __webpack_require__(682);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -66671,7 +66681,7 @@
 	}
 
 /***/ },
-/* 681 */
+/* 682 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66682,15 +66692,15 @@
 	
 	var _redux = __webpack_require__(454);
 	
-	var _reduxThunk = __webpack_require__(682);
+	var _reduxThunk = __webpack_require__(683);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(683);
+	var _reduxLogger = __webpack_require__(684);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _appReducer = __webpack_require__(684);
+	var _appReducer = __webpack_require__(685);
 	
 	var _appReducer2 = _interopRequireDefault(_appReducer);
 	
@@ -66705,7 +66715,7 @@
 	exports.default = store;
 
 /***/ },
-/* 682 */
+/* 683 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -66724,7 +66734,7 @@
 	module.exports = thunkMiddleware;
 
 /***/ },
-/* 683 */
+/* 684 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -66922,7 +66932,7 @@
 	module.exports = createLogger;
 
 /***/ },
-/* 684 */
+/* 685 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66933,45 +66943,54 @@
 	
 	var _redux = __webpack_require__(454);
 	
-	var _environmentConfigurationReducer = __webpack_require__(685);
+	var _currentPlanReducer = __webpack_require__(686);
+	
+	var _currentPlanReducer2 = _interopRequireDefault(_currentPlanReducer);
+	
+	var _environmentConfigurationReducer = __webpack_require__(688);
 	
 	var _environmentConfigurationReducer2 = _interopRequireDefault(_environmentConfigurationReducer);
 	
-	var _loginReducer = __webpack_require__(688);
+	var _loginReducer = __webpack_require__(691);
 	
 	var _loginReducer2 = _interopRequireDefault(_loginReducer);
 	
-	var _nodesReducer = __webpack_require__(690);
+	var _nodesReducer = __webpack_require__(693);
 	
 	var _nodesReducer2 = _interopRequireDefault(_nodesReducer);
 	
-	var _notificationsReducer = __webpack_require__(692);
+	var _notificationsReducer = __webpack_require__(695);
 	
 	var _notificationsReducer2 = _interopRequireDefault(_notificationsReducer);
 	
-	var _parametersReducer = __webpack_require__(693);
+	var _parametersReducer = __webpack_require__(696);
 	
 	var _parametersReducer2 = _interopRequireDefault(_parametersReducer);
 	
-	var _plansReducer = __webpack_require__(696);
+	var _plansReducer = __webpack_require__(699);
 	
 	var _plansReducer2 = _interopRequireDefault(_plansReducer);
 	
-	var _registerNodesReducer = __webpack_require__(698);
+	var _registerNodesReducer = __webpack_require__(701);
 	
 	var _registerNodesReducer2 = _interopRequireDefault(_registerNodesReducer);
 	
-	var _rolesReducer = __webpack_require__(701);
+	var _rolesReducer = __webpack_require__(704);
 	
 	var _rolesReducer2 = _interopRequireDefault(_rolesReducer);
 	
-	var _validationsReducer = __webpack_require__(704);
+	var _stacksReducer = __webpack_require__(707);
+	
+	var _stacksReducer2 = _interopRequireDefault(_stacksReducer);
+	
+	var _validationsReducer = __webpack_require__(710);
 	
 	var _validationsReducer2 = _interopRequireDefault(_validationsReducer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var appReducer = (0, _redux.combineReducers)({
+	  currentPlan: _currentPlanReducer2.default,
 	  environmentConfiguration: _environmentConfigurationReducer2.default,
 	  login: _loginReducer2.default,
 	  nodes: _nodesReducer2.default,
@@ -66980,13 +66999,71 @@
 	  plans: _plansReducer2.default,
 	  registerNodes: _registerNodesReducer2.default,
 	  roles: _rolesReducer2.default,
+	  stacks: _stacksReducer2.default,
 	  validations: _validationsReducer2.default
 	});
 	
 	exports.default = appReducer;
 
 /***/ },
-/* 685 */
+/* 686 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = currentPlanReducer;
+	
+	var _currentPlan = __webpack_require__(687);
+	
+	var _PlansConstants = __webpack_require__(678);
+	
+	var _PlansConstants2 = _interopRequireDefault(_PlansConstants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var initialState = new _currentPlan.CurrentPlanState();
+	
+	function currentPlanReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	
+	    case _PlansConstants2.default.PLAN_CHOSEN:
+	      return state.set('currentPlanName', action.payload);
+	
+	    case _PlansConstants2.default.PLAN_DETECTED:
+	      return state.set('currentPlanName', action.payload.currentPlanName).set('conflict', action.payload.conflict);
+	
+	    default:
+	      return state;
+	
+	  }
+	}
+
+/***/ },
+/* 687 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CurrentPlanState = undefined;
+	
+	var _immutable = __webpack_require__(556);
+	
+	var CurrentPlanState = exports.CurrentPlanState = (0, _immutable.Record)({
+	  conflict: undefined,
+	  currentPlanName: undefined
+	});
+
+/***/ },
+/* 688 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66998,15 +67075,19 @@
 	
 	var _immutable = __webpack_require__(556);
 	
-	var _EnvironmentConfigurationConstants = __webpack_require__(686);
+	var _EnvironmentConfigurationConstants = __webpack_require__(689);
 	
 	var _EnvironmentConfigurationConstants2 = _interopRequireDefault(_EnvironmentConfigurationConstants);
 	
-	var _environmentConfiguration = __webpack_require__(687);
+	var _environmentConfiguration = __webpack_require__(690);
+	
+	var _PlansConstants = __webpack_require__(678);
+	
+	var _PlansConstants2 = _interopRequireDefault(_PlansConstants);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var initialState = new _environmentConfiguration.InitialEnvironmentConfigurationState();
+	var initialState = new _environmentConfiguration.EnvironmentConfigurationState();
 	
 	function environmentConfigurationReducer() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
@@ -67015,22 +67096,35 @@
 	  switch (action.type) {
 	
 	    case _EnvironmentConfigurationConstants2.default.FETCH_ENVIRONMENT_CONFIGURATION_PENDING:
-	      return initialState.set('isLoaded', false);
+	      return initialState.set('isFetching', true);
 	
 	    case _EnvironmentConfigurationConstants2.default.FETCH_ENVIRONMENT_CONFIGURATION_SUCCESS:
-	      return state.set('isLoaded', true).set('topics', (0, _immutable.fromJS)(action.payload.topics));
+	      {
+	        var topics = action.payload.topics || (0, _immutable.Map)();
+	        var environmentGroups = action.payload.environmentGroups || (0, _immutable.Map)();
+	        var environments = action.payload.environments || (0, _immutable.Map)();
+	        return state.set('isFetching', false).set('loaded', true).set('topics', (0, _immutable.fromJS)(topics)).set('environmentGroups', (0, _immutable.fromJS)(environmentGroups)).set('environments', (0, _immutable.fromJS)(environments));
+	      }
 	
 	    case _EnvironmentConfigurationConstants2.default.FETCH_ENVIRONMENT_CONFIGURATION_FAILED:
-	      return initialState.set('isLoaded', true);
+	      return initialState.set('isFetching', false).set('loaded', true);
 	
 	    case _EnvironmentConfigurationConstants2.default.UPDATE_ENVIRONMENT_CONFIGURATION_PENDING:
-	      return state.set('isLoaded', false);
+	      return state.set('isFetching', true);
 	
 	    case _EnvironmentConfigurationConstants2.default.UPDATE_ENVIRONMENT_CONFIGURATION_SUCCESS:
-	      return state.set('isLoaded', true).set('topics', (0, _immutable.fromJS)(action.payload.topics));
+	      {
+	        var _topics = action.payload.topics || (0, _immutable.Map)();
+	        var _environmentGroups = action.payload.environmentGroups || (0, _immutable.Map)();
+	        var _environments = action.payload.environments || (0, _immutable.Map)();
+	        return state.set('loaded', false).set('isFetching', false).set('topics', (0, _immutable.fromJS)(_topics)).set('environmentGroups', (0, _immutable.fromJS)(_environmentGroups)).set('environments', (0, _immutable.fromJS)(_environments));
+	      }
 	
 	    case _EnvironmentConfigurationConstants2.default.UPDATE_ENVIRONMENT_CONFIGURATION_FAILED:
-	      return state.set('isLoaded', true).set('form', (0, _immutable.fromJS)(action.payload));
+	      return state.set('isFetching', false).set('loaded', true).set('form', (0, _immutable.fromJS)(action.payload));
+	
+	    case _PlansConstants2.default.PLAN_CHOSEN:
+	      return state.set('loaded', false);
 	
 	    default:
 	      return state;
@@ -67039,7 +67133,7 @@
 	}
 
 /***/ },
-/* 686 */
+/* 689 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67064,7 +67158,7 @@
 	});
 
 /***/ },
-/* 687 */
+/* 690 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67072,13 +67166,16 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.InitialEnvironmentConfigurationState = undefined;
+	exports.EnvironmentConfigurationState = undefined;
 	
 	var _immutable = __webpack_require__(556);
 	
-	var InitialEnvironmentConfigurationState = exports.InitialEnvironmentConfigurationState = (0, _immutable.Record)({
-	  isLoaded: false,
-	  topics: (0, _immutable.List)(),
+	var EnvironmentConfigurationState = exports.EnvironmentConfigurationState = (0, _immutable.Record)({
+	  loaded: false,
+	  isFetching: false,
+	  topics: (0, _immutable.Map)(),
+	  environmentGroups: (0, _immutable.Map)(),
+	  environments: (0, _immutable.Map)(),
 	  form: (0, _immutable.Map)({
 	    formErrors: (0, _immutable.List)(),
 	    formFieldErrors: (0, _immutable.Map)()
@@ -67086,7 +67183,7 @@
 	});
 
 /***/ },
-/* 688 */
+/* 691 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67100,7 +67197,7 @@
 	
 	var _LoginConstants2 = _interopRequireDefault(_LoginConstants);
 	
-	var _login = __webpack_require__(689);
+	var _login = __webpack_require__(692);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -67131,7 +67228,7 @@
 	}
 
 /***/ },
-/* 689 */
+/* 692 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67153,7 +67250,7 @@
 	});
 
 /***/ },
-/* 690 */
+/* 693 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67165,7 +67262,7 @@
 	
 	var _immutable = __webpack_require__(556);
 	
-	var _NodesConstants = __webpack_require__(691);
+	var _NodesConstants = __webpack_require__(694);
 	
 	var _NodesConstants2 = _interopRequireDefault(_NodesConstants);
 	
@@ -67173,11 +67270,11 @@
 	
 	var initialState = (0, _immutable.Map)({
 	  isFetching: false,
-	  dataOperationInProgress: false,
+	  nodesInProgress: (0, _immutable.Set)(),
 	  allFilter: '',
 	  registeredFilter: '',
 	  introspectedFilter: '',
-	  provisionedFilter: '',
+	  deployedFilter: '',
 	  maintenanceFilter: '',
 	  all: (0, _immutable.Map)()
 	});
@@ -67195,19 +67292,29 @@
 	      return state.set('all', (0, _immutable.fromJS)(action.payload)).set('isFetching', false);
 	
 	    case _NodesConstants2.default.START_NODES_OPERATION:
-	      return state.set('dataOperationInProgress', true);
+	      return state.update('nodesInProgress', function (nodesInProgress) {
+	        return nodesInProgress.union(action.payload);
+	      });
 	
 	    case _NodesConstants2.default.FINISH_NODES_OPERATION:
-	      return state.set('dataOperationInProgress', false);
+	      return state.update('nodesInProgress', function (nodesInProgress) {
+	        return nodesInProgress.subtract(action.payload);
+	      });
 	
 	    case _NodesConstants2.default.UPDATE_NODE_PENDING:
-	      return state.set('dataOperationInProgress', true);
+	      return state.update('nodesInProgress', function (nodesInProgress) {
+	        return nodesInProgress.add(action.payload);
+	      });
 	
 	    case _NodesConstants2.default.UPDATE_NODE_FAILED:
-	      return state.set('dataOperationInProgress', false);
+	      return state.update('nodesInProgress', function (nodesInProgress) {
+	        return nodesInProgress.remove(action.payload);
+	      });
 	
 	    case _NodesConstants2.default.UPDATE_NODE_SUCCESS:
-	      return state.setIn(['all', action.payload.uuid], (0, _immutable.fromJS)(action.payload)).set('dataOperationInProgress', false);
+	      return state.setIn(['all', action.payload.uuid], (0, _immutable.fromJS)(action.payload)).update('nodesInProgress', function (nodesInProgress) {
+	        return nodesInProgress.remove(action.payload.uuid);
+	      });
 	
 	    default:
 	      return state;
@@ -67216,7 +67323,7 @@
 	}
 
 /***/ },
-/* 691 */
+/* 694 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67242,7 +67349,7 @@
 	});
 
 /***/ },
-/* 692 */
+/* 695 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67257,7 +67364,7 @@
 	
 	var _immutable = __webpack_require__(556);
 	
-	var _NotificationConstants = __webpack_require__(676);
+	var _NotificationConstants = __webpack_require__(677);
 	
 	var _NotificationConstants2 = _interopRequireDefault(_NotificationConstants);
 	
@@ -67307,7 +67414,7 @@
 	}
 
 /***/ },
-/* 693 */
+/* 696 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67319,11 +67426,11 @@
 	
 	var _immutable = __webpack_require__(556);
 	
-	var _ParametersConstants = __webpack_require__(694);
+	var _ParametersConstants = __webpack_require__(697);
 	
 	var _ParametersConstants2 = _interopRequireDefault(_ParametersConstants);
 	
-	var _parameters = __webpack_require__(695);
+	var _parameters = __webpack_require__(698);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -67404,7 +67511,7 @@
 	};
 
 /***/ },
-/* 694 */
+/* 697 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67429,7 +67536,7 @@
 	});
 
 /***/ },
-/* 695 */
+/* 698 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67462,7 +67569,7 @@
 	});
 
 /***/ },
-/* 696 */
+/* 699 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67477,9 +67584,9 @@
 	
 	var _immutable = __webpack_require__(556);
 	
-	var _plans = __webpack_require__(697);
+	var _plans = __webpack_require__(700);
 	
-	var _PlansConstants = __webpack_require__(677);
+	var _PlansConstants = __webpack_require__(678);
 	
 	var _PlansConstants2 = _interopRequireDefault(_PlansConstants);
 	
@@ -67535,12 +67642,6 @@
 	        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
 	      }
 	
-	    case _PlansConstants2.default.PLAN_CHOSEN:
-	      return state.set('currentPlanName', action.payload);
-	
-	    case _PlansConstants2.default.PLAN_DETECTED:
-	      return state.set('currentPlanName', action.payload.currentPlanName).set('conflict', action.payload.conflict);
-	
 	    case _PlansConstants2.default.DELETING_PLAN:
 	      {
 	        return state.setIn(['all', action.payload, 'transition'], 'deleting');
@@ -67563,17 +67664,6 @@
 	    case _PlansConstants2.default.PLAN_UPDATED:
 	      return state.set('transition', false);
 	
-	    case _PlansConstants2.default.FETCH_STACK_PENDING:
-	      return state.set('isFetchingStacks', true);
-	
-	    case _PlansConstants2.default.FETCH_STACK_SUCCESS:
-	      return state.set('isFetchingStacks', false).set('stacks', (0, _immutable.Map)(action.payload.reduce(function (obj, val) {
-	        obj[val.stack_name] = (0, _plans.Stack)(val);
-	        return obj;
-	      }, {})));
-	    case _PlansConstants2.default.FETCH_STACK_FAILED:
-	      return state.set('isFetchingStacks', false).set('stacks', (0, _immutable.Map)());
-	
 	    default:
 	      return state;
 	
@@ -67581,7 +67671,7 @@
 	}
 
 /***/ },
-/* 697 */
+/* 700 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67589,7 +67679,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.InitialPlanState = exports.Stack = exports.PlanFile = exports.Plan = undefined;
+	exports.InitialPlanState = exports.PlanFile = exports.Plan = undefined;
 	
 	var _immutable = __webpack_require__(556);
 	
@@ -67610,23 +67700,14 @@
 	  info: (0, _immutable.Map)()
 	});
 	
-	var Stack = exports.Stack = (0, _immutable.Record)({
-	  stack_name: '',
-	  stack_status: ''
-	});
-	
 	var InitialPlanState = exports.InitialPlanState = (0, _immutable.Record)({
 	  isFetchingPlans: false,
-	  isFetchingStacks: false,
 	  isCreatingPlan: false,
-	  conflict: undefined,
-	  currentPlanName: undefined,
-	  stacks: (0, _immutable.Map)(),
 	  all: (0, _immutable.Map)()
 	});
 
 /***/ },
-/* 698 */
+/* 701 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67641,15 +67722,16 @@
 	
 	var _immutable = __webpack_require__(556);
 	
-	var _nodes = __webpack_require__(699);
+	var _nodes = __webpack_require__(702);
 	
-	var _RegisterNodesConstants = __webpack_require__(700);
+	var _RegisterNodesConstants = __webpack_require__(703);
 	
 	var _RegisterNodesConstants2 = _interopRequireDefault(_RegisterNodesConstants);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var initialState = (0, _immutable.Map)({
+	  isRegistering: false,
 	  nodesToRegister: (0, _immutable.OrderedMap)(),
 	  selectedNodeId: undefined
 	});
@@ -67699,6 +67781,21 @@
 	        });
 	      }
 	
+	    case _RegisterNodesConstants2.default.REGISTER_NODES_PENDING:
+	      {
+	        return state.set('isRegistering', true);
+	      }
+	
+	    case _RegisterNodesConstants2.default.REGISTER_NODES_SUCCESS:
+	      {
+	        return state.set('isRegistering', false).set('nodesToRegister', (0, _immutable.OrderedMap)());
+	      }
+	
+	    case _RegisterNodesConstants2.default.REGISTER_NODES_FAILED:
+	      {
+	        return state.set('isRegistering', false);
+	      }
+	
 	    default:
 	      return state;
 	
@@ -67706,7 +67803,7 @@
 	}
 
 /***/ },
-/* 699 */
+/* 702 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67714,21 +67811,28 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.NodeToRegister = undefined;
+	exports.IronicNode = exports.NodeToRegister = undefined;
 	
 	var _immutable = __webpack_require__(556);
 	
 	var NodeToRegister = exports.NodeToRegister = (0, _immutable.Record)({
 	  id: undefined,
-	  name: 'Undefined Node',
-	  nicMacAddress: '',
+	  name: '',
+	  nicMacAddresses: (0, _immutable.List)(),
 	  driver: 'pxe_ssh',
 	  driver_info: (0, _immutable.Map)(),
 	  valid: false
 	});
+	
+	var IronicNode = exports.IronicNode = (0, _immutable.Record)({
+	  name: '',
+	  nicMacAddresses: (0, _immutable.List)(),
+	  driver: 'pxe_ssh',
+	  driver_info: (0, _immutable.Map)()
+	});
 
 /***/ },
-/* 700 */
+/* 703 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67747,11 +67851,14 @@
 	  ADD_NODE: null,
 	  SELECT_NODE: null,
 	  REMOVE_NODE: null,
-	  UPDATE_NODE: null
+	  UPDATE_NODE: null,
+	  REGISTER_NODES_PENDING: null,
+	  REGISTER_NODES_SUCCESS: null,
+	  REGISTER_NODES_FAILED: null
 	});
 
 /***/ },
-/* 701 */
+/* 704 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67763,15 +67870,15 @@
 	
 	var _immutable = __webpack_require__(556);
 	
-	var _PlansConstants = __webpack_require__(677);
+	var _PlansConstants = __webpack_require__(678);
 	
 	var _PlansConstants2 = _interopRequireDefault(_PlansConstants);
 	
-	var _RolesConstants = __webpack_require__(702);
+	var _RolesConstants = __webpack_require__(705);
 	
 	var _RolesConstants2 = _interopRequireDefault(_RolesConstants);
 	
-	var _roles = __webpack_require__(703);
+	var _roles = __webpack_require__(706);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -67812,7 +67919,7 @@
 	}
 
 /***/ },
-/* 702 */
+/* 705 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67834,7 +67941,7 @@
 	});
 
 /***/ },
-/* 703 */
+/* 706 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67852,7 +67959,99 @@
 	});
 
 /***/ },
-/* 704 */
+/* 707 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = stacksReducer;
+	
+	var _immutable = __webpack_require__(556);
+	
+	var _stacks = __webpack_require__(708);
+	
+	var _StacksConstants = __webpack_require__(709);
+	
+	var _StacksConstants2 = _interopRequireDefault(_StacksConstants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var initialState = new _stacks.StacksState();
+	
+	function stacksReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	
+	    case _StacksConstants2.default.FETCH_STACKS_PENDING:
+	      return state.set('isFetching', true);
+	
+	    case _StacksConstants2.default.FETCH_STACKS_SUCCESS:
+	      return state.set('isLoaded', true).set('isFetching', false).set('stacks', (0, _immutable.Map)(action.payload.reduce(function (obj, val) {
+	        obj[val.stack_name] = (0, _stacks.Stack)(val);
+	        return obj;
+	      }, {})));
+	    case _StacksConstants2.default.FETCH_STACKS_FAILED:
+	      return state.set('isLoaded', true).set('isFetching', false).set('stacks', (0, _immutable.Map)());
+	
+	    default:
+	      return state;
+	
+	  }
+	}
+
+/***/ },
+/* 708 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Stack = exports.StacksState = undefined;
+	
+	var _immutable = __webpack_require__(556);
+	
+	var StacksState = exports.StacksState = (0, _immutable.Record)({
+	  isLoaded: false,
+	  isFetching: false,
+	  stacks: (0, _immutable.Map)()
+	});
+	
+	var Stack = exports.Stack = (0, _immutable.Record)({
+	  stack_name: '',
+	  stack_status: ''
+	});
+
+/***/ },
+/* 709 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _keymirror = __webpack_require__(595);
+	
+	var _keymirror2 = _interopRequireDefault(_keymirror);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = (0, _keymirror2.default)({
+	  FETCH_STACKS_PENDING: null,
+	  FETCH_STACKS_SUCCESS: null,
+	  FETCH_STACKS_FAILED: null
+	});
+
+/***/ },
+/* 710 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67864,11 +68063,11 @@
 	
 	var _immutable = __webpack_require__(556);
 	
-	var _ValidationsConstants = __webpack_require__(705);
+	var _ValidationsConstants = __webpack_require__(711);
 	
 	var _ValidationsConstants2 = _interopRequireDefault(_ValidationsConstants);
 	
-	var _validations = __webpack_require__(559);
+	var _validations2 = __webpack_require__(559);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -67893,19 +68092,17 @@
 	
 	    case _ValidationsConstants2.default.FETCH_VALIDATION_STAGES_SUCCESS:
 	      {
-	        var _action$payload$entit = action.payload.entities;
-	        var validationStages = _action$payload$entit.validationStages;
-	        var validations = _action$payload$entit.validations;
-	        var validationResults = _action$payload$entit.validationResults;
+	        var validations = (0, _immutable.fromJS)(action.payload.entities.validations) || (0, _immutable.Map)();
+	        var validationStages = (0, _immutable.fromJS)(action.payload.entities.validationStages) || (0, _immutable.Map)();
+	        var validationResults = (0, _immutable.fromJS)(action.payload.entities.validationResults) || (0, _immutable.Map)();
 	
-	
-	        return state.set('validationStages', validationStages ? (0, _immutable.fromJS)(validationStages).map(function (stage) {
-	          return new _validations.ValidationStage(stage);
-	        }) : (0, _immutable.Map)()).set('validations', validations ? (0, _immutable.fromJS)(validations).map(function (validation) {
-	          return new _validations.Validation(validation);
-	        }) : (0, _immutable.Map)()).set('validationResults', validationResults ? (0, _immutable.fromJS)(validationResults).map(function (result) {
-	          return new _validations.ValidationResult(result);
-	        }) : (0, _immutable.Map)()).set('isFetching', false).set('loaded', true);
+	        return state.set('validationStages', validationStages.map(function (stage) {
+	          return new _validations2.ValidationStage(stage.set('visible', state.getIn(['validationStages', stage.uuid, 'visible'], false)));
+	        })).set('validations', validations.map(function (validation) {
+	          return new _validations2.Validation(validation);
+	        })).set('validationResults', validationResults.map(function (result) {
+	          return new _validations2.ValidationResult(result);
+	        })).set('isFetching', false).set('loaded', true);
 	      }
 	
 	    case _ValidationsConstants2.default.FETCH_VALIDATION_STAGES_FAILED:
@@ -67913,12 +68110,32 @@
 	
 	    case _ValidationsConstants2.default.UPDATE_STAGE_STATUS:
 	      {
-	        return state.setIn(['validationStages', action.payload.uuid, 'status'], action.payload.status);
+	        var validationIds = state.getIn(['validationStages', action.payload.uuid, 'validations'], (0, _immutable.List)([]));
+	
+	        var _validations = state.get('validations');
+	
+	        var updatedValidations = validationIds.reduce(function (r, validationId) {
+	          return r.setIn([validationId, 'status'], action.payload.status);
+	        }, _validations);
+	
+	        return state.setIn(['validationStages', action.payload.uuid, 'status'], action.payload.status).set('validations', updatedValidations);
 	      }
 	
 	    case _ValidationsConstants2.default.UPDATE_VALIDATION_STATUS:
 	      {
 	        return state.setIn(['validations', action.payload.uuid, 'status'], action.payload.status);
+	      }
+	
+	    case _ValidationsConstants2.default.TOGGLE_VALIDATION_STAGE_VISIBILITY:
+	      {
+	        return state.updateIn(['validationStages', action.payload.uuid, 'visible'], function (oldValue) {
+	          return !oldValue;
+	        });
+	      }
+	
+	    case _ValidationsConstants2.default.SHOW_VALIDATION_STAGE:
+	      {
+	        return state.setIn(['validationStages', action.payload.uuid, 'visible'], true);
 	      }
 	
 	    default:
@@ -67928,7 +68145,7 @@
 	}
 
 /***/ },
-/* 705 */
+/* 711 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67947,12 +68164,14 @@
 	  FETCH_VALIDATION_STAGES_PENDING: null,
 	  FETCH_VALIDATION_STAGES_SUCCESS: null,
 	  FETCH_VALIDATION_STAGES_FAILED: null,
+	  SHOW_VALIDATION_STAGE: null,
+	  TOGGLE_VALIDATION_STAGE_VISIBILITY: null,
 	  UPDATE_STAGE_STATUS: null,
 	  UPDATE_VALIDATION_STATUS: null
 	});
 
 /***/ },
-/* 706 */
+/* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68028,76 +68247,7 @@
 	exports.default = TripleOApiErrorHandler;
 
 /***/ },
-/* 707 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _lodash = __webpack_require__(588);
-	
-	var _ = _interopRequireWildcard(_lodash);
-	
-	var _reqwest = __webpack_require__(590);
-	
-	var _reqwest2 = _interopRequireDefault(_reqwest);
-	
-	var _when = __webpack_require__(565);
-	
-	var _when2 = _interopRequireDefault(_when);
-	
-	var _utils = __webpack_require__(680);
-	
-	var _APIEndpointUrls = __webpack_require__(593);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var HeatApiService = function () {
-	  function HeatApiService() {
-	    _classCallCheck(this, HeatApiService);
-	  }
-	
-	  _createClass(HeatApiService, [{
-	    key: 'request',
-	    value: function request() {
-	      return _reqwest2.default.apply(this, arguments);
-	    }
-	  }, {
-	    key: 'defaultRequest',
-	    value: function defaultRequest(additionalAttributes) {
-	      return _.merge({
-	        headers: { 'X-Auth-Token': (0, _utils.getAuthTokenId)() },
-	        crossOrigin: true,
-	        contentType: 'application/json',
-	        type: 'json',
-	        method: 'GET'
-	      }, additionalAttributes);
-	    }
-	  }, {
-	    key: 'getStacks',
-	    value: function getStacks() {
-	      return (0, _when2.default)(this.request(this.defaultRequest({
-	        url: _APIEndpointUrls.HEAT_API_URL + '/' + (0, _utils.getTenantId)() + '/stacks'
-	      })));
-	    }
-	  }]);
-	
-	  return HeatApiService;
-	}();
-	
-	exports.default = new HeatApiService();
-
-/***/ },
-/* 708 */
+/* 713 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68118,7 +68268,7 @@
 	
 	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
 	
-	var _NavTab = __webpack_require__(709);
+	var _NavTab = __webpack_require__(714);
 	
 	var _NavTab2 = _interopRequireDefault(_NavTab);
 	
@@ -68230,7 +68380,7 @@
 	};
 
 /***/ },
-/* 709 */
+/* 714 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68297,7 +68447,7 @@
 	};
 
 /***/ },
-/* 710 */
+/* 715 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68318,7 +68468,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Notification = __webpack_require__(711);
+	var _Notification = __webpack_require__(716);
 	
 	var _Notification2 = _interopRequireDefault(_Notification);
 	
@@ -68473,7 +68623,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(NotificationsToaster);
 
 /***/ },
-/* 711 */
+/* 716 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68575,7 +68725,7 @@
 	};
 
 /***/ },
-/* 712 */
+/* 717 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68586,23 +68736,23 @@
 	
 	var _normalizr = __webpack_require__(597);
 	
-	var _NotificationActions = __webpack_require__(665);
+	var _NotificationActions = __webpack_require__(666);
 	
 	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
 	
-	var _ValidationsApiService = __webpack_require__(713);
+	var _ValidationsApiService = __webpack_require__(718);
 	
 	var _ValidationsApiService2 = _interopRequireDefault(_ValidationsApiService);
 	
-	var _ValidationsApiErrorHandler = __webpack_require__(714);
+	var _ValidationsApiErrorHandler = __webpack_require__(719);
 	
 	var _ValidationsApiErrorHandler2 = _interopRequireDefault(_ValidationsApiErrorHandler);
 	
-	var _ValidationsConstants = __webpack_require__(705);
+	var _ValidationsConstants = __webpack_require__(711);
 	
 	var _ValidationsConstants2 = _interopRequireDefault(_ValidationsConstants);
 	
-	var _validations = __webpack_require__(715);
+	var _validations = __webpack_require__(720);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -68646,6 +68796,7 @@
 	
 	    return function (dispatch) {
 	      dispatch(_this2.updateValidationStageStatus(uuid, 'running'));
+	      dispatch(_this2.showValidationStage(uuid));
 	      _ValidationsApiService2.default.runStage(uuid).then(function (response) {}).catch(function (error) {
 	        console.error('Error in ValidationStage.runStage', error.stack); //eslint-disable-line no-console
 	        var errorHandler = new _ValidationsApiErrorHandler2.default(error);
@@ -68654,6 +68805,22 @@
 	        });
 	        dispatch(_this2.updateValidationStageStatus(uuid, 'error'));
 	      });
+	    };
+	  },
+	  toggleValidationStageVisibility: function toggleValidationStageVisibility(uuid) {
+	    return {
+	      type: _ValidationsConstants2.default.TOGGLE_VALIDATION_STAGE_VISIBILITY,
+	      payload: {
+	        uuid: uuid
+	      }
+	    };
+	  },
+	  showValidationStage: function showValidationStage(uuid) {
+	    return {
+	      type: _ValidationsConstants2.default.SHOW_VALIDATION_STAGE,
+	      payload: {
+	        uuid: uuid
+	      }
 	    };
 	  },
 	  updateValidationStageStatus: function updateValidationStageStatus(uuid, status) {
@@ -68711,7 +68878,7 @@
 	};
 
 /***/ },
-/* 713 */
+/* 718 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68734,7 +68901,7 @@
 	
 	var _when2 = _interopRequireDefault(_when);
 	
-	var _utils = __webpack_require__(680);
+	var _utils = __webpack_require__(681);
 	
 	var _APIEndpointUrls = __webpack_require__(593);
 	
@@ -68896,7 +69063,7 @@
 	exports.default = new ValidationsApiService();
 
 /***/ },
-/* 714 */
+/* 719 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68961,7 +69128,7 @@
 	exports.default = ValidationsApiErrorHandler;
 
 /***/ },
-/* 715 */
+/* 720 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68986,7 +69153,7 @@
 	});
 
 /***/ },
-/* 716 */
+/* 721 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69009,11 +69176,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _BlankSlate = __webpack_require__(717);
+	var _BlankSlate = __webpack_require__(722);
 	
 	var _BlankSlate2 = _interopRequireDefault(_BlankSlate);
 	
-	var _ValidationStage = __webpack_require__(718);
+	var _ValidationStage = __webpack_require__(723);
 	
 	var _ValidationStage2 = _interopRequireDefault(_ValidationStage);
 	
@@ -69051,6 +69218,8 @@
 	          runValidationStage: _this2.props.runValidationStage,
 	          runValidation: _this2.props.runValidation,
 	          stopValidation: _this2.props.stopValidation,
+	          visible: stage.visible,
+	          toggleValidationStageVisibility: _this2.props.toggleValidationStageVisibility,
 	          uuid: stage.uuid });
 	      });
 	
@@ -69078,11 +69247,12 @@
 	  runValidation: _react2.default.PropTypes.func.isRequired,
 	  runValidationStage: _react2.default.PropTypes.func.isRequired,
 	  stopValidation: _react2.default.PropTypes.func.isRequired,
+	  toggleValidationStageVisibility: _react2.default.PropTypes.func.isRequired,
 	  validationStages: _reactImmutableProptypes2.default.map.isRequired
 	};
 
 /***/ },
-/* 717 */
+/* 722 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69157,7 +69327,7 @@
 	};
 
 /***/ },
-/* 718 */
+/* 723 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69180,7 +69350,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Validation = __webpack_require__(719);
+	var _Validation = __webpack_require__(724);
 	
 	var _Validation2 = _interopRequireDefault(_Validation);
 	
@@ -69200,25 +69370,20 @@
 	  function ValidationStage() {
 	    _classCallCheck(this, ValidationStage);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ValidationStage).call(this));
-	
-	    _this.state = {
-	      isOpen: false
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ValidationStage).call(this));
 	  }
 	
 	  _createClass(ValidationStage, [{
 	    key: 'toggleOpen',
 	    value: function toggleOpen(e) {
 	      e.preventDefault();
-	      var nowOpen = !this.state.isOpen;
-	      this.setState({ isOpen: nowOpen });
+	      this.props.toggleValidationStageVisibility(this.props.uuid);
 	    }
 	  }, {
 	    key: 'runStage',
 	    value: function runStage(e) {
-	      e.preventDefault(), this.props.runValidationStage(this.props.uuid);
+	      e.preventDefault();
+	      this.props.runValidationStage(this.props.uuid);
 	    }
 	  }, {
 	    key: 'getStatusBadge',
@@ -69260,12 +69425,12 @@
 	
 	      var titleClass = (0, _classnames2.default)({
 	        link: true,
-	        collapsed: !this.state.isOpen
+	        collapsed: !this.props.visible
 	      });
 	
 	      var contentClass = (0, _classnames2.default)({
 	        'panel-collapse collapse': true,
-	        'in': this.state.isOpen
+	        'in': this.props.visible
 	      });
 	
 	      var validations = this.props.validations.map(function (validation) {
@@ -69333,12 +69498,14 @@
 	  runValidationStage: _react2.default.PropTypes.func.isRequired,
 	  status: _react2.default.PropTypes.string.isRequired,
 	  stopValidation: _react2.default.PropTypes.func.isRequired,
+	  toggleValidationStageVisibility: _react2.default.PropTypes.func.isRequired,
 	  uuid: _react2.default.PropTypes.string.isRequired,
-	  validations: _reactImmutableProptypes2.default.list.isRequired
+	  validations: _reactImmutableProptypes2.default.list.isRequired,
+	  visible: _react2.default.PropTypes.bool.isRequired
 	};
 
 /***/ },
-/* 719 */
+/* 724 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69497,7 +69664,7 @@
 	};
 
 /***/ },
-/* 720 */
+/* 725 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69569,7 +69736,7 @@
 	            { to: '/plans/list',
 	              type: 'button',
 	              className: 'close' },
-	            _react2.default.createElement('span', { className: 'pficon pficon-close' })
+	            _react2.default.createElement('span', { 'aria-hidden': 'true', className: 'pficon pficon-close' })
 	          ),
 	          _react2.default.createElement(
 	            'h4',
@@ -69633,7 +69800,1467 @@
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(DeletePlan);
 
 /***/ },
-/* 721 */
+/* 726 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(504);
+	
+	var _NavTab = __webpack_require__(714);
+	
+	var _NavTab2 = _interopRequireDefault(_NavTab);
+	
+	var _Modal = __webpack_require__(562);
+	
+	var _Modal2 = _interopRequireDefault(_Modal);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DeploymentConfiguration = function (_React$Component) {
+	  _inherits(DeploymentConfiguration, _React$Component);
+	
+	  function DeploymentConfiguration() {
+	    _classCallCheck(this, DeploymentConfiguration);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DeploymentConfiguration).apply(this, arguments));
+	  }
+	
+	  _createClass(DeploymentConfiguration, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _Modal2.default,
+	        { dialogClasses: 'modal-lg' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'modal-header' },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: this.props.parentPath,
+	              type: 'button',
+	              className: 'close' },
+	            _react2.default.createElement('span', { 'aria-hidden': 'true', className: 'pficon pficon-close' })
+	          ),
+	          _react2.default.createElement(
+	            'h4',
+	            { className: 'modal-title' },
+	            'Deployment Configuration'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'nav nav-tabs' },
+	          _react2.default.createElement(
+	            _NavTab2.default,
+	            { to: '/deployment-plan/configuration/environment' },
+	            'Overall Settings'
+	          ),
+	          _react2.default.createElement(
+	            _NavTab2.default,
+	            { to: '/deployment-plan/configuration/parameters' },
+	            'Parameters'
+	          )
+	        ),
+	        _react2.default.cloneElement(this.props.children, { currentPlanName: this.props.currentPlanName,
+	          parentPath: this.props.parentPath })
+	      );
+	    }
+	  }]);
+	
+	  return DeploymentConfiguration;
+	}(_react2.default.Component);
+	
+	exports.default = DeploymentConfiguration;
+	
+	DeploymentConfiguration.propTypes = {
+	  children: _react2.default.PropTypes.node,
+	  currentPlanName: _react2.default.PropTypes.string,
+	  parentPath: _react2.default.PropTypes.string };
+
+/***/ },
+/* 727 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	exports.mapStateToProps = mapStateToProps;
+	
+	var _reactRedux = __webpack_require__(291);
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _reactRouter = __webpack_require__(504);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _plans = __webpack_require__(728);
+	
+	var _stacks = __webpack_require__(729);
+	
+	var _nodes = __webpack_require__(730);
+	
+	var _environmentConfiguration = __webpack_require__(731);
+	
+	var _CurrentPlanActions = __webpack_require__(665);
+	
+	var _CurrentPlanActions2 = _interopRequireDefault(_CurrentPlanActions);
+	
+	var _DeploymentConfigurationSummary = __webpack_require__(732);
+	
+	var _DeploymentConfigurationSummary2 = _interopRequireDefault(_DeploymentConfigurationSummary);
+	
+	var _DeploymentStatus = __webpack_require__(733);
+	
+	var _DeploymentStatus2 = _interopRequireDefault(_DeploymentStatus);
+	
+	var _DeploymentStep = __webpack_require__(734);
+	
+	var _DeploymentStep2 = _interopRequireDefault(_DeploymentStep);
+	
+	var _EnvironmentConfigurationActions = __webpack_require__(735);
+	
+	var _EnvironmentConfigurationActions2 = _interopRequireDefault(_EnvironmentConfigurationActions);
+	
+	var _PlansDropdown = __webpack_require__(737);
+	
+	var _PlansDropdown2 = _interopRequireDefault(_PlansDropdown);
+	
+	var _Loader = __webpack_require__(560);
+	
+	var _Loader2 = _interopRequireDefault(_Loader);
+	
+	var _NodesActions = __webpack_require__(741);
+	
+	var _NodesActions2 = _interopRequireDefault(_NodesActions);
+	
+	var _NoPlans = __webpack_require__(747);
+	
+	var _NoPlans2 = _interopRequireDefault(_NoPlans);
+	
+	var _NotificationActions = __webpack_require__(666);
+	
+	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
+	
+	var _StacksActions = __webpack_require__(748);
+	
+	var _StacksActions2 = _interopRequireDefault(_StacksActions);
+	
+	var _Roles = __webpack_require__(750);
+	
+	var _Roles2 = _interopRequireDefault(_Roles);
+	
+	var _RolesActions = __webpack_require__(752);
+	
+	var _RolesActions2 = _interopRequireDefault(_RolesActions);
+	
+	var _TripleOApiService = __webpack_require__(680);
+	
+	var _TripleOApiService2 = _interopRequireDefault(_TripleOApiService);
+	
+	var _TripleOApiErrorHandler = __webpack_require__(712);
+	
+	var _TripleOApiErrorHandler2 = _interopRequireDefault(_TripleOApiErrorHandler);
+	
+	var _ValidationsActions = __webpack_require__(717);
+	
+	var _ValidationsActions2 = _interopRequireDefault(_ValidationsActions);
+	
+	var _validations = __webpack_require__(557);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DeploymentPlan = function (_React$Component) {
+	  _inherits(DeploymentPlan, _React$Component);
+	
+	  function DeploymentPlan() {
+	    _classCallCheck(this, DeploymentPlan);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DeploymentPlan).call(this));
+	
+	    _this.state = {
+	      readyToDeploy: true
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(DeploymentPlan, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.fetchStacks();
+	    }
+	  }, {
+	    key: 'handleDeploy',
+	    value: function handleDeploy() {
+	      var _this2 = this;
+	
+	      _TripleOApiService2.default.deployPlan(this.props.currentPlanName).then(function (response) {
+	        _this2.setState({ parameters: response.parameters });
+	        _this2.props.fetchStacks();
+	        _this2.props.notify({
+	          title: 'Deployment started',
+	          message: 'The Deployment has been successfully initiated',
+	          type: 'success'
+	        });
+	      }).catch(function (error) {
+	        var errorHandler = new _TripleOApiErrorHandler2.default(error);
+	        errorHandler.errors.forEach(function (error) {
+	          _this2.props.notify(error);
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'renderDeployStep',
+	    value: function renderDeployStep() {
+	      return !this.props.currentStack ? _react2.default.createElement(
+	        'div',
+	        { className: 'actions pull-left' },
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'link btn btn-primary btn-lg ' + (this.state.readyToDeploy ? '' : 'disabled'),
+	            onClick: this.handleDeploy.bind(this) },
+	          _react2.default.createElement('span', { className: 'fa fa-send' }),
+	          ' Verify and Deploy'
+	        )
+	      ) : _react2.default.createElement(_DeploymentStatus2.default, { stack: this.props.currentStack,
+	        fetchStacks: this.props.fetchStacks });
+	    }
+	  }, {
+	    key: 'runNetworkValidations',
+	    value: function runNetworkValidations(e) {
+	      e.preventDefault();
+	      var validationStageUuid = (0, _validations.getValidationStageUuidByName)(this.props.validationStages, 'network-validation');
+	      this.props.runValidationStage(validationStageUuid);
+	    }
+	  }, {
+	    key: 'runHardwareValidations',
+	    value: function runHardwareValidations(e) {
+	      e.preventDefault();
+	      this.props.runValidationStage((0, _validations.getValidationStageUuidByName)(this.props.validationStages, 'discovery'));
+	    }
+	  }, {
+	    key: 'runPostDeploymentValidations',
+	    value: function runPostDeploymentValidations(e) {
+	      e.preventDefault();
+	      this.props.runValidationStage((0, _validations.getValidationStageUuidByName)(this.props.validationStages, 'post-deployment'));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var deploymentConfigLinks = [_react2.default.createElement(
+	        _reactRouter.Link,
+	        { className: 'btn btn-link',
+	          key: 'deploymentConfiguration',
+	          to: '/deployment-plan/configuration' },
+	        'Edit Configuration'
+	      ), _react2.default.createElement(
+	        'p',
+	        { key: 'networkValidationHint' },
+	        'At this point you should ',
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'link',
+	            onClick: this.runNetworkValidations.bind(this) },
+	          'run Network Validations'
+	        ),
+	        '.'
+	      )];
+	
+	      var registerAndAssignLinks = [_react2.default.createElement(
+	        _reactRouter.Link,
+	        { className: 'btn btn-default', key: 'registerNodes', to: '/nodes/registered/register' },
+	        _react2.default.createElement('span', { className: 'fa fa-plus' }),
+	        ' Register Nodes'
+	      ), _react2.default.createElement(
+	        'span',
+	        { key: 'space' },
+	        ' '
+	      ), _react2.default.createElement(_Loader2.default, { key: 'rolesLoader',
+	        loaded: !(this.props.rolesLoaded && this.props.isFetchingRoles),
+	        content: 'Loading Deployment Roles...',
+	        component: 'span',
+	        inline: true }), _react2.default.createElement(
+	        'span',
+	        { key: 'space2' },
+	        ' '
+	      ), _react2.default.createElement(
+	        _Loader2.default,
+	        { key: 'nodesLoader',
+	          loaded: !this.props.isFetchingNodes,
+	          content: 'Loading Nodes...',
+	          component: 'span',
+	          inline: true },
+	        'There are ',
+	        _react2.default.createElement(
+	          'strong',
+	          null,
+	          this.props.unassignedIntrospectedNodes.size
+	        ),
+	        ' of ',
+	        _react2.default.createElement(
+	          'strong',
+	          null,
+	          this.props.introspectedNodes.size
+	        ),
+	        ' Nodes available to assign'
+	      )];
+	
+	      var children = void 0;
+	      // Render children only when current plan is already selected
+	      if (this.props.children && this.props.currentPlanName) {
+	        children = _react2.default.cloneElement(this.props.children, { currentPlanName: this.props.currentPlanName,
+	          parentPath: '/' + this.props.route.path });
+	      }
+	
+	      var deploymentConfigurationSummary = _react2.default.createElement(_DeploymentConfigurationSummary2.default, {
+	        fetchEnvironmentConfiguration: this.props.fetchEnvironmentConfiguration.bind(this),
+	        summary: this.props.environmentConfigurationSummary,
+	        planName: this.props.currentPlanName,
+	        isFetching: this.props.isFetchingEnvironmentConfiguration,
+	        loaded: this.props.environmentConfigurationLoaded });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          _Loader2.default,
+	          { loaded: (this.props.currentPlanName || !this.props.hasPlans) && !this.props.isFetchingPlans,
+	            content: 'Loading Deployments...',
+	            global: true },
+	          this.props.hasPlans ? _react2.default.createElement(
+	            'div',
+	            { className: 'col-sm-12 deployment-step-list' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'page-header page-header-bleed-right' },
+	              _react2.default.createElement(
+	                'h1',
+	                null,
+	                this.props.currentPlanName,
+	                _react2.default.createElement(_PlansDropdown2.default, { currentPlanName: this.props.currentPlanName,
+	                  plans: this.props.inactivePlans,
+	                  choosePlan: this.props.choosePlan })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'ol',
+	              { className: 'deployment-step-list' },
+	              _react2.default.createElement(_DeploymentStep2.default, { title: 'Specify Deployment Configuration',
+	                subTitle: deploymentConfigurationSummary,
+	                links: deploymentConfigLinks,
+	                disabled: this.props.currentStackDeploymentProgress }),
+	              _react2.default.createElement(
+	                _DeploymentStep2.default,
+	                { title: 'Register and Assign Nodes',
+	                  links: registerAndAssignLinks,
+	                  disabled: this.props.currentStackDeploymentProgress },
+	                _react2.default.createElement(_Roles2.default, { roles: this.props.roles.toList().toJS(),
+	                  introspectedNodes: this.props.introspectedNodes,
+	                  unassignedIntrospectedNodes: this.props.unassignedIntrospectedNodes,
+	                  fetchRoles: this.props.fetchRoles,
+	                  fetchNodes: this.props.fetchNodes,
+	                  isFetchingNodes: this.props.isFetchingNodes,
+	                  loaded: this.props.rolesLoaded }),
+	                _react2.default.createElement(
+	                  'p',
+	                  null,
+	                  'At this point you should run the ',
+	                  _react2.default.createElement(
+	                    'a',
+	                    { className: 'link',
+	                      onClick: this.runHardwareValidations.bind(this) },
+	                    'Hardware Validations'
+	                  ),
+	                  '.'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                _DeploymentStep2.default,
+	                { title: 'Deploy' },
+	                this.renderDeployStep(),
+	                _react2.default.createElement(
+	                  'p',
+	                  { style: { clear: 'both' } },
+	                  'At this point you should run ',
+	                  _react2.default.createElement(
+	                    'a',
+	                    { className: 'link',
+	                      onClick: this.runPostDeploymentValidations.bind(this) },
+	                    'the Post Deployment Validations'
+	                  ),
+	                  '.'
+	                )
+	              )
+	            )
+	          ) : _react2.default.createElement(
+	            'div',
+	            { className: 'col-sm-12' },
+	            _react2.default.createElement(_NoPlans2.default, null)
+	          ),
+	          children
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return DeploymentPlan;
+	}(_react2.default.Component);
+	
+	DeploymentPlan.propTypes = {
+	  children: _react2.default.PropTypes.node,
+	  choosePlan: _react2.default.PropTypes.func,
+	  currentPlanName: _react2.default.PropTypes.string,
+	  currentStack: _reactImmutableProptypes2.default.record,
+	  currentStackDeploymentProgress: _react2.default.PropTypes.bool,
+	  environmentConfigurationLoaded: _react2.default.PropTypes.bool,
+	  environmentConfigurationSummary: _react2.default.PropTypes.string,
+	  fetchEnvironmentConfiguration: _react2.default.PropTypes.func,
+	  fetchNodes: _react2.default.PropTypes.func,
+	  fetchRoles: _react2.default.PropTypes.func,
+	  fetchStacks: _react2.default.PropTypes.func,
+	  hasPlans: _react2.default.PropTypes.bool,
+	  inactivePlans: _reactImmutableProptypes2.default.map,
+	  introspectedNodes: _reactImmutableProptypes2.default.map,
+	  isFetchingEnvironmentConfiguration: _react2.default.PropTypes.bool,
+	  isFetchingNodes: _react2.default.PropTypes.bool,
+	  isFetchingPlans: _react2.default.PropTypes.bool,
+	  isFetchingRoles: _react2.default.PropTypes.bool,
+	  notify: _react2.default.PropTypes.func,
+	  roles: _reactImmutableProptypes2.default.map,
+	  rolesLoaded: _react2.default.PropTypes.bool,
+	  route: _react2.default.PropTypes.object,
+	  runValidationStage: _react2.default.PropTypes.func,
+	  unassignedIntrospectedNodes: _reactImmutableProptypes2.default.map,
+	  validationStages: _reactImmutableProptypes2.default.map
+	};
+	
+	function mapStateToProps(state) {
+	  return {
+	    currentPlanName: state.currentPlan.currentPlanName,
+	    currentStack: (0, _stacks.getCurrentStack)(state),
+	    currentStackDeploymentProgress: (0, _stacks.getCurrentStackDeploymentProgress)(state),
+	    environmentConfigurationLoaded: state.environmentConfiguration.loaded,
+	    environmentConfigurationSummary: (0, _environmentConfiguration.getEnvironmentConfigurationSummary)(state),
+	    isFetchingEnvironmentConfiguration: state.environmentConfiguration.isFetching,
+	    isFetchingNodes: state.nodes.get('isFetching'),
+	    isFetchingPlans: state.plans.get('isFetchingPlans'),
+	    isFetchingRoles: state.roles.get('isFetching'),
+	    hasPlans: !state.plans.get('all').isEmpty(),
+	    inactivePlans: (0, _plans.getAllPlansButCurrent)(state),
+	    introspectedNodes: (0, _nodes.getIntrospectedNodes)(state),
+	    roles: state.roles.get('roles'),
+	    rolesLoaded: state.roles.get('loaded'),
+	    unassignedIntrospectedNodes: (0, _nodes.getUnassignedIntrospectedNodes)(state),
+	    validationStages: state.validations.get('validationStages')
+	  };
+	}
+	
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    choosePlan: function choosePlan(planName) {
+	      return dispatch(_CurrentPlanActions2.default.choosePlan(planName));
+	    },
+	    fetchEnvironmentConfiguration: function fetchEnvironmentConfiguration(planName, parentPath) {
+	      dispatch(_EnvironmentConfigurationActions2.default.fetchEnvironmentConfiguration(planName, parentPath));
+	    },
+	    fetchNodes: function fetchNodes() {
+	      return dispatch(_NodesActions2.default.fetchNodes());
+	    },
+	    fetchRoles: function fetchRoles() {
+	      return dispatch(_RolesActions2.default.fetchRoles());
+	    },
+	    fetchStacks: function fetchStacks() {
+	      return dispatch(_StacksActions2.default.fetchStacks());
+	    },
+	    notify: function notify(notification) {
+	      return dispatch(_NotificationActions2.default.notify(notification));
+	    },
+	    runValidationStage: function runValidationStage(uuid) {
+	      dispatch(_ValidationsActions2.default.runValidationStage(uuid));
+	    }
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(DeploymentPlan);
+
+/***/ },
+/* 728 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getAllPlansButCurrent = exports.currentPlanNameSelector = undefined;
+	
+	var _reselect = __webpack_require__(558);
+	
+	var plansSelector = function plansSelector(state) {
+	  return state.plans.get('all');
+	};
+	var currentPlanNameSelector = exports.currentPlanNameSelector = function currentPlanNameSelector(state) {
+	  return state.currentPlan.currentPlanName;
+	};
+	
+	/**
+	 * Returns a Map o all plans except for the selected one
+	 */
+	// TODO(jtomasek): update this to list 3 last used plans
+	var getAllPlansButCurrent = exports.getAllPlansButCurrent = (0, _reselect.createSelector)([plansSelector, currentPlanNameSelector], function (plans, currentPlanName) {
+	  return plans.filter(function (plan) {
+	    return plan.name != currentPlanName;
+	  }).sortBy(function (plan) {
+	    return plan.name;
+	  });
+	});
+
+/***/ },
+/* 729 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getCurrentStackDeploymentProgress = exports.getCurrentStack = undefined;
+	
+	var _reselect = __webpack_require__(558);
+	
+	var _stacks = __webpack_require__(708);
+	
+	var _plans = __webpack_require__(728);
+	
+	// const plansSelector = state => state.plans.get('all');
+	var stacksSelector = function stacksSelector(state) {
+	  return state.stacks.get('stacks');
+	};
+	
+	/**
+	 * Returns the stack associated with currentPlanName
+	 */
+	var getCurrentStack = exports.getCurrentStack = (0, _reselect.createSelector)([stacksSelector, _plans.currentPlanNameSelector], function (stacks, currentPlanName) {
+	  return stacks.get(currentPlanName);
+	});
+	
+	/**
+	 * Returns a flag for the deployment progress of the current plan
+	 * (true if the plan is currently being deployed, false it not).
+	 */
+	var getCurrentStackDeploymentProgress = exports.getCurrentStackDeploymentProgress = (0, _reselect.createSelector)([stacksSelector, _plans.currentPlanNameSelector], function (stacks, currentPlanName) {
+	  return stacks.get(currentPlanName, (0, _stacks.Stack)({})).stack_status === 'CREATE_IN_PROGRESS';
+	});
+
+/***/ },
+/* 730 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getAssignedNodes = exports.getNodesOperationInProgress = exports.getUnassignedIntrospectedNodes = exports.getMaintenanceNodes = exports.getDeployedNodes = exports.getIntrospectedNodes = exports.getRegisteredNodes = undefined;
+	
+	var _reselect = __webpack_require__(558);
+	
+	var nodes = function nodes(state) {
+	  return state.nodes.get('all');
+	};
+	var nodesInProgress = function nodesInProgress(state) {
+	  return state.nodes.get('nodesInProgress');
+	};
+	
+	var getRegisteredNodes = exports.getRegisteredNodes = (0, _reselect.createSelector)(nodes, function (nodes) {
+	  return nodes.filterNot(function (node) {
+	    return node.get('provision_state') === 'active' || node.get('maintenance');
+	  });
+	});
+	
+	var getIntrospectedNodes = exports.getIntrospectedNodes = (0, _reselect.createSelector)(nodes, function (nodes) {
+	  return nodes.filter(function (node) {
+	    return node.getIn(['properties', 'memory_mb']) && node.getIn('properties', 'cpu_arch') && node.getIn('properties', 'cpus') && node.getIn('properties', 'local_gb');
+	  });
+	});
+	
+	var getDeployedNodes = exports.getDeployedNodes = (0, _reselect.createSelector)(nodes, function (nodes) {
+	  return nodes.filter(function (node) {
+	    return node.get('provision_state') === 'active';
+	  });
+	});
+	
+	var getMaintenanceNodes = exports.getMaintenanceNodes = (0, _reselect.createSelector)(nodes, function (nodes) {
+	  return nodes.filter(function (node) {
+	    return node.get('maintenance');
+	  });
+	});
+	
+	var getUnassignedIntrospectedNodes = exports.getUnassignedIntrospectedNodes = (0, _reselect.createSelector)(getIntrospectedNodes, function (introspectedNodes) {
+	  return introspectedNodes.filterNot(function (node) {
+	    return node.getIn(['properties', 'capabilities']).match(/.*profile:(\w+)/);
+	  });
+	});
+	
+	/*
+	 * booleam, returns true if there are any nodes with operation in progress
+	 */
+	var getNodesOperationInProgress = exports.getNodesOperationInProgress = (0, _reselect.createSelector)(nodesInProgress, function (nodesInProgress) {
+	  return !nodesInProgress.isEmpty();
+	});
+	
+	var getAssignedNodes = exports.getAssignedNodes = function getAssignedNodes(introspectedNodes, roleName) {
+	  return introspectedNodes.filter(function (node) {
+	    return node.getIn(['properties', 'capabilities']).includes('profile:' + roleName);
+	  });
+	};
+
+/***/ },
+/* 731 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getTopicsTree = exports.getEnvironmentConfigurationSummary = exports.getEnabledEnvironments = undefined;
+	
+	var _reselect = __webpack_require__(558);
+	
+	var _immutable = __webpack_require__(556);
+	
+	var topics = function topics(state) {
+	  return state.environmentConfiguration.topics;
+	};
+	var environmentGroups = function environmentGroups(state) {
+	  return state.environmentConfiguration.environmentGroups;
+	};
+	var environments = function environments(state) {
+	  return state.environmentConfiguration.environments;
+	};
+	
+	var getEnabledEnvironments = exports.getEnabledEnvironments = (0, _reselect.createSelector)(environments, function (environments) {
+	  return environments.filter(function (environment) {
+	    return environment.get('enabled');
+	  });
+	});
+	
+	var getEnvironmentConfigurationSummary = exports.getEnvironmentConfigurationSummary = (0, _reselect.createSelector)(getEnabledEnvironments, function (environments) {
+	  var titlesList = environments.reduce(function (titlesList, environment) {
+	    return titlesList.push(environment.get('title'));
+	  }, (0, _immutable.List)());
+	  return titlesList.toArray().join(', ');
+	});
+	
+	/**
+	 * Returns Map of Topics with nested Environment Groups and Environments
+	 */
+	var getTopicsTree = exports.getTopicsTree = (0, _reselect.createSelector)([topics, environmentGroups, environments], function (topics, environmentGroups, environments) {
+	  return topics.map(function (topic) {
+	    return topic.update('environment_groups', function (envGroups) {
+	      return envGroups.map(function (envGroup) {
+	        return environmentGroups.get(envGroup).update('environments', function (envs) {
+	          return envs.map(function (environment) {
+	            return environments.get(environment);
+	          });
+	        });
+	      });
+	    });
+	  });
+	});
+
+/***/ },
+/* 732 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Loader = __webpack_require__(560);
+	
+	var _Loader2 = _interopRequireDefault(_Loader);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DeploymentConfigurationSummary = function (_React$Component) {
+	  _inherits(DeploymentConfigurationSummary, _React$Component);
+	
+	  function DeploymentConfigurationSummary() {
+	    _classCallCheck(this, DeploymentConfigurationSummary);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DeploymentConfigurationSummary).apply(this, arguments));
+	  }
+	
+	  _createClass(DeploymentConfigurationSummary, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (this.props.planName) {
+	        this.props.fetchEnvironmentConfiguration(this.props.planName);
+	      }
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (this.props.loaded === false && this.props.isFetching === false && this.props.planName) {
+	        this.props.fetchEnvironmentConfiguration(this.props.planName);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _Loader2.default,
+	        { loaded: this.props.loaded,
+	          content: 'Loading current Deployment Configuration...',
+	          component: 'span',
+	          inline: true },
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          this.props.summary
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return DeploymentConfigurationSummary;
+	}(_react2.default.Component);
+	
+	exports.default = DeploymentConfigurationSummary;
+	
+	DeploymentConfigurationSummary.propTypes = {
+	  fetchEnvironmentConfiguration: _react2.default.PropTypes.func.isRequired,
+	  isFetching: _react2.default.PropTypes.bool.isRequired,
+	  loaded: _react2.default.PropTypes.bool.isRequired,
+	  planName: _react2.default.PropTypes.string,
+	  summary: _react2.default.PropTypes.string.isRequired
+	};
+
+/***/ },
+/* 733 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var statusMessages = {
+	  CREATE_IN_PROGRESS: 'Deployment in progress.',
+	  CREATE_FAILED: 'The deployment failed.',
+	  DELETE_IN_PROGRESS: 'Deletion in progress.',
+	  UPDATE_IN_PROGRESS: 'Update in progress.',
+	  UPDATE_FAILED: 'The update failed.'
+	};
+	
+	var DeploymentStatus = function (_React$Component) {
+	  _inherits(DeploymentStatus, _React$Component);
+	
+	  function DeploymentStatus() {
+	    _classCallCheck(this, DeploymentStatus);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DeploymentStatus).call(this));
+	
+	    _this.state = {
+	      intervalId: undefined
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(DeploymentStatus, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+	
+	      var intervalId = setInterval(function () {
+	        _this2.props.fetchStacks();
+	      }, 5000);
+	      this.setState({ intervalId: intervalId });
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearInterval(this.state.intervalId);
+	    }
+	  }, {
+	    key: 'renderProgress',
+	    value: function renderProgress(stack) {
+	      var msg = statusMessages[stack.stack_status];
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'progress-description' },
+	          _react2.default.createElement('div', { className: 'spinner spinner-xs spinner-inline' }),
+	          ' ',
+	          _react2.default.createElement(
+	            'strong',
+	            null,
+	            msg
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'progress progress-label-top-right' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'progress-bar',
+	              role: 'progressbar',
+	              'aria-valuenow': '50',
+	              'aria-valuemin': '0',
+	              'aria-valuemax': '100',
+	              style: { width: '42.7%' } },
+	            _react2.default.createElement(
+	              'span',
+	              null,
+	              '50%'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'renderResult',
+	    value: function renderResult(stack, failed) {
+	      var statusClass = failed ? 'alert alert-danger' : 'alert alert-success';
+	      var iconClass = failed ? 'pficon pficon-error-circle-o' : 'pficon pficon-ok';
+	      var msg = statusMessages[stack.stack_status];
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: statusClass },
+	        _react2.default.createElement('span', { className: iconClass }),
+	        msg
+	      );
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var progress = !!this.props.stack.stack_status.match(/PROGRESS/);
+	      var failed = !!this.props.stack.stack_status.match(/FAILED/);
+	
+	      if (progress) {
+	        return this.renderProgress(this.props.stack);
+	      } else {
+	        return this.renderResult(this.props.stack, failed);
+	      }
+	    }
+	  }]);
+	
+	  return DeploymentStatus;
+	}(_react2.default.Component);
+	
+	exports.default = DeploymentStatus;
+	
+	
+	DeploymentStatus.propTypes = {
+	  fetchStacks: _react2.default.PropTypes.func.isRequired,
+	  stack: _reactImmutableProptypes2.default.record.isRequired
+	};
+
+/***/ },
+/* 734 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DeploymentStep = function (_React$Component) {
+	  _inherits(DeploymentStep, _React$Component);
+	
+	  function DeploymentStep() {
+	    _classCallCheck(this, DeploymentStep);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DeploymentStep).apply(this, arguments));
+	  }
+	
+	  _createClass(DeploymentStep, [{
+	    key: "render",
+	    value: function render() {
+	      var links = !this.props.disabled ? this.props.links : null;
+	      return _react2.default.createElement(
+	        "li",
+	        null,
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          _react2.default.createElement(
+	            "span",
+	            null,
+	            this.props.title
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-sm-12" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "deployment-step-subtitle" },
+	              _react2.default.createElement(
+	                "span",
+	                null,
+	                this.props.subTitle
+	              ),
+	              links
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-sm-12" },
+	            this.props.children
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return DeploymentStep;
+	}(_react2.default.Component);
+	
+	exports.default = DeploymentStep;
+	
+	
+	DeploymentStep.propTypes = {
+	  children: _react2.default.PropTypes.node,
+	  disabled: _react2.default.PropTypes.bool,
+	  links: _react2.default.PropTypes.array,
+	  subTitle: _react2.default.PropTypes.node,
+	  title: _react2.default.PropTypes.string.isRequired
+	};
+	
+	DeploymentStep.defaultProps = {
+	  disabled: false
+	};
+
+/***/ },
+/* 735 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _normalizr = __webpack_require__(597);
+	
+	var _EnvironmentConfigurationConstants = __webpack_require__(689);
+	
+	var _EnvironmentConfigurationConstants2 = _interopRequireDefault(_EnvironmentConfigurationConstants);
+	
+	var _history = __webpack_require__(551);
+	
+	var _history2 = _interopRequireDefault(_history);
+	
+	var _NotificationActions = __webpack_require__(666);
+	
+	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
+	
+	var _TripleOApiService = __webpack_require__(680);
+	
+	var _TripleOApiService2 = _interopRequireDefault(_TripleOApiService);
+	
+	var _TripleOApiErrorHandler = __webpack_require__(712);
+	
+	var _TripleOApiErrorHandler2 = _interopRequireDefault(_TripleOApiErrorHandler);
+	
+	var _environmentConfiguration = __webpack_require__(736);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  fetchEnvironmentConfiguration: function fetchEnvironmentConfiguration(planName, parentPath) {
+	    var _this = this;
+	
+	    return function (dispatch) {
+	      dispatch(_this.fetchEnvironmentConfigurationPending());
+	      _TripleOApiService2.default.getPlanEnvironments(planName).then(function (response) {
+	        var entities = (0, _normalizr.normalize)(response.environments.topics, (0, _normalizr.arrayOf)(_environmentConfiguration.topicSchema)).entities;
+	        dispatch(_this.fetchEnvironmentConfigurationSuccess(entities));
+	      }).catch(function (error) {
+	        console.error('Error retrieving EnvironmentConfigurationActions.fetchEnvironment', //eslint-disable-line no-console
+	        error.stack || error); //eslint-disable-line no-console
+	        if (parentPath) {
+	          _history2.default.pushState(null, parentPath);
+	        }
+	        dispatch(_this.fetchEnvironmentConfigurationFailed());
+	        var errorHandler = new _TripleOApiErrorHandler2.default(error);
+	        errorHandler.errors.forEach(function (error) {
+	          dispatch(_NotificationActions2.default.notify(error));
+	        });
+	      });
+	    };
+	  },
+	  fetchEnvironmentConfigurationPending: function fetchEnvironmentConfigurationPending() {
+	    return {
+	      type: _EnvironmentConfigurationConstants2.default.FETCH_ENVIRONMENT_CONFIGURATION_PENDING
+	    };
+	  },
+	  fetchEnvironmentConfigurationSuccess: function fetchEnvironmentConfigurationSuccess(entities) {
+	    return {
+	      type: _EnvironmentConfigurationConstants2.default.FETCH_ENVIRONMENT_CONFIGURATION_SUCCESS,
+	      payload: entities
+	    };
+	  },
+	  fetchEnvironmentConfigurationFailed: function fetchEnvironmentConfigurationFailed(environment) {
+	    return {
+	      type: _EnvironmentConfigurationConstants2.default.FETCH_ENVIRONMENT_CONFIGURATION_FAILED
+	    };
+	  },
+	  updateEnvironmentConfiguration: function updateEnvironmentConfiguration(planName, data, formFields, parentPath) {
+	    var _this2 = this;
+	
+	    return function (dispatch) {
+	      dispatch(_this2.updateEnvironmentConfigurationPending());
+	      _TripleOApiService2.default.updatePlanEnvironments(planName, data).then(function (response) {
+	        var entities = (0, _normalizr.normalize)(response.environments.topics, (0, _normalizr.arrayOf)(_environmentConfiguration.topicSchema)).entities;
+	        dispatch(_this2.updateEnvironmentConfigurationSuccess(entities));
+	        _history2.default.pushState(null, parentPath);
+	        dispatch(_NotificationActions2.default.notify({
+	          title: 'Environment Configuration updated',
+	          message: 'The Environment Configuration has been successfully updated',
+	          type: 'success'
+	        }));
+	      }).catch(function (error) {
+	        console.error('Error in EnvironmentConfigurationActions.updateEnvironment', //eslint-disable-line no-console
+	        error.stack || error);
+	        var errorHandler = new _TripleOApiErrorHandler2.default(error, formFields);
+	        dispatch(_this2.updateEnvironmentConfigurationFailed(errorHandler.errors, errorHandler.formFieldErrors));
+	      });
+	    };
+	  },
+	  updateEnvironmentConfigurationPending: function updateEnvironmentConfigurationPending() {
+	    return {
+	      type: _EnvironmentConfigurationConstants2.default.UPDATE_ENVIRONMENT_CONFIGURATION_PENDING
+	    };
+	  },
+	  updateEnvironmentConfigurationSuccess: function updateEnvironmentConfigurationSuccess(entities) {
+	    return {
+	      type: _EnvironmentConfigurationConstants2.default.UPDATE_ENVIRONMENT_CONFIGURATION_SUCCESS,
+	      payload: entities
+	    };
+	  },
+	  updateEnvironmentConfigurationFailed: function updateEnvironmentConfigurationFailed(formErrors, formFieldErrors) {
+	    return {
+	      type: _EnvironmentConfigurationConstants2.default.UPDATE_ENVIRONMENT_CONFIGURATION_FAILED,
+	      payload: {
+	        formErrors: formErrors,
+	        formFieldErrors: formFieldErrors
+	      }
+	    };
+	  }
+	};
+
+/***/ },
+/* 736 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.environmentSchema = exports.environmentGroupSchema = exports.topicSchema = undefined;
+	
+	var _normalizr = __webpack_require__(597);
+	
+	var topicSchema = exports.topicSchema = new _normalizr.Schema('topics', { idAttribute: 'title' });
+	var environmentGroupSchema = exports.environmentGroupSchema = new _normalizr.Schema('environmentGroups', { idAttribute: function idAttribute(entity) {
+	    return entity.title ? entity.title : entity.description;
+	  } });
+	var environmentSchema = exports.environmentSchema = new _normalizr.Schema('environments', { idAttribute: 'file' });
+	
+	topicSchema.define({
+	  environment_groups: (0, _normalizr.arrayOf)(environmentGroupSchema)
+	});
+	
+	environmentGroupSchema.define({
+	  environments: (0, _normalizr.arrayOf)(environmentSchema)
+	});
+
+/***/ },
+/* 737 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(504);
+	
+	var _DropdownItem = __webpack_require__(738);
+	
+	var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
+	
+	var _DropdownButton = __webpack_require__(739);
+	
+	var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
+	
+	var _Dropdown = __webpack_require__(740);
+	
+	var _Dropdown2 = _interopRequireDefault(_Dropdown);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PlansDropdown = function (_React$Component) {
+	  _inherits(PlansDropdown, _React$Component);
+	
+	  function PlansDropdown() {
+	    _classCallCheck(this, PlansDropdown);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlansDropdown).apply(this, arguments));
+	  }
+	
+	  _createClass(PlansDropdown, [{
+	    key: 'renderRecentPlans',
+	    value: function renderRecentPlans() {
+	      var _this2 = this;
+	
+	      return this.props.plans.toList().map(function (plan) {
+	        return _react2.default.createElement(
+	          _DropdownItem2.default,
+	          { key: plan.name,
+	            onClick: _this2.props.choosePlan.bind(_this2, plan.name) },
+	          plan.name
+	        );
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.props.plans.isEmpty()) {
+	        return _react2.default.createElement(
+	          _reactRouter.Link,
+	          { className: 'btn btn-link', to: '/plans/list' },
+	          'Manage Deployments'
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          _Dropdown2.default,
+	          null,
+	          _react2.default.createElement(
+	            _DropdownButton2.default,
+	            { className: 'btn-link' },
+	            'Select Deployment'
+	          ),
+	          this.renderRecentPlans(),
+	          _react2.default.createElement(_DropdownItem2.default, { key: 'divider', divider: true }),
+	          _react2.default.createElement(
+	            _DropdownItem2.default,
+	            { key: 'plansLink', to: '/plans/list' },
+	            'Manage Deployments'
+	          )
+	        );
+	      }
+	    }
+	  }]);
+	
+	  return PlansDropdown;
+	}(_react2.default.Component);
+	
+	exports.default = PlansDropdown;
+	
+	PlansDropdown.propTypes = {
+	  choosePlan: _react2.default.PropTypes.func,
+	  plans: _reactImmutableProptypes2.default.map
+	};
+
+/***/ },
+/* 738 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _classnames = __webpack_require__(561);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _reactRouter = __webpack_require__(504);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DropdownItem = function (_React$Component) {
+	  _inherits(DropdownItem, _React$Component);
+	
+	  function DropdownItem() {
+	    _classCallCheck(this, DropdownItem);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DropdownItem).apply(this, arguments));
+	  }
+	
+	  _createClass(DropdownItem, [{
+	    key: 'handleClick',
+	    value: function handleClick(e) {
+	      e.preventDefault();
+	      this.props.onClick(e);
+	      this.props.toggleDropdown(e);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      if (this.props.divider) {
+	        return _react2.default.createElement('li', { className: 'divider' });
+	      }
+	
+	      var classes = {
+	        disabled: this.props.disabled,
+	        active: this.props.active
+	      };
+	
+	      if (this.props.to) {
+	        return _react2.default.createElement(
+	          'li',
+	          { className: (0, _classnames2.default)(this.props.className, classes) },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: this.props.to, onClick: function onClick() {
+	                return _this2.props.toggleDropdown();
+	              } },
+	            this.props.children
+	          )
+	        );
+	      }
+	
+	      if (this.props.onClick) {
+	        return _react2.default.createElement(
+	          'li',
+	          { className: (0, _classnames2.default)(this.props.className, classes) },
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'link', onClick: this.handleClick.bind(this) },
+	            this.props.children
+	          )
+	        );
+	      }
+	
+	      return _react2.default.createElement(
+	        'li',
+	        { className: (0, _classnames2.default)(this.props.className, classes) },
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'link' },
+	          this.props.children
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return DropdownItem;
+	}(_react2.default.Component);
+	
+	exports.default = DropdownItem;
+	
+	DropdownItem.propTypes = {
+	  active: _react2.default.PropTypes.bool,
+	  children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.node), _react2.default.PropTypes.node]),
+	  className: _react2.default.PropTypes.string,
+	  disabled: _react2.default.PropTypes.bool,
+	  divider: _react2.default.PropTypes.bool,
+	  onClick: _react2.default.PropTypes.func,
+	  to: _react2.default.PropTypes.string,
+	  toggleDropdown: _react2.default.PropTypes.func
+	};
+	DropdownItem.defaultProps = {
+	  active: false,
+	  disabled: false,
+	  divider: false
+	};
+
+/***/ },
+/* 739 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _classnames = __webpack_require__(561);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DropdownButton = function (_React$Component) {
+	  _inherits(DropdownButton, _React$Component);
+	
+	  function DropdownButton() {
+	    _classCallCheck(this, DropdownButton);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DropdownButton).apply(this, arguments));
+	  }
+	
+	  _createClass(DropdownButton, [{
+	    key: 'handleClick',
+	    value: function handleClick(e) {
+	      e.preventDefault();
+	      this.props.toggleDropdown();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'button',
+	        { className: (0, _classnames2.default)('btn dropdown-toggle', this.props.className),
+	          onClick: this.handleClick.bind(this),
+	          type: 'button' },
+	        this.props.children,
+	        _react2.default.createElement('span', { className: 'caret' })
+	      );
+	    }
+	  }]);
+	
+	  return DropdownButton;
+	}(_react2.default.Component);
+	
+	exports.default = DropdownButton;
+	
+	DropdownButton.propTypes = {
+	  children: _react2.default.PropTypes.node,
+	  className: _react2.default.PropTypes.string,
+	  toggleDropdown: _react2.default.PropTypes.func
+	};
+
+/***/ },
+/* 740 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69648,27 +71275,13 @@
 	
 	var _ = _interopRequireWildcard(_lodash);
 	
-	var _immutable = __webpack_require__(556);
+	var _classnames = __webpack_require__(561);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
 	
 	var _react = __webpack_require__(293);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _formsyReact = __webpack_require__(722);
-	
-	var _formsyReact2 = _interopRequireDefault(_formsyReact);
-	
-	var _FormErrorList = __webpack_require__(729);
-	
-	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
-	
-	var _NodesTable = __webpack_require__(730);
-	
-	var _NodesTable2 = _interopRequireDefault(_NodesTable);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -69680,95 +71293,1393 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var IntrospectedNodesTabPane = function (_React$Component) {
-	  _inherits(IntrospectedNodesTabPane, _React$Component);
+	var Dropdown = function (_React$Component) {
+	  _inherits(Dropdown, _React$Component);
 	
-	  function IntrospectedNodesTabPane() {
-	    _classCallCheck(this, IntrospectedNodesTabPane);
+	  function Dropdown(props) {
+	    _classCallCheck(this, Dropdown);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(IntrospectedNodesTabPane).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Dropdown).call(this, props));
 	
 	    _this.state = {
-	      canSubmit: false
+	      isOpen: false
 	    };
 	    return _this;
 	  }
 	
-	  _createClass(IntrospectedNodesTabPane, [{
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      this.invalidateForm(this.props.formFieldErrors.toJS());
+	  _createClass(Dropdown, [{
+	    key: 'toggleDropdown',
+	    value: function toggleDropdown() {
+	      this.setState({ isOpen: !this.state.isOpen });
 	    }
 	  }, {
-	    key: 'canSubmit',
-	    value: function canSubmit() {
-	      if (_.includes(_.values(this.refs.introspectedNodesTableForm.getCurrentValues()), true)) {
-	        this.enableButton();
-	      } else {
-	        this.disableButton();
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var children = _react2.default.Children.toArray(this.props.children);
+	
+	      var toggle = _.first(children, function (child) {
+	        return child.type.name === 'DropdownButton';
+	      });
+	
+	      var items = _.map(_.filter(children, function (child) {
+	        return child.type.name === 'DropdownItem';
+	      }), function (item) {
+	        return _react2.default.cloneElement(item, { toggleDropdown: _this2.toggleDropdown.bind(_this2) });
+	      });
+	
+	      // Any other children are prepended to DropdownButton.
+	      // This can be used to add buttons to Dropdown button group
+	      var otherChildren = _.reject(children, function (child) {
+	        return _.includes(['DropdownButton', 'DropdownItem'], child.type.name);
+	      });
+	      var dropdownClasses = {
+	        open: this.state.isOpen
+	      };
+	
+	      return _react2.default.createElement(
+	        'span',
+	        { className: 'dropdown-wrapper' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: (0, _classnames2.default)('dropdown btn-group', dropdownClasses, this.props.className) },
+	          otherChildren,
+	          _react2.default.cloneElement(toggle, { toggleDropdown: this.toggleDropdown.bind(this) }),
+	          _react2.default.createElement(
+	            'ul',
+	            { className: 'dropdown-menu', role: 'menu', ref: 'menu' },
+	            items
+	          )
+	        ),
+	        this.state.isOpen ? _react2.default.createElement('div', { onClick: this.toggleDropdown.bind(this),
+	          className: 'modal-backdrop fade' }) : null
+	      );
+	    }
+	  }]);
+	
+	  return Dropdown;
+	}(_react2.default.Component);
+	
+	exports.default = Dropdown;
+	
+	Dropdown.propTypes = {
+	  active: _react2.default.PropTypes.bool,
+	  children: _react2.default.PropTypes.node,
+	  className: _react2.default.PropTypes.string
+	};
+
+/***/ },
+/* 741 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _normalizr = __webpack_require__(597);
+	
+	var _immutable = __webpack_require__(556);
+	
+	var _when = __webpack_require__(565);
+	
+	var _when2 = _interopRequireDefault(_when);
+	
+	var _IronicApiErrorHandler = __webpack_require__(742);
+	
+	var _IronicApiErrorHandler2 = _interopRequireDefault(_IronicApiErrorHandler);
+	
+	var _IronicApiService = __webpack_require__(743);
+	
+	var _IronicApiService2 = _interopRequireDefault(_IronicApiService);
+	
+	var _MistralApiService = __webpack_require__(744);
+	
+	var _MistralApiService2 = _interopRequireDefault(_MistralApiService);
+	
+	var _MistralApiErrorHandler = __webpack_require__(745);
+	
+	var _MistralApiErrorHandler2 = _interopRequireDefault(_MistralApiErrorHandler);
+	
+	var _NodesConstants = __webpack_require__(694);
+	
+	var _NodesConstants2 = _interopRequireDefault(_NodesConstants);
+	
+	var _NotificationActions = __webpack_require__(666);
+	
+	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
+	
+	var _nodes = __webpack_require__(746);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  startOperation: function startOperation(nodeIds) {
+	    return {
+	      type: _NodesConstants2.default.START_NODES_OPERATION,
+	      payload: nodeIds
+	    };
+	  },
+	  finishOperation: function finishOperation(nodeIds) {
+	    return {
+	      type: _NodesConstants2.default.FINISH_NODES_OPERATION,
+	      payload: nodeIds
+	    };
+	  },
+	  requestNodes: function requestNodes() {
+	    return {
+	      type: _NodesConstants2.default.REQUEST_NODES
+	    };
+	  },
+	  receiveNodes: function receiveNodes(nodes) {
+	    return {
+	      type: _NodesConstants2.default.RECEIVE_NODES,
+	      payload: nodes
+	    };
+	  },
+	  fetchNodes: function fetchNodes() {
+	    var _this = this;
+	
+	    return function (dispatch, getState) {
+	      dispatch(_this.requestNodes());
+	      _IronicApiService2.default.getNodes().then(function (response) {
+	        return _when2.default.all(response.nodes.map(function (node) {
+	          return _IronicApiService2.default.getNode(node.uuid);
+	        }));
+	      }).then(function (nodes) {
+	        var normalizedNodes = (0, _normalizr.normalize)(nodes, (0, _normalizr.arrayOf)(_nodes.nodeSchema)).entities.nodes || (0, _immutable.Map)();
+	        dispatch(_this.receiveNodes(normalizedNodes));
+	      }).catch(function (error) {
+	        dispatch(_this.receiveNodes({}));
+	        console.error('Error in NodesActions.fetchNodes', error.stack || error); //eslint-disable-line no-console
+	        var errorHandler = new _IronicApiErrorHandler2.default(error);
+	        errorHandler.errors.forEach(function (error) {
+	          dispatch(_NotificationActions2.default.notify(error));
+	        });
+	      });
+	    };
+	  },
+	  introspectNodes: function introspectNodes(nodeIds) {
+	    var _this2 = this;
+	
+	    return function (dispatch, getState) {
+	      dispatch(_this2.startOperation(nodeIds));
+	      _MistralApiService2.default.runWorkflow('tripleo.baremetal.v1.bulk_introspect').then(function (response) {
+	        if (response.state === 'ERROR') {
+	          dispatch(_NotificationActions2.default.notify({ title: 'Error', message: response.state_info }));
+	          dispatch(_this2.finishOperation(nodeIds));
+	        } else {
+	          dispatch(_this2.pollForIntrospectionWorkflow(response.id, nodeIds));
+	        }
+	      }).catch(function (error) {
+	        var errorHandler = new _MistralApiErrorHandler2.default(error);
+	        errorHandler.errors.forEach(function (error) {
+	          dispatch(_NotificationActions2.default.notify(error));
+	        });
+	        dispatch(_this2.finishOperation(nodeIds));
+	      });
+	    };
+	  },
+	  pollForIntrospectionWorkflow: function pollForIntrospectionWorkflow(workflowExecutionId, nodeIds) {
+	    var _this3 = this;
+	
+	    return function (dispatch, getState) {
+	      _MistralApiService2.default.getWorkflowExecution(workflowExecutionId).then(function (response) {
+	        if (response.state === 'RUNNING') {
+	          dispatch(_this3.fetchNodes());
+	          setTimeout(function () {
+	            return dispatch(_this3.pollForIntrospectionWorkflow(workflowExecutionId, nodeIds));
+	          }, 5000);
+	        } else if (response.state === 'ERROR') {
+	          dispatch(_NotificationActions2.default.notify({ title: 'Error', message: response.state_info }));
+	          dispatch(_this3.finishOperation(nodeIds));
+	        } else {
+	          dispatch(_this3.finishOperation(nodeIds));
+	          dispatch(_NotificationActions2.default.notify({ type: 'success',
+	            title: 'Introspection finished',
+	            message: 'Nodes Introspection successfully finished' }));
+	        }
+	      }).catch(function (error) {
+	        var errorHandler = new _MistralApiErrorHandler2.default(error);
+	        errorHandler.errors.forEach(function (error) {
+	          dispatch(_NotificationActions2.default.notify(error));
+	        });
+	        dispatch(_this3.finishOperation(nodeIds));
+	      });
+	    };
+	  },
+	  updateNode: function updateNode(nodePatch) {
+	    var _this4 = this;
+	
+	    return function (dispatch, getState) {
+	      dispatch(_this4.updateNodePending(nodePatch.uuid));
+	      _IronicApiService2.default.patchNode(nodePatch).then(function (response) {
+	        dispatch(_this4.updateNodeSuccess(response));
+	      }).catch(function (error) {
+	        dispatch(_this4.updateNodeFailed(nodePatch.uuid));
+	        console.error('Error in NodesActions.UpdateNode', error.stack || error); //eslint-disable-line no-console
+	        var errorHandler = new _IronicApiErrorHandler2.default(error);
+	        errorHandler.errors.forEach(function (error) {
+	          dispatch(_NotificationActions2.default.notify(error));
+	        });
+	      });
+	    };
+	  },
+	  updateNodePending: function updateNodePending(nodeId) {
+	    return {
+	      type: _NodesConstants2.default.UPDATE_NODE_PENDING,
+	      payload: nodeId
+	    };
+	  },
+	  updateNodeFailed: function updateNodeFailed(nodeId) {
+	    return {
+	      type: _NodesConstants2.default.UPDATE_NODE_FAILED,
+	      payload: nodeId
+	    };
+	  },
+	  updateNodeSuccess: function updateNodeSuccess(node) {
+	    return {
+	      type: _NodesConstants2.default.UPDATE_NODE_SUCCESS,
+	      payload: node
+	    };
+	  }
+	};
+
+/***/ },
+/* 742 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _BaseHttpRequestErrorHandler = __webpack_require__(586);
+	
+	var _BaseHttpRequestErrorHandler2 = _interopRequireDefault(_BaseHttpRequestErrorHandler);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var IronicApiErrorHandler = function (_BaseHttpRequestError) {
+	  _inherits(IronicApiErrorHandler, _BaseHttpRequestError);
+	
+	  function IronicApiErrorHandler() {
+	    _classCallCheck(this, IronicApiErrorHandler);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(IronicApiErrorHandler).apply(this, arguments));
+	  }
+	
+	  _createClass(IronicApiErrorHandler, [{
+	    key: '_generateErrors',
+	    value: function _generateErrors(xmlHttpRequestError) {
+	      var errors = [];
+	      var error = void 0;
+	      switch (xmlHttpRequestError.status) {
+	        case 0:
+	          errors.push({
+	            title: 'Connection Error',
+	            message: 'Connection to Ironic is not available'
+	          });
+	          break;
+	        case 401:
+	          error = xmlHttpRequestError.responseText;
+	          errors.push({
+	            title: 'Unauthorized',
+	            message: error
+	          });
+	          break;
+	        default:
+	          error = xmlHttpRequestError.responseText;
+	          status = xmlHttpRequestError.status;
+	          errors.push({
+	            title: 'Error ' + status,
+	            message: error
+	          });
+	          break;
+	      }
+	      return errors;
+	    }
+	
+	    // TODO(jtomasek): remove this, I am leaving this here just for example reasons
+	    // this function should be implemented by form related subclass.
+	
+	  }, {
+	    key: '_generateFormFieldErrors',
+	    value: function _generateFormFieldErrors() {
+	      return {};
+	    }
+	  }]);
+	
+	  return IronicApiErrorHandler;
+	}(_BaseHttpRequestErrorHandler2.default);
+
+	exports.default = IronicApiErrorHandler;
+
+/***/ },
+/* 743 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _lodash = __webpack_require__(588);
+	
+	var _ = _interopRequireWildcard(_lodash);
+	
+	var _reqwest = __webpack_require__(590);
+	
+	var _reqwest2 = _interopRequireDefault(_reqwest);
+	
+	var _when = __webpack_require__(565);
+	
+	var _when2 = _interopRequireDefault(_when);
+	
+	var _utils = __webpack_require__(681);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var IronicApiService = function () {
+	  function IronicApiService() {
+	    _classCallCheck(this, IronicApiService);
+	  }
+	
+	  _createClass(IronicApiService, [{
+	    key: 'defaultRequest',
+	    value: function defaultRequest(additionalAttributes) {
+	      return _.merge({
+	        headers: {
+	          'X-Auth-Token': (0, _utils.getAuthTokenId)(),
+	          'X-OpenStack-Ironic-API-Version': '1.14'
+	        },
+	        crossOrigin: true,
+	        contentType: 'application/json',
+	        type: 'json',
+	        method: 'GET'
+	      }, additionalAttributes);
+	    }
+	
+	    /**
+	     * Ironic API: GET /v1/nodes
+	     * @returns {array} of nodes.
+	     */
+	
+	  }, {
+	    key: 'getNodes',
+	    value: function getNodes() {
+	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
+	        url: (0, _utils.getServiceUrl)('ironic') + '/nodes'
+	      })));
+	    }
+	
+	    /**
+	     * Ironic API: GET /v1/nodes/<uuid>
+	     * @returns node object.
+	     */
+	
+	  }, {
+	    key: 'getNode',
+	    value: function getNode(nodeId) {
+	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
+	        url: (0, _utils.getServiceUrl)('ironic') + '/nodes/' + nodeId
+	      })));
+	    }
+	  }, {
+	    key: 'patchNode',
+	    value: function patchNode(nodePatch) {
+	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
+	        method: 'PATCH',
+	        url: (0, _utils.getServiceUrl)('ironic') + '/nodes/' + nodePatch.uuid,
+	        data: JSON.stringify(nodePatch.patches)
+	      })));
+	    }
+	  }]);
+	
+	  return IronicApiService;
+	}();
+	
+	exports.default = new IronicApiService();
+
+/***/ },
+/* 744 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _lodash = __webpack_require__(588);
+	
+	var _ = _interopRequireWildcard(_lodash);
+	
+	var _reqwest = __webpack_require__(590);
+	
+	var _reqwest2 = _interopRequireDefault(_reqwest);
+	
+	var _when = __webpack_require__(565);
+	
+	var _when2 = _interopRequireDefault(_when);
+	
+	var _utils = __webpack_require__(681);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var MistralApiService = function () {
+	  function MistralApiService() {
+	    _classCallCheck(this, MistralApiService);
+	  }
+	
+	  _createClass(MistralApiService, [{
+	    key: 'defaultRequest',
+	    value: function defaultRequest(additionalAttributes) {
+	      return _.merge({
+	        headers: {
+	          'X-Auth-Token': (0, _utils.getAuthTokenId)()
+	        },
+	        crossOrigin: true,
+	        contentType: 'application/json',
+	        type: 'json',
+	        method: 'GET'
+	      }, additionalAttributes);
+	    }
+	
+	    /**
+	     * Gets a Workflow execution
+	     * Mistral API: GET /v2/executions/:execution_id
+	     * @param {string} mistralUrl - Mistral API service base url
+	     * @param {string} authTokenId - keystone authentication token ID
+	     * @return {object} Execution.
+	     */
+	
+	  }, {
+	    key: 'getWorkflowExecution',
+	    value: function getWorkflowExecution(executionId) {
+	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
+	        url: (0, _utils.getServiceUrl)('mistral') + '/executions/' + executionId
+	      })));
+	    }
+	
+	    /**
+	     * Starts a new Workflow execution
+	     * Mistral API: POST /v2/executions
+	     * @param {string} mistralUrl - Mistral API service base url
+	     * @param {string} authTokenId - keystone authentication token ID
+	     * @param {string} workflowName - Workflow name
+	     * @param {object} input - Workflow input object
+	     * @return {object} Execution.
+	     */
+	
+	  }, {
+	    key: 'runWorkflow',
+	    value: function runWorkflow(workflowName) {
+	      var input = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
+	        method: 'POST',
+	        url: (0, _utils.getServiceUrl)('mistral') + '/executions',
+	        data: JSON.stringify({
+	          workflow_name: workflowName,
+	          input: JSON.stringify(input)
+	        })
+	      })));
+	    }
+	
+	    /**
+	     * Starts a new Action execution
+	     * Mistral API: POST /v2/action_executions
+	     * @param {string} mistralUrl - Mistral API service base url
+	     * @param {string} authTokenId - keystone authentication token ID
+	     * @param {string} actionName - Name of the Action to be executed
+	     * @param {object} input - Action input object
+	     * @return {object} Action Execution.
+	     */
+	
+	  }, {
+	    key: 'runAction',
+	    value: function runAction(actionName) {
+	      var input = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
+	        method: 'POST',
+	        url: (0, _utils.getServiceUrl)('mistral') + '/action_executions',
+	        data: JSON.stringify({
+	          name: actionName,
+	          input: JSON.stringify(input)
+	        })
+	      })));
+	    }
+	  }]);
+	
+	  return MistralApiService;
+	}();
+	
+	exports.default = new MistralApiService();
+
+/***/ },
+/* 745 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _BaseHttpRequestErrorHandler = __webpack_require__(586);
+	
+	var _BaseHttpRequestErrorHandler2 = _interopRequireDefault(_BaseHttpRequestErrorHandler);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var MistralApiErrorHandler = function (_BaseHttpRequestError) {
+	  _inherits(MistralApiErrorHandler, _BaseHttpRequestError);
+	
+	  function MistralApiErrorHandler() {
+	    _classCallCheck(this, MistralApiErrorHandler);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(MistralApiErrorHandler).apply(this, arguments));
+	  }
+	
+	  _createClass(MistralApiErrorHandler, [{
+	    key: '_generateErrors',
+	    value: function _generateErrors(xmlHttpRequestError) {
+	      var errors = [];
+	      var error = void 0;
+	      switch (xmlHttpRequestError.status) {
+	        case 0:
+	          errors.push({
+	            title: 'Connection Error',
+	            message: 'Connection to Mistral API is not available'
+	          });
+	          break;
+	        case 401:
+	          error = JSON.parse(xmlHttpRequestError.responseText).error;
+	          errors.push({
+	            title: 'Unauthorized',
+	            message: error.message
+	          });
+	          break;
+	        default:
+	          error = JSON.parse(xmlHttpRequestError.responseText);
+	          errors.push({
+	            title: xmlHttpRequestError.statusText,
+	            message: error.faultstring
+	          });
+	          break;
+	      }
+	      return errors;
+	    }
+	  }]);
+	
+	  return MistralApiErrorHandler;
+	}(_BaseHttpRequestErrorHandler2.default);
+
+	exports.default = MistralApiErrorHandler;
+
+/***/ },
+/* 746 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.nodeSchema = undefined;
+	
+	var _normalizr = __webpack_require__(597);
+	
+	var nodeSchema = exports.nodeSchema = new _normalizr.Schema('nodes', { idAttribute: 'uuid' });
+
+/***/ },
+/* 747 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactRouter = __webpack_require__(504);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NoPlans = function (_React$Component) {
+	  _inherits(NoPlans, _React$Component);
+	
+	  function NoPlans() {
+	    _classCallCheck(this, NoPlans);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NoPlans).apply(this, arguments));
+	  }
+	
+	  _createClass(NoPlans, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'blank-slate-pf' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'blank-slate-pf-icon' },
+	          _react2.default.createElement('span', { className: 'fa fa-ban' })
+	        ),
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'No Deployment Plans Available'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'There are no Deployment Plans available. Please create one first.'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'blank-slate-pf-main-action' },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/plans/new',
+	              query: { tab: 'newPlan' },
+	              className: 'btn btn-lg btn-primary' },
+	            _react2.default.createElement('span', { className: 'fa fa-plus' }),
+	            ' Create New Plan'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NoPlans;
+	}(_react2.default.Component);
+	
+	exports.default = NoPlans;
+
+/***/ },
+/* 748 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _StacksConstants = __webpack_require__(709);
+	
+	var _StacksConstants2 = _interopRequireDefault(_StacksConstants);
+	
+	var _HeatApiService = __webpack_require__(749);
+	
+	var _HeatApiService2 = _interopRequireDefault(_HeatApiService);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  fetchStacksPending: function fetchStacksPending() {
+	    return {
+	      type: _StacksConstants2.default.FETCH_STACKS_PENDING
+	    };
+	  },
+	  fetchStacksSuccess: function fetchStacksSuccess(data) {
+	    return {
+	      type: _StacksConstants2.default.FETCH_STACKS_SUCCESS,
+	      payload: data
+	    };
+	  },
+	  fetchStacksFailed: function fetchStacksFailed(error) {
+	    return {
+	      type: _StacksConstants2.default.FETCH_STACKS_FAILED
+	    };
+	  },
+	  fetchStacks: function fetchStacks(planName) {
+	    var _this = this;
+	
+	    return function (dispatch) {
+	      dispatch(_this.fetchStacksPending());
+	      _HeatApiService2.default.getStacks().then(function (response) {
+	        dispatch(_this.fetchStacksSuccess(response.stacks));
+	      }).catch(function (error) {
+	        dispatch(_this.fetchStacksFailed(error));
+	      });
+	    };
+	  }
+	};
+
+/***/ },
+/* 749 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _lodash = __webpack_require__(588);
+	
+	var _ = _interopRequireWildcard(_lodash);
+	
+	var _reqwest = __webpack_require__(590);
+	
+	var _reqwest2 = _interopRequireDefault(_reqwest);
+	
+	var _when = __webpack_require__(565);
+	
+	var _when2 = _interopRequireDefault(_when);
+	
+	var _utils = __webpack_require__(681);
+	
+	var _APIEndpointUrls = __webpack_require__(593);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var HeatApiService = function () {
+	  function HeatApiService() {
+	    _classCallCheck(this, HeatApiService);
+	  }
+	
+	  _createClass(HeatApiService, [{
+	    key: 'request',
+	    value: function request() {
+	      return _reqwest2.default.apply(this, arguments);
+	    }
+	  }, {
+	    key: 'defaultRequest',
+	    value: function defaultRequest(additionalAttributes) {
+	      return _.merge({
+	        headers: { 'X-Auth-Token': (0, _utils.getAuthTokenId)() },
+	        crossOrigin: true,
+	        contentType: 'application/json',
+	        type: 'json',
+	        method: 'GET'
+	      }, additionalAttributes);
+	    }
+	  }, {
+	    key: 'getStacks',
+	    value: function getStacks() {
+	      return (0, _when2.default)(this.request(this.defaultRequest({
+	        url: _APIEndpointUrls.HEAT_API_URL + '/' + (0, _utils.getTenantId)() + '/stacks'
+	      })));
+	    }
+	  }]);
+	
+	  return HeatApiService;
+	}();
+	
+	exports.default = new HeatApiService();
+
+/***/ },
+/* 750 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _nodes = __webpack_require__(730);
+	
+	var _Loader = __webpack_require__(560);
+	
+	var _Loader2 = _interopRequireDefault(_Loader);
+	
+	var _RoleCard = __webpack_require__(751);
+	
+	var _RoleCard2 = _interopRequireDefault(_RoleCard);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Roles = function (_React$Component) {
+	  _inherits(Roles, _React$Component);
+	
+	  function Roles() {
+	    _classCallCheck(this, Roles);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Roles).apply(this, arguments));
+	  }
+	
+	  _createClass(Roles, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.fetchRoles();
+	      this.props.fetchNodes();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (!this.props.loaded) {
+	        this.props.fetchRoles();
+	        this.props.fetchNodes();
 	      }
 	    }
 	  }, {
-	    key: 'enableButton',
-	    value: function enableButton() {
-	      this.setState({ canSubmit: true });
+	    key: 'getAssignedNodes',
+	    value: function getAssignedNodes(introspectedNodes, roleName) {
+	      return introspectedNodes.filter(function (node) {
+	        return node.getIn(['properties', 'capabilities']).includes('profile:' + roleName);
+	      });
 	    }
 	  }, {
-	    key: 'disableButton',
-	    value: function disableButton() {
-	      this.setState({ canSubmit: false });
-	    }
-	  }, {
-	    key: 'invalidateForm',
-	    value: function invalidateForm(formFieldErrors) {
-	      this.refs.introspectedNodesTableForm.updateInputsWithError(formFieldErrors);
-	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(formData, resetForm, invalidateForm) {
-	      // const data = this._convertFormData(formData);
-	      // const formFields = Object.keys(this.refs.introspectedNodesTableForm.inputs);
-	      this.disableButton();
-	      resetForm();
+	    key: 'renderRoleCards',
+	    value: function renderRoleCards() {
+	      var _this2 = this;
+	
+	      return this.props.roles.map(function (role) {
+	        return _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-6 col-sm-4 col-md-3 col-lg-2', key: role.name },
+	          _react2.default.createElement(_RoleCard2.default, { name: role.name,
+	            title: role.title,
+	            fetchNodes: _this2.props.fetchNodes,
+	            assignedNodesCount: (0, _nodes.getAssignedNodes)(_this2.props.introspectedNodes, role.name).size,
+	            availableNodesCount: _this2.props.unassignedIntrospectedNodes.size })
+	        );
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        _formsyReact2.default.Form,
-	        { ref: 'introspectedNodesTableForm',
-	          role: 'form',
-	          className: 'form',
-	          onSubmit: this.handleSubmit.bind(this),
-	          onValid: this.canSubmit.bind(this),
-	          onInvalid: this.disableButton.bind(this) },
-	        _react2.default.createElement(_FormErrorList2.default, { errors: this.props.formErrors.toJS() }),
-	        _react2.default.createElement(_NodesTable2.default, { nodes: this.props.nodes.get('introspected'),
-	          roles: this.props.roles,
-	          isFetchingNodes: this.props.nodes.get('isFetching'),
-	          dataOperationInProgress: this.props.nodes.get('dataOperationInProgress') })
+	        'div',
+	        { className: 'panel panel-default roles-panel' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement(
+	            _Loader2.default,
+	            { loaded: this.props.loaded,
+	              content: 'Loading Deployment Roles...',
+	              height: 40 },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row-cards-pf' },
+	              this.renderRoleCards()
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
 	
-	  return IntrospectedNodesTabPane;
+	  return Roles;
 	}(_react2.default.Component);
 	
-	exports.default = IntrospectedNodesTabPane;
+	exports.default = Roles;
 	
-	IntrospectedNodesTabPane.propTypes = {
-	  formErrors: _reactImmutableProptypes2.default.list,
-	  formFieldErrors: _reactImmutableProptypes2.default.map,
-	  nodes: _reactImmutableProptypes2.default.map,
-	  roles: _reactImmutableProptypes2.default.map
-	};
-	IntrospectedNodesTabPane.defaultProps = {
-	  formErrors: (0, _immutable.List)(),
-	  formFieldErrors: (0, _immutable.Map)()
+	Roles.propTypes = {
+	  fetchNodes: _react2.default.PropTypes.func.isRequired,
+	  fetchRoles: _react2.default.PropTypes.func.isRequired,
+	  introspectedNodes: _reactImmutableProptypes2.default.map,
+	  isFetchingNodes: _react2.default.PropTypes.bool,
+	  loaded: _react2.default.PropTypes.bool.isRequired,
+	  roles: _react2.default.PropTypes.array.isRequired,
+	  unassignedIntrospectedNodes: _reactImmutableProptypes2.default.map
 	};
 
 /***/ },
-/* 722 */
+/* 751 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(504);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RoleCard = function (_React$Component) {
+	  _inherits(RoleCard, _React$Component);
+	
+	  function RoleCard() {
+	    _classCallCheck(this, RoleCard);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(RoleCard).apply(this, arguments));
+	  }
+	
+	  _createClass(RoleCard, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'card-pf card-pf-accented role-card ' + this.props.name },
+	        _react2.default.createElement(
+	          'h2',
+	          { className: 'card-pf-title' },
+	          this.props.title
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'card-pf-body' },
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'card-pf-utilization-details' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'card-pf-utilization-card-details-count' },
+	              this.props.assignedNodesCount
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'card-pf-utilization-card-details-description' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-pf-utilization-card-details-line-1' },
+	                'Nodes assigned'
+	              ),
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-pf-utilization-card-details-line-2' },
+	                'of ',
+	                this.props.availableNodesCount,
+	                ' available'
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'card-pf-footer' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/deployment-plan/' + this.props.name + '/assignNodes',
+	                className: 'card-pf-link-with-icon' },
+	              _react2.default.createElement('span', { className: 'pficon pficon-add-circle-o' }),
+	              'Assign Nodes'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return RoleCard;
+	}(_react2.default.Component);
+	
+	exports.default = RoleCard;
+	
+	RoleCard.propTypes = {
+	  assignedNodesCount: _react2.default.PropTypes.number.isRequired,
+	  availableNodesCount: _react2.default.PropTypes.number.isRequired,
+	  name: _react2.default.PropTypes.string.isRequired,
+	  title: _react2.default.PropTypes.string.isRequired
+	};
+
+/***/ },
+/* 752 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _normalizr = __webpack_require__(597);
+	
+	var _immutable = __webpack_require__(556);
+	
+	var _RolesConstants = __webpack_require__(705);
+	
+	var _RolesConstants2 = _interopRequireDefault(_RolesConstants);
+	
+	var _roles = __webpack_require__(753);
+	
+	var _roles2 = _interopRequireDefault(_roles);
+	
+	var _roles3 = __webpack_require__(754);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  fetchRoles: function fetchRoles() {
+	    var _this = this;
+	
+	    return function (dispatch, getState) {
+	      dispatch(_this.fetchRolesPending());
+	
+	      // TODO(jtomasek): Replace this with an actual action which fetches Roles from HEAT
+	      // fake the reques/response delay
+	      var normalizedRoles = (0, _normalizr.normalize)(_roles2.default, (0, _normalizr.arrayOf)(_roles3.roleSchema)).entities.roles || (0, _immutable.Map)();
+	      setTimeout(function () {
+	        return dispatch(_this.fetchRolesSuccess(normalizedRoles));
+	      }, 500);
+	
+	      // TODO(jtomasek): Use this when roles are fetched from Heat
+	      // HeatApiService.getRoles().then((response) => {
+	      //   response = normalize(response, arrayOf(roleSchema));
+	      //   dispatch(this.fetchRolesSuccess(response));
+	      // }).catch((error) => {
+	      //   console.error('Error in RolesAction.fetchRoles', error.stack || error); //eslint-disable-line no-console
+	      //   dispatch(this.fetchRolesFailed());
+	      //   let errorHandler = new HeatApiErrorHandler(error);
+	      //   errorHandler.errors.forEach((error) => {
+	      //     dispatch(NotificationActions.notify(error));
+	      //   });
+	      // });
+	    };
+	  },
+	  fetchRolesPending: function fetchRolesPending() {
+	    return {
+	      type: _RolesConstants2.default.FETCH_ROLES_PENDING
+	    };
+	  },
+	  fetchRolesSuccess: function fetchRolesSuccess(roles) {
+	    return {
+	      type: _RolesConstants2.default.FETCH_ROLES_SUCCESS,
+	      payload: roles
+	    };
+	  },
+	  fetchRolesFailed: function fetchRolesFailed() {
+	    return {
+	      type: _RolesConstants2.default.FETCH_ROLES_FAILED
+	    };
+	  }
+	};
+
+	// import NotificationActions from './NotificationActions';
+
+/***/ },
+/* 753 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = [{
+	  name: 'control',
+	  title: 'Controller'
+	}, {
+	  name: 'compute',
+	  title: 'Compute'
+	}, {
+	  name: 'blockStorage',
+	  title: 'Block Storage'
+	}, {
+	  name: 'objectStorage',
+	  title: 'Object Storage'
+	}, {
+	  name: 'cephStorage',
+	  title: 'Ceph Storage'
+	}];
+
+/***/ },
+/* 754 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.roleSchema = undefined;
+	
+	var _normalizr = __webpack_require__(597);
+	
+	var roleSchema = exports.roleSchema = new _normalizr.Schema('roles', { idAttribute: 'name' });
+
+/***/ },
+/* 755 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactRedux = __webpack_require__(291);
+	
+	var _formsyReact = __webpack_require__(756);
+	
+	var _formsyReact2 = _interopRequireDefault(_formsyReact);
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _reactRouter = __webpack_require__(504);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _FormErrorList = __webpack_require__(763);
+	
+	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
+	
+	var _PlanEditFormTabs = __webpack_require__(764);
+	
+	var _PlanEditFormTabs2 = _interopRequireDefault(_PlanEditFormTabs);
+	
+	var _PlansActions = __webpack_require__(596);
+	
+	var _PlansActions2 = _interopRequireDefault(_PlansActions);
+	
+	var _Modal = __webpack_require__(562);
+	
+	var _Modal2 = _interopRequireDefault(_Modal);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var EditPlan = function (_React$Component) {
+	  _inherits(EditPlan, _React$Component);
+	
+	  function EditPlan() {
+	    _classCallCheck(this, EditPlan);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EditPlan).call(this));
+	
+	    _this.state = {
+	      planName: undefined,
+	      selectedFiles: undefined,
+	      canSubmit: false,
+	      formErrors: []
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(EditPlan, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.state.planName = this.getNameFromUrl();
+	      this.props.fetchPlan(this.state.planName);
+	    }
+	  }, {
+	    key: 'onPlanFilesChange',
+	    value: function onPlanFilesChange(currentValues) {
+	      if (currentValues && currentValues.planFiles) {
+	        this.setState({ selectedFiles: currentValues.planFiles });
+	      }
+	    }
+	  }, {
+	    key: 'onFormSubmit',
+	    value: function onFormSubmit(form) {
+	      var planFiles = {};
+	      this.state.selectedFiles.map(function (item) {
+	        planFiles[item.name] = {};
+	        planFiles[item.name].contents = item.content;
+	        // TODO(jtomasek): user can identify capabilities-map in the list of files
+	        // (dropdown select or sth)
+	        if (item.name.match('^capabilities[-|_]map\.yaml$')) {
+	          planFiles[item.name].meta = { 'file-type': 'capabilities-map' };
+	        }
+	      });
+	      this.props.updatePlan(this.state.planName, planFiles);
+	    }
+	  }, {
+	    key: 'onFormValid',
+	    value: function onFormValid() {
+	      this.setState({ canSubmit: true });
+	    }
+	  }, {
+	    key: 'onFormInvalid',
+	    value: function onFormInvalid() {
+	      this.setState({ canSubmit: false });
+	    }
+	  }, {
+	    key: 'getNameFromUrl',
+	    value: function getNameFromUrl() {
+	      var planName = this.props.params.planName || '';
+	      return planName.replace(/[^A-Za-z0-9_-]*/g, '');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var plan = this.props.plans.filter(function (plan) {
+	        return plan.name === _this2.state.planName;
+	      }).first();
+	      var planFiles = plan ? plan.files : undefined;
+	
+	      return _react2.default.createElement(
+	        _Modal2.default,
+	        { dialogClasses: 'modal-lg' },
+	        _react2.default.createElement(
+	          _formsyReact2.default.Form,
+	          { ref: 'EditPlanForm',
+	            role: 'form',
+	            className: 'form-horizontal',
+	            onChange: this.onPlanFilesChange.bind(this),
+	            onValidSubmit: this.onFormSubmit.bind(this),
+	            onValid: this.onFormValid.bind(this),
+	            onInvalid: this.onFormInvalid.bind(this) },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-header' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/plans/list',
+	                type: 'button',
+	                className: 'close' },
+	              _react2.default.createElement('span', { 'aria-hidden': 'true', className: 'pficon pficon-close' })
+	            ),
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Update ',
+	              this.state.planName,
+	              ' Files'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-body' },
+	            _react2.default.createElement(_FormErrorList2.default, { errors: this.state.formErrors }),
+	            _react2.default.createElement(_PlanEditFormTabs2.default, { currentTab: this.props.location.query.tab || 'editPlan',
+	              planFiles: planFiles,
+	              selectedFiles: this.state.selectedFiles,
+	              planName: this.state.planName })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-footer' },
+	            _react2.default.createElement(
+	              'button',
+	              { disabled: !this.state.canSubmit,
+	                className: 'btn btn-primary btn-lg',
+	                type: 'submit' },
+	              'Upload Files and Update Plan'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return EditPlan;
+	}(_react2.default.Component);
+	
+	EditPlan.propTypes = {
+	  fetchPlan: _react2.default.PropTypes.func,
+	  history: _react2.default.PropTypes.object,
+	  location: _react2.default.PropTypes.object,
+	  params: _react2.default.PropTypes.object,
+	  plans: _reactImmutableProptypes2.default.map,
+	  updatePlan: _react2.default.PropTypes.func
+	};
+	
+	function mapStateToProps(state) {
+	  return {
+	    plans: state.plans.get('all')
+	  };
+	}
+	
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    fetchPlan: function fetchPlan(planName) {
+	      dispatch(_PlansActions2.default.fetchPlan(planName));
+	    },
+	    updatePlan: function updatePlan(planName, files) {
+	      dispatch(_PlansActions2.default.updatePlan(planName, files));
+	    }
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(EditPlan);
+
+/***/ },
+/* 756 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -69777,12 +72688,12 @@
 	
 	var React = global.React || __webpack_require__(293);
 	var Formsy = {};
-	var validationRules = __webpack_require__(723);
-	var formDataToObject = __webpack_require__(724);
-	var utils = __webpack_require__(725);
-	var Mixin = __webpack_require__(726);
-	var HOC = __webpack_require__(727);
-	var Decorator = __webpack_require__(728);
+	var validationRules = __webpack_require__(757);
+	var formDataToObject = __webpack_require__(758);
+	var utils = __webpack_require__(759);
+	var Mixin = __webpack_require__(760);
+	var HOC = __webpack_require__(761);
+	var Decorator = __webpack_require__(762);
 	var options = {};
 	
 	Formsy.Mixin = Mixin;
@@ -70212,7 +73123,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 723 */
+/* 757 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -70297,7 +73208,7 @@
 	module.exports = validations;
 
 /***/ },
-/* 724 */
+/* 758 */
 /***/ function(module, exports) {
 
 	module.exports = function (source) {
@@ -70334,7 +73245,7 @@
 
 
 /***/ },
-/* 725 */
+/* 759 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -70382,12 +73293,12 @@
 	};
 
 /***/ },
-/* 726 */
+/* 760 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 	
-	var utils = __webpack_require__(725);
+	var utils = __webpack_require__(759);
 	var React = global.React || __webpack_require__(293);
 	
 	var convertValidationsToObject = function convertValidationsToObject(validations) {
@@ -70562,7 +73473,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 727 */
+/* 761 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -70570,7 +73481,7 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var React = global.React || __webpack_require__(293);
-	var Mixin = __webpack_require__(726);
+	var Mixin = __webpack_require__(760);
 	module.exports = function (Component) {
 	  return React.createClass({
 	    mixins: [Mixin],
@@ -70598,7 +73509,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 728 */
+/* 762 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -70606,7 +73517,7 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var React = global.React || __webpack_require__(293);
-	var Mixin = __webpack_require__(726);
+	var Mixin = __webpack_require__(760);
 	module.exports = function () {
 	  return function (Component) {
 	    return React.createClass({
@@ -70636,7 +73547,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 729 */
+/* 763 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70655,7 +73566,7 @@
 	
 	var _ = _interopRequireWildcard(_lodash);
 	
-	var _Notification = __webpack_require__(711);
+	var _Notification = __webpack_require__(716);
 	
 	var _Notification2 = _interopRequireDefault(_Notification);
 	
@@ -70711,7 +73622,7 @@
 	};
 
 /***/ },
-/* 730 */
+/* 764 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70719,9 +73630,626 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.NodesTableRoleCell = undefined;
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _immutable = __webpack_require__(556);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _HorizontalStaticText = __webpack_require__(765);
+	
+	var _HorizontalStaticText2 = _interopRequireDefault(_HorizontalStaticText);
+	
+	var _NavTab = __webpack_require__(714);
+	
+	var _NavTab2 = _interopRequireDefault(_NavTab);
+	
+	var _PlanFileInput = __webpack_require__(766);
+	
+	var _PlanFileInput2 = _interopRequireDefault(_PlanFileInput);
+	
+	var _PlanFilesTab = __webpack_require__(767);
+	
+	var _PlanFilesTab2 = _interopRequireDefault(_PlanFilesTab);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PlanEditFormTabs = function (_React$Component) {
+	  _inherits(PlanEditFormTabs, _React$Component);
+	
+	  function PlanEditFormTabs() {
+	    _classCallCheck(this, PlanEditFormTabs);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlanEditFormTabs).apply(this, arguments));
+	  }
+	
+	  _createClass(PlanEditFormTabs, [{
+	    key: 'setActiveTab',
+	    value: function setActiveTab(tabName) {
+	      return this.props.currentTab === tabName ? 'active' : '';
+	    }
+	  }, {
+	    key: 'getFileCount',
+	    value: function getFileCount() {
+	      var planFiles = this.props.planFiles || (0, _immutable.List)();
+	      var selectedFiles = this.props.selectedFiles || [];
+	      return selectedFiles.length > planFiles.size ? selectedFiles.length : planFiles.size;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'nav nav-tabs' },
+	          _react2.default.createElement(
+	            _NavTab2.default,
+	            { to: '/plans/' + this.props.planName + '/edit',
+	              query: { tab: 'editPlan' } },
+	            'Update Plan'
+	          ),
+	          _react2.default.createElement(
+	            _NavTab2.default,
+	            { to: '/plans/' + this.props.planName + '/edit',
+	              query: { tab: 'planFiles' } },
+	            'Files ',
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'badge' },
+	              this.getFileCount.bind(this)()
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'tab-content' },
+	          _react2.default.createElement(PlanFormTab, { active: this.setActiveTab('editPlan'),
+	            planName: this.props.planName }),
+	          _react2.default.createElement(_PlanFilesTab2.default, { active: this.setActiveTab('planFiles'),
+	            planFiles: this.props.planFiles,
+	            selectedFiles: this.props.selectedFiles })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return PlanEditFormTabs;
+	}(_react2.default.Component);
+	
+	exports.default = PlanEditFormTabs;
+	
+	PlanEditFormTabs.propTypes = {
+	  currentTab: _react2.default.PropTypes.string,
+	  planFiles: _reactImmutableProptypes2.default.map,
+	  planName: _react2.default.PropTypes.string,
+	  selectedFiles: _react2.default.PropTypes.array
+	};
+	PlanEditFormTabs.defaultProps = {
+	  currentTtab: 'editPlan'
+	};
+	
+	var PlanFormTab = function (_React$Component2) {
+	  _inherits(PlanFormTab, _React$Component2);
+	
+	  function PlanFormTab() {
+	    _classCallCheck(this, PlanFormTab);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlanFormTab).apply(this, arguments));
+	  }
+	
+	  _createClass(PlanFormTab, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'tab-pane ' + this.props.active },
+	        _react2.default.createElement(_HorizontalStaticText2.default, { title: 'Plan Name',
+	          text: this.props.planName,
+	          valueColumnClasses: 'col-sm-7',
+	          labelColumnClasses: 'col-sm-3' }),
+	        _react2.default.createElement(_PlanFileInput2.default, { name: 'planFiles',
+	          title: 'Upload Files',
+	          inputColumnClasses: 'col-sm-7',
+	          labelColumnClasses: 'col-sm-3',
+	          multiple: true,
+	          required: true })
+	      );
+	    }
+	  }]);
+	
+	  return PlanFormTab;
+	}(_react2.default.Component);
+	
+	PlanFormTab.propTypes = {
+	  active: _react2.default.PropTypes.string,
+	  planName: _react2.default.PropTypes.string
+	};
+
+/***/ },
+/* 765 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var HorizontalStaticText = function (_React$Component) {
+	  _inherits(HorizontalStaticText, _React$Component);
+	
+	  function HorizontalStaticText() {
+	    _classCallCheck(this, HorizontalStaticText);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(HorizontalStaticText).apply(this, arguments));
+	  }
+	
+	  _createClass(HorizontalStaticText, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "form-group" },
+	        _react2.default.createElement(
+	          "label",
+	          { className: this.props.labelColumnClasses + " control-label" },
+	          this.props.title
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: this.props.valueColumnClasses },
+	          _react2.default.createElement(
+	            "p",
+	            { className: "form-control-static" },
+	            this.props.text
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return HorizontalStaticText;
+	}(_react2.default.Component);
+	
+	exports.default = HorizontalStaticText;
+	
+	HorizontalStaticText.propTypes = {
+	  labelColumnClasses: _react2.default.PropTypes.string,
+	  text: _react2.default.PropTypes.string,
+	  title: _react2.default.PropTypes.string,
+	  valueColumnClasses: _react2.default.PropTypes.string
+	};
+
+/***/ },
+/* 766 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _classnames = __webpack_require__(561);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _formsyReact = __webpack_require__(756);
+	
+	var _formsyReact2 = _interopRequireDefault(_formsyReact);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PlanFileInput = function (_React$Component) {
+	  _inherits(PlanFileInput, _React$Component);
+	
+	  function PlanFileInput() {
+	    _classCallCheck(this, PlanFileInput);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PlanFileInput).call(this));
+	
+	    _this.state = {
+	      progress: 0
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(PlanFileInput, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      // Attributes not in react's whitelist need to be added after mounting.
+	      this.refs[this.props.name].setAttribute('webkitdirectory', 'webkitdirectory');
+	    }
+	  }, {
+	    key: 'processFiles',
+	    value: function processFiles(event) {
+	      var _this2 = this;
+	
+	      var files = [];
+	      var processedFilesCount = 0;
+	
+	      var _loop = function _loop(i, l) {
+	        var reader = new FileReader();
+	        var file = event.target.files[i];
+	        reader.onload = function (f) {
+	          return function (e) {
+	            if (file.name.match(/(\.yaml|\.json|\.pp|\.sh)$/)) {
+	              var obj = {
+	                name: f.webkitRelativePath.replace(/^[^\/]*\//, ''),
+	                content: e.target.result
+	              };
+	              files.push(obj);
+	            }
+	            processedFilesCount += 1;
+	            _this2.setState({ progress: Math.round(100 / l * processedFilesCount) }, function () {
+	              // if the last file is processed, setValue -> triggers onChange on Formsy.Form
+	              if (processedFilesCount === l) {
+	                _this2.props.setValue(files);
+	                _this2.setState({ progress: 0 });
+	              }
+	            });
+	          };
+	        }(file);
+	        reader.readAsText(file);
+	      };
+	
+	      for (var i = 0, l = event.target.files.length; i < l; i++) {
+	        _loop(i, l);
+	      }
+	    }
+	  }, {
+	    key: 'renderErrorMessage',
+	    value: function renderErrorMessage() {
+	      var errorMessage = this.props.getErrorMessage();
+	      return errorMessage ? _react2.default.createElement(
+	        'span',
+	        { className: 'help-block' },
+	        errorMessage
+	      ) : false;
+	    }
+	  }, {
+	    key: 'renderDescription',
+	    value: function renderDescription() {
+	      var description = this.props.description;
+	      return description ? _react2.default.createElement(
+	        'small',
+	        { className: 'help-block' },
+	        description
+	      ) : false;
+	    }
+	  }, {
+	    key: 'renderProgress',
+	    value: function renderProgress() {
+	      return this.state.progress > 0 ? _react2.default.createElement(
+	        'div',
+	        { className: 'progress active help-block' },
+	        _react2.default.createElement('div', { className: 'progress-bar', style: { width: this.state.progress + '%' } })
+	      ) : false;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var divClasses = (0, _classnames2.default)({
+	        'form-group': true,
+	        'has-error': this.props.showError(),
+	        'has-success': this.props.isValid(),
+	        'required': this.props.isRequired()
+	      });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: divClasses },
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: this.props.name,
+	            className: this.props.labelColumnClasses + ' control-label' },
+	          this.props.title
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.props.inputColumnClasses },
+	          _react2.default.createElement('input', { type: 'file',
+	            name: this.props.name,
+	            ref: this.props.name,
+	            id: this.props.name,
+	            onChange: this.processFiles.bind(this),
+	            multiple: true }),
+	          this.renderProgress(),
+	          this.renderErrorMessage(),
+	          this.renderDescription()
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return PlanFileInput;
+	}(_react2.default.Component);
+	
+	PlanFileInput.propTypes = {
+	  description: _react2.default.PropTypes.string,
+	  getErrorMessage: _react2.default.PropTypes.func,
+	  getValue: _react2.default.PropTypes.func,
+	  inputColumnClasses: _react2.default.PropTypes.string.isRequired,
+	  isRequired: _react2.default.PropTypes.func,
+	  isValid: _react2.default.PropTypes.func,
+	  labelColumnClasses: _react2.default.PropTypes.string.isRequired,
+	  name: _react2.default.PropTypes.string.isRequired,
+	  setValue: _react2.default.PropTypes.func,
+	  showError: _react2.default.PropTypes.func,
+	  title: _react2.default.PropTypes.string.isRequired
+	};
+	PlanFileInput.defaultProps = {
+	  inputColumnClasses: 'col-sm-10',
+	  labelColumnClasses: 'col-sm-2'
+	};
+	
+	exports.default = _formsyReact2.default.HOC(PlanFileInput);
+
+/***/ },
+/* 767 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _FileList = __webpack_require__(768);
+	
+	var _FileList2 = _interopRequireDefault(_FileList);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PlanFilesTab = function (_React$Component) {
+	  _inherits(PlanFilesTab, _React$Component);
+	
+	  function PlanFilesTab() {
+	    _classCallCheck(this, PlanFilesTab);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlanFilesTab).apply(this, arguments));
+	  }
+	
+	  _createClass(PlanFilesTab, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'tab-pane ' + this.props.active },
+	        _react2.default.createElement(_FileList2.default, { planFiles: this.props.planFiles,
+	          selectedFiles: this.props.selectedFiles })
+	      );
+	    }
+	  }]);
+	
+	  return PlanFilesTab;
+	}(_react2.default.Component);
+	
+	exports.default = PlanFilesTab;
+	
+	PlanFilesTab.propTypes = {
+	  active: _react2.default.PropTypes.string,
+	  planFiles: _reactImmutableProptypes2.default.map,
+	  selectedFiles: _react2.default.PropTypes.array
+	};
+
+/***/ },
+/* 768 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _classnames = __webpack_require__(561);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _immutable = __webpack_require__(556);
+	
+	var _plans = __webpack_require__(700);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var FileList = function (_React$Component) {
+	  _inherits(FileList, _React$Component);
+	
+	  function FileList() {
+	    _classCallCheck(this, FileList);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FileList).apply(this, arguments));
+	  }
+	
+	  _createClass(FileList, [{
+	    key: 'getMergedFiles',
+	    value: function getMergedFiles(planFiles, selectedFiles) {
+	      var files = {};
+	      if (!planFiles.isEmpty()) {
+	        planFiles.map(function (file) {
+	          files[file.name] = file;
+	        });
+	      }
+	      if (selectedFiles.length > 0) {
+	        selectedFiles.forEach(function (file) {
+	          var existing = files[file.name];
+	          var info = void 0;
+	          if (!existing) {
+	            info = (0, _immutable.Map)({
+	              newFile: planFiles.isEmpty() ? false : true,
+	              changed: false
+	            });
+	          } else {
+	            info = (0, _immutable.Map)({
+	              newFile: false,
+	              changed: file.content !== existing.contents
+	            });
+	          }
+	          files[file.name] = (0, _plans.PlanFile)({ name: file.name, info: info });
+	        });
+	      }
+	      return (0, _immutable.Map)(files).sort(function (fileA, fileB) {
+	        var aName = fileA.name;
+	        var aChangedOrNew = fileA.getIn(['info', 'changed']) || fileA.getIn(['info', 'newFile']);
+	        var bName = fileB.name;
+	        var bChangedOrNew = fileB.getIn(['info', 'changed']) || fileB.getIn(['info', 'newFile']);
+	
+	        if (aChangedOrNew && !bChangedOrNew) {
+	          return -1;
+	        } else if (!aChangedOrNew && bChangedOrNew) {
+	          return 1;
+	        } else {
+	          return aName > bName ? 1 : -1;
+	        }
+	      }).toArray();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.props.planFiles.size === 0 && this.props.selectedFiles === 0) {
+	        return null;
+	      }
+	      var files = this.getMergedFiles(this.props.planFiles, this.props.selectedFiles).map(function (file) {
+	        var info = file.info.toJS() || {};
+	        var classes = (0, _classnames2.default)({
+	          'changed-plan-file': info.changed,
+	          'new-plan-file': info.newFile
+	        });
+	        return _react2.default.createElement(
+	          'tr',
+	          { key: file.name },
+	          _react2.default.createElement(
+	            'td',
+	            { className: classes },
+	            file.name
+	          )
+	        );
+	      });
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'panel panel-default' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-heading', role: 'tab', id: 'plan-files-list-panel' },
+	          _react2.default.createElement(
+	            'h4',
+	            { className: 'panel-title' },
+	            'Plan Files'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'table',
+	          { className: 'table upload-files' },
+	          _react2.default.createElement(
+	            'tbody',
+	            null,
+	            files
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return FileList;
+	}(_react2.default.Component);
+	
+	exports.default = FileList;
+	
+	
+	FileList.propTypes = {
+	  planFiles: _reactImmutableProptypes2.default.map,
+	  selectedFiles: _react2.default.PropTypes.array
+	};
+	
+	FileList.defaultProps = {
+	  planFiles: (0, _immutable.Map)(),
+	  selectedFiles: []
+	};
+
+/***/ },
+/* 769 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -70729,27 +74257,47 @@
 	
 	var _ = _interopRequireWildcard(_lodash);
 	
-	var _react = __webpack_require__(293);
+	var _reactRedux = __webpack_require__(291);
 	
-	var _react2 = _interopRequireDefault(_react);
+	var _formsyReact = __webpack_require__(756);
+	
+	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
 	var _reactImmutableProptypes = __webpack_require__(555);
 	
 	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
 	
-	var _DataTable = __webpack_require__(731);
+	var _reactRouter = __webpack_require__(504);
 	
-	var _DataTable2 = _interopRequireDefault(_DataTable);
+	var _react = __webpack_require__(293);
 	
-	var _DataTableCells = __webpack_require__(733);
+	var _react2 = _interopRequireDefault(_react);
 	
-	var _DataTableColumn = __webpack_require__(735);
+	var _EnvironmentConfigurationActions = __webpack_require__(735);
 	
-	var _DataTableColumn2 = _interopRequireDefault(_DataTableColumn);
+	var _EnvironmentConfigurationActions2 = _interopRequireDefault(_EnvironmentConfigurationActions);
+	
+	var _EnvironmentConfigurationTopic = __webpack_require__(770);
+	
+	var _EnvironmentConfigurationTopic2 = _interopRequireDefault(_EnvironmentConfigurationTopic);
+	
+	var _FormErrorList = __webpack_require__(763);
+	
+	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
+	
+	var _environmentConfiguration = __webpack_require__(731);
 	
 	var _Loader = __webpack_require__(560);
 	
 	var _Loader2 = _interopRequireDefault(_Loader);
+	
+	var _Tab = __webpack_require__(774);
+	
+	var _Tab2 = _interopRequireDefault(_Tab);
+	
+	var _TabPane = __webpack_require__(775);
+	
+	var _TabPane2 = _interopRequireDefault(_TabPane);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -70761,201 +74309,1141 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var NodesTable = function (_React$Component) {
-	  _inherits(NodesTable, _React$Component);
+	var EnvironmentConfiguration = function (_React$Component) {
+	  _inherits(EnvironmentConfiguration, _React$Component);
 	
-	  function NodesTable() {
-	    _classCallCheck(this, NodesTable);
+	  function EnvironmentConfiguration() {
+	    _classCallCheck(this, EnvironmentConfiguration);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NodesTable).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EnvironmentConfiguration).call(this));
 	
 	    _this.state = {
-	      filterString: '',
-	      sortBy: '',
-	      sortDir: 'asc'
+	      canSubmit: false,
+	      activeTab: undefined
 	    };
 	    return _this;
 	  }
 	
-	  _createClass(NodesTable, [{
-	    key: 'renderNoNodesFound',
-	    value: function renderNoNodesFound() {
+	  _createClass(EnvironmentConfiguration, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.fetchEnvironmentConfiguration(this.props.currentPlanName, this.props.parentPath);
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      this.invalidateForm(this.props.formFieldErrors.toJS());
+	    }
+	  }, {
+	    key: 'enableButton',
+	    value: function enableButton() {
+	      this.setState({ canSubmit: true });
+	    }
+	  }, {
+	    key: 'disableButton',
+	    value: function disableButton() {
+	      this.setState({ canSubmit: false });
+	    }
+	  }, {
+	    key: 'invalidateForm',
+	    value: function invalidateForm(formFieldErrors) {
+	      this.refs.environmentConfigurationForm.updateInputsWithError(formFieldErrors);
+	    }
+	
+	    /*
+	    * Formsy splits data into objects by '.', file names include '.'
+	    * so we need to convert data back to e.g. { filename.yaml: true, ... }
+	    */
+	
+	  }, {
+	    key: '_convertFormData',
+	    value: function _convertFormData(formData) {
+	      return _.mapValues(_.mapKeys(formData, function (value, key) {
+	        return key + '.yaml';
+	      }), function (value) {
+	        return value.yaml;
+	      });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(formData, resetForm, invalidateForm) {
+	      var data = this._convertFormData(formData);
+	      var formFields = Object.keys(this.refs.environmentConfigurationForm.inputs);
+	      this.disableButton();
+	      this.props.updateEnvironmentConfiguration(this.props.currentPlanName, data, formFields, this.props.parentPath);
+	    }
+	  }, {
+	    key: 'activateTab',
+	    value: function activateTab(tabName, e) {
+	      e.preventDefault();
+	      this.setState({ activeTab: tabName });
+	    }
+	  }, {
+	    key: 'isTabActive',
+	    value: function isTabActive(tabName) {
+	      var firstTabName = _.camelCase(this.props.environmentConfigurationTopics.first().get('title'));
+	      var currentTab = this.state.activeTab || firstTabName;
+	      return currentTab === tabName;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var topics = this.props.environmentConfigurationTopics.toList().map(function (topic, index) {
+	        var tabName = _.camelCase(topic.get('title'));
+	        return _react2.default.createElement(
+	          _TabPane2.default,
+	          { isActive: _this2.isTabActive(tabName),
+	            key: index },
+	          _react2.default.createElement(_EnvironmentConfigurationTopic2.default, { key: index,
+	            title: topic.get('title'),
+	            description: topic.get('description'),
+	            environmentGroups: topic.get('environment_groups') })
+	        );
+	      });
+	
+	      var topicTabs = this.props.environmentConfigurationTopics.toList().map(function (topic, index) {
+	        var tabName = _.camelCase(topic.get('title'));
+	        return _react2.default.createElement(
+	          _Tab2.default,
+	          { key: index, isActive: _this2.isTabActive(tabName) },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '', onClick: _this2.activateTab.bind(_this2, tabName) },
+	            topic.get('title')
+	          )
+	        );
+	      });
+	
+	      return _react2.default.createElement(
+	        _formsyReact2.default.Form,
+	        { ref: 'environmentConfigurationForm',
+	          role: 'form',
+	          className: 'form',
+	          onSubmit: this.handleSubmit.bind(this),
+	          onValid: this.enableButton.bind(this),
+	          onInvalid: this.disableButton.bind(this) },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container-fluid' },
+	          _react2.default.createElement(
+	            _Loader2.default,
+	            { height: 60,
+	              loaded: !this.props.isFetching },
+	            _react2.default.createElement(_FormErrorList2.default, { errors: this.props.formErrors.toJS() }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row row-eq-height' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-sm-4 sidebar-pf sidebar-pf-left' },
+	                _react2.default.createElement(
+	                  'ul',
+	                  { className: 'nav nav-pills nav-stacked nav-arrows' },
+	                  topicTabs
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-sm-8' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'tab-content' },
+	                  topics
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'modal-footer' },
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', disabled: !this.state.canSubmit,
+	              className: 'btn btn-primary' },
+	            'Save Changes'
+	          ),
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: this.props.parentPath, type: 'button', className: 'btn btn-default' },
+	            'Cancel'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return EnvironmentConfiguration;
+	}(_react2.default.Component);
+	
+	EnvironmentConfiguration.propTypes = {
+	  currentPlanName: _react2.default.PropTypes.string,
+	  environmentConfigurationTopics: _reactImmutableProptypes2.default.map.isRequired,
+	  fetchEnvironmentConfiguration: _react2.default.PropTypes.func,
+	  formErrors: _reactImmutableProptypes2.default.list.isRequired,
+	  formFieldErrors: _reactImmutableProptypes2.default.map.isRequired,
+	  isFetching: _react2.default.PropTypes.bool,
+	  location: _react2.default.PropTypes.object,
+	  parentPath: _react2.default.PropTypes.string.isRequired,
+	  updateEnvironmentConfiguration: _react2.default.PropTypes.func
+	};
+	
+	EnvironmentConfiguration.defaultProps = {
+	  parentPath: '/deployment-plan'
+	};
+	
+	function mapStateToProps(state) {
+	  return {
+	    currentPlanName: state.currentPlan.currentPlanName,
+	    environmentConfigurationTopics: (0, _environmentConfiguration.getTopicsTree)(state),
+	    formErrors: state.environmentConfiguration.getIn(['form', 'formErrors']),
+	    formFieldErrors: state.environmentConfiguration.getIn(['form', 'formFieldErrors']),
+	    isFetching: state.environmentConfiguration.isFetching
+	  };
+	}
+	
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    fetchEnvironmentConfiguration: function fetchEnvironmentConfiguration(planName) {
+	      dispatch(_EnvironmentConfigurationActions2.default.fetchEnvironmentConfiguration(planName));
+	    },
+	    updateEnvironmentConfiguration: function updateEnvironmentConfiguration(planName, data, parentPath) {
+	      dispatch(_EnvironmentConfigurationActions2.default.updateEnvironmentConfiguration(planName, data, parentPath));
+	    }
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(EnvironmentConfiguration);
+	
+	/**
+	* requiresEnvironments validation
+	* Invalidates input if it is selected and environment it requires is not.
+	* example: validations="requiredEnvironments:['some_environment.yaml']"
+	*/
+	
+	_formsyReact2.default.addValidationRule('requiresEnvironments', function (values, value, requiredEnvironmentFieldNames) {
+	  if (value) {
+	    return !_.filter(_.values(_.pick(values, requiredEnvironmentFieldNames)), function (val) {
+	      return val === false;
+	    }).length;
+	  }
+	  return true;
+	});
+
+/***/ },
+/* 770 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _EnvironmentGroup = __webpack_require__(771);
+	
+	var _EnvironmentGroup2 = _interopRequireDefault(_EnvironmentGroup);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var EnvironmentConfigurationTopic = function (_React$Component) {
+	  _inherits(EnvironmentConfigurationTopic, _React$Component);
+	
+	  function EnvironmentConfigurationTopic() {
+	    _classCallCheck(this, EnvironmentConfigurationTopic);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(EnvironmentConfigurationTopic).apply(this, arguments));
+	  }
+	
+	  _createClass(EnvironmentConfigurationTopic, [{
+	    key: 'render',
+	    value: function render() {
+	      var environmentGroups = this.props.environmentGroups.toArray().map(function (envGroup, index) {
+	        return _react2.default.createElement(_EnvironmentGroup2.default, { key: index,
+	          title: envGroup.get('title'),
+	          description: envGroup.get('description'),
+	          environments: envGroup.get('environments') });
+	      });
+	
+	      return _react2.default.createElement(
+	        'fieldset',
+	        { className: 'environment-topic' },
+	        environmentGroups
+	      );
+	    }
+	  }]);
+	
+	  return EnvironmentConfigurationTopic;
+	}(_react2.default.Component);
+	
+	exports.default = EnvironmentConfigurationTopic;
+	
+	EnvironmentConfigurationTopic.propTypes = {
+	  description: _react2.default.PropTypes.string,
+	  environmentGroups: _reactImmutableProptypes2.default.list,
+	  title: _react2.default.PropTypes.string.isRequired
+	};
+
+/***/ },
+/* 771 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _GenericCheckBox = __webpack_require__(772);
+	
+	var _GenericCheckBox2 = _interopRequireDefault(_GenericCheckBox);
+	
+	var _GroupedCheckBox = __webpack_require__(773);
+	
+	var _GroupedCheckBox2 = _interopRequireDefault(_GroupedCheckBox);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var EnvironmentGroup = function (_React$Component) {
+	  _inherits(EnvironmentGroup, _React$Component);
+	
+	  function EnvironmentGroup(props) {
+	    _classCallCheck(this, EnvironmentGroup);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EnvironmentGroup).call(this, props));
+	
+	    var firstCheckedEnvironment = props.environments.filter(function (env) {
+	      return env.get('enabled') === true;
+	    }).first();
+	    _this.state = {
+	      checkedEnvironment: firstCheckedEnvironment ? firstCheckedEnvironment.file : null
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(EnvironmentGroup, [{
+	    key: 'onGroupedCheckBoxChange',
+	    value: function onGroupedCheckBoxChange(checked, environmentFile) {
+	      this.setState({ checkedEnvironment: checked ? environmentFile : null });
+	    }
+	  }, {
+	    key: '_generateInputs',
+	    value: function _generateInputs() {
+	      var _this2 = this;
+	
+	      var environments = this.props.environments;
+	      if (environments.size > 1) {
+	        return environments.toArray().map(function (environment, index) {
+	          var checkBoxValue = _this2.state.checkedEnvironment === environment.get('file') ? true : false;
+	          var requiresEnvironments = environment.get('requires') ? environment.get('requires').toArray() : undefined;
+	          return _react2.default.createElement(_GroupedCheckBox2.default, { key: index,
+	            name: environment.get('file'),
+	            id: environment.get('file'),
+	            title: environment.get('title'),
+	            value: checkBoxValue,
+	            validations: { requiresEnvironments: requiresEnvironments },
+	            validationError: 'This environment requires\n                                             \'' + requiresEnvironments + '\'',
+	            checked: _this2.state.checkedEnvironment === environment.get('file'),
+	            onChange: _this2.onGroupedCheckBoxChange.bind(_this2),
+	            description: environment.get('description') });
+	        });
+	      } else {
+	        var environment = environments.first();
+	        var requiresEnvironments = environment.get('requires') ? environment.get('requires').toArray() : undefined;
+	        return _react2.default.createElement(_GenericCheckBox2.default, { name: environment.get('file'),
+	          id: environment.get('file'),
+	          title: environment.get('title'),
+	          value: environment.get('enabled') || false,
+	          validations: { requiresEnvironments: requiresEnvironments },
+	          validationError: 'This environment requires\n                                           \'' + requiresEnvironments + '\'',
+	          description: environment.get('description') });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var environments = this._generateInputs();
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'environment-group' },
+	        _react2.default.createElement(EnvironmentGroupHeading, { title: this.props.title,
+	          description: this.props.description }),
+	        environments
+	      );
+	    }
+	  }]);
+	
+	  return EnvironmentGroup;
+	}(_react2.default.Component);
+	
+	exports.default = EnvironmentGroup;
+	
+	EnvironmentGroup.propTypes = {
+	  description: _react2.default.PropTypes.string,
+	  environments: _reactImmutableProptypes2.default.list,
+	  title: _react2.default.PropTypes.string
+	};
+	
+	var EnvironmentGroupHeading = function (_React$Component2) {
+	  _inherits(EnvironmentGroupHeading, _React$Component2);
+	
+	  function EnvironmentGroupHeading() {
+	    _classCallCheck(this, EnvironmentGroupHeading);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(EnvironmentGroupHeading).apply(this, arguments));
+	  }
+	
+	  _createClass(EnvironmentGroupHeading, [{
+	    key: 'render',
+	    value: function render() {
+	      if (this.props.title) {
+	        return _react2.default.createElement(
+	          'h4',
+	          null,
+	          this.props.title,
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'small',
+	            null,
+	            this.props.description
+	          )
+	        );
+	      } else if (this.props.description) {
+	        return _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.description
+	        );
+	      } else {
+	        return false;
+	      }
+	    }
+	  }]);
+	
+	  return EnvironmentGroupHeading;
+	}(_react2.default.Component);
+	
+	EnvironmentGroupHeading.propTypes = {
+	  description: _react2.default.PropTypes.string,
+	  title: _react2.default.PropTypes.string
+	};
+
+/***/ },
+/* 772 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _classnames = __webpack_require__(561);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _formsyReact = __webpack_require__(756);
+	
+	var _formsyReact2 = _interopRequireDefault(_formsyReact);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var GenericCheckBox = function (_React$Component) {
+	  _inherits(GenericCheckBox, _React$Component);
+	
+	  function GenericCheckBox() {
+	    _classCallCheck(this, GenericCheckBox);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GenericCheckBox).apply(this, arguments));
+	  }
+	
+	  _createClass(GenericCheckBox, [{
+	    key: 'changeValue',
+	    value: function changeValue(event) {
+	      this.props.setValue(event.target.checked);
+	    }
+	  }, {
+	    key: 'renderErrorMessage',
+	    value: function renderErrorMessage() {
+	      var errorMessage = this.props.getErrorMessage();
+	      return errorMessage ? _react2.default.createElement(
+	        'span',
+	        { className: 'help-block' },
+	        errorMessage
+	      ) : false;
+	    }
+	  }, {
+	    key: 'renderDescription',
+	    value: function renderDescription() {
+	      var description = this.props.description;
+	      return description ? _react2.default.createElement(
+	        'small',
+	        { className: 'help-block' },
+	        description
+	      ) : false;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var divClasses = (0, _classnames2.default)({
+	        'checkbox': this.props.type === 'checkbox',
+	        'radio': this.props.type === 'radio',
+	        'has-error': this.props.showError(),
+	        'required': this.props.showRequired()
+	      });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: divClasses },
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: this.props.id, className: 'control-label' },
+	          _react2.default.createElement('input', { type: this.props.type,
+	            name: this.props.name,
+	            ref: this.props.id,
+	            id: this.props.id,
+	            onChange: this.changeValue.bind(this),
+	            checked: !!this.props.getValue(),
+	            value: this.props.getValue() }),
+	          this.props.title
+	        ),
+	        this.renderErrorMessage(),
+	        this.renderDescription()
+	      );
+	    }
+	  }]);
+	
+	  return GenericCheckBox;
+	}(_react2.default.Component);
+	
+	GenericCheckBox.propTypes = {
+	  description: _react2.default.PropTypes.string,
+	  getErrorMessage: _react2.default.PropTypes.func,
+	  getValue: _react2.default.PropTypes.func,
+	  id: _react2.default.PropTypes.string.isRequired,
+	  isRequired: _react2.default.PropTypes.func,
+	  isValid: _react2.default.PropTypes.func,
+	  name: _react2.default.PropTypes.string.isRequired,
+	  placeholder: _react2.default.PropTypes.string,
+	  setValue: _react2.default.PropTypes.func,
+	  showError: _react2.default.PropTypes.func,
+	  showRequired: _react2.default.PropTypes.func,
+	  title: _react2.default.PropTypes.string,
+	  type: _react2.default.PropTypes.string
+	};
+	GenericCheckBox.defaultProps = {
+	  type: 'checkbox'
+	};
+	exports.default = _formsyReact2.default.HOC(GenericCheckBox);
+
+/***/ },
+/* 773 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _classnames = __webpack_require__(561);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _formsyReact = __webpack_require__(756);
+	
+	var _formsyReact2 = _interopRequireDefault(_formsyReact);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var GroupedCheckBox = function (_React$Component) {
+	  _inherits(GroupedCheckBox, _React$Component);
+	
+	  function GroupedCheckBox() {
+	    _classCallCheck(this, GroupedCheckBox);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GroupedCheckBox).apply(this, arguments));
+	  }
+	
+	  _createClass(GroupedCheckBox, [{
+	    key: 'changeValue',
+	    value: function changeValue(event) {
+	      this.props.onChange(event.target.checked, this.props.name);
+	      this.props.setValue(event.target.checked);
+	    }
+	  }, {
+	    key: 'renderErrorMessage',
+	    value: function renderErrorMessage() {
+	      var errorMessage = this.props.getErrorMessage();
+	      return errorMessage ? _react2.default.createElement(
+	        'span',
+	        { className: 'help-block' },
+	        errorMessage
+	      ) : false;
+	    }
+	  }, {
+	    key: 'renderDescription',
+	    value: function renderDescription() {
+	      var description = this.props.description;
+	      return description ? _react2.default.createElement(
+	        'small',
+	        { className: 'help-block' },
+	        description
+	      ) : false;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var divClasses = (0, _classnames2.default)({
+	        'checkbox': this.props.type === 'checkbox',
+	        'radio': this.props.type === 'radio',
+	        'has-error': this.props.showError(),
+	        'required': this.props.showRequired()
+	      });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: divClasses },
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: this.props.id, className: 'control-label' },
+	          _react2.default.createElement('input', { type: this.props.type,
+	            name: this.props.name,
+	            ref: this.props.id,
+	            id: this.props.id,
+	            onChange: this.changeValue.bind(this),
+	            checked: !!this.props.getValue(),
+	            value: this.props.getValue() }),
+	          this.props.title
+	        ),
+	        this.renderErrorMessage(),
+	        this.renderDescription()
+	      );
+	    }
+	  }]);
+	
+	  return GroupedCheckBox;
+	}(_react2.default.Component);
+	
+	GroupedCheckBox.propTypes = {
+	  description: _react2.default.PropTypes.string,
+	  getErrorMessage: _react2.default.PropTypes.func,
+	  getValue: _react2.default.PropTypes.func,
+	  id: _react2.default.PropTypes.string.isRequired,
+	  isRequired: _react2.default.PropTypes.func,
+	  isValid: _react2.default.PropTypes.func,
+	  name: _react2.default.PropTypes.string.isRequired,
+	  onChange: _react2.default.PropTypes.func.isRequired,
+	  placeholder: _react2.default.PropTypes.string,
+	  setValue: _react2.default.PropTypes.func,
+	  showError: _react2.default.PropTypes.func,
+	  showRequired: _react2.default.PropTypes.func,
+	  title: _react2.default.PropTypes.string.isRequired,
+	  type: _react2.default.PropTypes.string
+	};
+	GroupedCheckBox.defaultProps = {
+	  type: 'checkbox'
+	};
+	exports.default = _formsyReact2.default.HOC(GroupedCheckBox);
+
+/***/ },
+/* 774 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Tab = function (_React$Component) {
+	  _inherits(Tab, _React$Component);
+	
+	  function Tab() {
+	    _classCallCheck(this, Tab);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Tab).apply(this, arguments));
+	  }
+	
+	  _createClass(Tab, [{
+	    key: 'render',
+	    value: function render() {
+	      var className = this.props.isActive ? 'active' : '';
+	      return _react2.default.createElement(
+	        'li',
+	        { className: className },
+	        this.props.children
+	      );
+	    }
+	  }]);
+	
+	  return Tab;
+	}(_react2.default.Component);
+	
+	exports.default = Tab;
+	
+	Tab.propTypes = {
+	  children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.node), _react2.default.PropTypes.node]),
+	  isActive: _react2.default.PropTypes.bool.isRequired
+	};
+
+/***/ },
+/* 775 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _classnames = __webpack_require__(561);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var TabPane = function (_React$Component) {
+	  _inherits(TabPane, _React$Component);
+	
+	  function TabPane() {
+	    _classCallCheck(this, TabPane);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TabPane).apply(this, arguments));
+	  }
+	
+	  _createClass(TabPane, [{
+	    key: 'renderChildren',
+	    value: function renderChildren() {
+	      if (this.props.renderOnlyActive) {
+	        return this.props.isActive ? this.props.children : null;
+	      }
+	      return this.props.children;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var classes = (0, _classnames2.default)({
+	        'tab-pane': true,
+	        'active': this.props.isActive
+	      });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: classes },
+	        this.renderChildren()
+	      );
+	    }
+	  }]);
+	
+	  return TabPane;
+	}(_react2.default.Component);
+	
+	exports.default = TabPane;
+	
+	TabPane.propTypes = {
+	  children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.node), _react2.default.PropTypes.node]),
+	  isActive: _react2.default.PropTypes.bool.isRequired,
+	  renderOnlyActive: _react2.default.PropTypes.bool.isRequired
+	};
+	TabPane.defaultProps = {
+	  renderOnlyActive: false
+	};
+
+/***/ },
+/* 776 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.PlanNameCell = undefined;
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactRedux = __webpack_require__(291);
+	
+	var _reactRouter = __webpack_require__(504);
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _CurrentPlanActions = __webpack_require__(665);
+	
+	var _CurrentPlanActions2 = _interopRequireDefault(_CurrentPlanActions);
+	
+	var _DataTable = __webpack_require__(777);
+	
+	var _DataTable2 = _interopRequireDefault(_DataTable);
+	
+	var _DataTableCells = __webpack_require__(779);
+	
+	var _DataTableColumn = __webpack_require__(781);
+	
+	var _DataTableColumn2 = _interopRequireDefault(_DataTableColumn);
+	
+	var _PageHeader = __webpack_require__(782);
+	
+	var _PlansActions = __webpack_require__(596);
+	
+	var _PlansActions2 = _interopRequireDefault(_PlansActions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ListPlans = function (_React$Component) {
+	  _inherits(ListPlans, _React$Component);
+	
+	  function ListPlans() {
+	    _classCallCheck(this, ListPlans);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ListPlans).call(this));
+	  }
+	
+	  _createClass(ListPlans, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.fetchPlans();
+	    }
+	  }, {
+	    key: 'renderNoPlans',
+	    value: function renderNoPlans() {
 	      return _react2.default.createElement(
 	        'tr',
 	        null,
 	        _react2.default.createElement(
 	          'td',
-	          { className: 'no-results', colSpan: '9' },
+	          { colSpan: '2' },
+	          _react2.default.createElement('p', null),
 	          _react2.default.createElement(
-	            _Loader2.default,
-	            { loaded: !this.props.isFetchingNodes,
-	              height: 40,
-	              content: 'Loading Nodes...' },
+	            'p',
+	            { className: 'text-center' },
+	            'There are currently no Plans'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'text-center' },
 	            _react2.default.createElement(
-	              'p',
-	              { className: 'text-center' },
-	              'There are no Nodes available'
+	              _reactRouter.Link,
+	              { to: '/plans/new',
+	                query: { tab: 'newPlan' },
+	                className: 'btn btn-success' },
+	              'Create New Plan'
 	            )
 	          )
 	        )
 	      );
 	    }
 	  }, {
-	    key: 'onFilter',
-	    value: function onFilter(filterString) {
-	      this.setState({
-	        filterString: filterString
-	      });
-	    }
-	  }, {
-	    key: '_filterData',
-	    value: function _filterData(filterString, data) {
-	      var dataKeys = ['uuid'];
-	      return filterString ? data.filter(function (row) {
-	        var result = dataKeys.filter(function (dataKey) {
-	          return row[dataKey].toLowerCase().includes(filterString.toLowerCase());
-	        });
-	        return result.length > 0;
-	      }) : data;
+	    key: 'renderTableActions',
+	    value: function renderTableActions() {
+	      return _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/plans/new',
+	          query: { tab: 'newPlan' },
+	          className: 'btn btn-primary' },
+	        _react2.default.createElement('span', { className: 'fa fa-plus' }),
+	        ' Create New Plan'
+	      );
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var filteredData = this._filterData(this.state.filterString, this.props.nodes.toList().toJS());
+	      var plans = this.props.plans.sortBy(function (plan) {
+	        return plan.name;
+	      }).toArray();
 	      return _react2.default.createElement(
-	        _DataTable2.default,
-	        _extends({}, this.props, {
-	          data: this.props.nodes.toList().toJS(),
-	          rowsCount: filteredData.length,
-	          noRowsRenderer: this.renderNoNodesFound.bind(this),
-	          onFilter: this.onFilter.bind(this),
-	          filterString: this.state.filterString }),
-	        _react2.default.createElement(_DataTableColumn2.default, {
-	          key: 'select',
-	          header: _react2.default.createElement(_DataTableCells.DataTableHeaderCell, { key: 'select' }),
-	          cell: _react2.default.createElement(_DataTableCells.DataTableCheckBoxCell, { data: filteredData, field: 'uuid' }) }),
-	        _react2.default.createElement(_DataTableColumn2.default, {
-	          key: 'uuid',
-	          header: _react2.default.createElement(
-	            _DataTableCells.DataTableHeaderCell,
-	            { key: 'uuid' },
-	            'UUID'
-	          ),
-	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'uuid' }) }),
-	        _react2.default.createElement(_DataTableColumn2.default, {
-	          key: 'role',
-	          header: _react2.default.createElement(
-	            _DataTableCells.DataTableHeaderCell,
-	            { key: 'role' },
-	            'Role'
-	          ),
-	          cell: _react2.default.createElement(NodesTableRoleCell, { data: filteredData, roles: this.props.roles }) }),
-	        _react2.default.createElement(_DataTableColumn2.default, {
-	          key: 'properties.cpu_arch',
-	          header: _react2.default.createElement(
-	            _DataTableCells.DataTableHeaderCell,
-	            { key: 'properties.cpu_arch' },
-	            'CPU Arch.'
-	          ),
-	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'properties.cpu_arch' }) }),
-	        _react2.default.createElement(_DataTableColumn2.default, {
-	          key: 'properties.cpus',
-	          header: _react2.default.createElement(
-	            _DataTableCells.DataTableHeaderCell,
-	            { key: 'properties.cpus' },
-	            'CPU (cores)'
-	          ),
-	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'properties.cpus' }) }),
-	        _react2.default.createElement(_DataTableColumn2.default, {
-	          key: 'properties.local_gb',
-	          header: _react2.default.createElement(
-	            _DataTableCells.DataTableHeaderCell,
-	            { key: 'properties.local_gb' },
-	            'Disk (GB)'
-	          ),
-	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'properties.local_gb' }) }),
-	        _react2.default.createElement(_DataTableColumn2.default, {
-	          key: 'properties.memory_mb',
-	          header: _react2.default.createElement(
-	            _DataTableCells.DataTableHeaderCell,
-	            { key: 'properties.memory_mb' },
-	            'Memory (MB)'
-	          ),
-	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'properties.memory_mb' }) }),
-	        _react2.default.createElement(_DataTableColumn2.default, {
-	          key: 'power_state',
-	          header: _react2.default.createElement(
-	            _DataTableCells.DataTableHeaderCell,
-	            { key: 'power_state' },
-	            'Power State'
-	          ),
-	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'power_state' }) }),
-	        _react2.default.createElement(_DataTableColumn2.default, {
-	          key: 'provision_state',
-	          header: _react2.default.createElement(
-	            _DataTableCells.DataTableHeaderCell,
-	            { key: 'provision_state' },
-	            'Provision State'
-	          ),
-	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'provision_state' }) })
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _PageHeader.PageHeader,
+	          null,
+	          'Plans'
+	        ),
+	        _react2.default.createElement(
+	          _DataTable2.default,
+	          { data: plans,
+	            rowsCount: plans.length,
+	            noRowsRenderer: this.renderNoPlans.bind(this),
+	            tableActions: this.renderTableActions },
+	          _react2.default.createElement(_DataTableColumn2.default, { header: _react2.default.createElement(
+	              _DataTableCells.DataTableHeaderCell,
+	              { key: 'name' },
+	              'Name'
+	            ),
+	            cell: _react2.default.createElement(PlanNameCell, {
+	              data: plans,
+	              currentPlanName: this.props.currentPlanName,
+	              choosePlan: this.props.choosePlan }) }),
+	          _react2.default.createElement(_DataTableColumn2.default, { header: _react2.default.createElement(
+	              _DataTableCells.DataTableHeaderCell,
+	              { key: 'actions' },
+	              'Actions'
+	            ),
+	            cell: _react2.default.createElement(RowActionsCell, { className: 'actions text-right',
+	              data: plans }) })
+	        ),
+	        this.props.children
 	      );
 	    }
 	  }]);
 	
-	  return NodesTable;
+	  return ListPlans;
 	}(_react2.default.Component);
 	
-	exports.default = NodesTable;
-	
-	NodesTable.propTypes = {
-	  isFetchingNodes: _react2.default.PropTypes.bool.isRequired,
-	  nodes: _reactImmutableProptypes2.default.map.isRequired,
-	  roles: _reactImmutableProptypes2.default.map.isRequired
+	ListPlans.propTypes = {
+	  children: _react2.default.PropTypes.node,
+	  choosePlan: _react2.default.PropTypes.func,
+	  conflict: _react2.default.PropTypes.string,
+	  currentPlanName: _react2.default.PropTypes.string,
+	  fetchPlans: _react2.default.PropTypes.func,
+	  plans: _reactImmutableProptypes2.default.map
 	};
 	
-	var NodesTableRoleCell = exports.NodesTableRoleCell = function (_React$Component2) {
-	  _inherits(NodesTableRoleCell, _React$Component2);
+	function mapStateToProps(state) {
+	  return {
+	    currentPlanName: state.currentPlan.currentPlanName,
+	    conflict: state.plans.get('conflict'),
+	    plans: state.plans.get('all')
+	  };
+	}
 	
-	  function NodesTableRoleCell() {
-	    _classCallCheck(this, NodesTableRoleCell);
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    fetchPlans: function fetchPlans() {
+	      dispatch(_PlansActions2.default.fetchPlans());
+	    },
+	    choosePlan: function choosePlan(planName) {
+	      dispatch(_CurrentPlanActions2.default.choosePlan(planName));
+	    }
+	  };
+	}
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NodesTableRoleCell).apply(this, arguments));
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ListPlans);
+	
+	var RowActionsCell = function (_React$Component2) {
+	  _inherits(RowActionsCell, _React$Component2);
+	
+	  function RowActionsCell() {
+	    _classCallCheck(this, RowActionsCell);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(RowActionsCell).apply(this, arguments));
 	  }
 	
-	  _createClass(NodesTableRoleCell, [{
-	    key: 'getAssignedRoleTitle',
-	    value: function getAssignedRoleTitle() {
-	      var fieldValue = _.result(this.props.data[this.props.rowIndex], 'properties.capabilities');
-	      var capabilitiesMatch = fieldValue.match(/.*profile:(\w+)/);
-	      if (capabilitiesMatch && Array.isArray(capabilitiesMatch) && capabilitiesMatch.length > 1) {
-	        var role = this.props.roles.get(capabilitiesMatch[1]);
-	        return role ? role.title : 'Not assigned';
+	  _createClass(RowActionsCell, [{
+	    key: 'render',
+	    value: function render() {
+	      var plan = this.props.data[this.props.rowIndex];
+	
+	      if (plan.transition) {
+	        // TODO(jtomasek): this causes DOMNesting validation error which should eventually go away
+	        // in future React versions. See https://github.com/facebook/react/issues/5506
+	        return null;
 	      } else {
-	        return 'Not assigned';
+	        return _react2.default.createElement(
+	          _DataTableCells.DataTableCell,
+	          this.props,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { key: 'edit',
+	              to: '/plans/' + plan.name + '/edit',
+	              query: { tab: 'editPlan' },
+	              className: 'btn btn-xs btn-default' },
+	            'Edit'
+	          ),
+	          ' ',
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { key: 'delete',
+	              to: '/plans/' + plan.name + '/delete',
+	              className: 'btn btn-xs btn-danger' },
+	            'Delete'
+	          )
+	        );
 	      }
+	    }
+	  }]);
+	
+	  return RowActionsCell;
+	}(_react2.default.Component);
+	
+	RowActionsCell.propTypes = {
+	  data: _react2.default.PropTypes.array,
+	  rowIndex: _react2.default.PropTypes.number
+	};
+	
+	var PlanNameCell = exports.PlanNameCell = function (_React$Component3) {
+	  _inherits(PlanNameCell, _React$Component3);
+	
+	  function PlanNameCell() {
+	    _classCallCheck(this, PlanNameCell);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlanNameCell).apply(this, arguments));
+	  }
+	
+	  _createClass(PlanNameCell, [{
+	    key: 'onPlanClick',
+	    value: function onPlanClick(e) {
+	      e.preventDefault();
+	      this.props.choosePlan(e.target.textContent);
+	    }
+	  }, {
+	    key: 'getActiveIcon',
+	    value: function getActiveIcon(planName) {
+	      if (planName === this.props.currentPlanName) {
+	        return _react2.default.createElement('span', { className: 'pficon pficon-flag' });
+	      }
+	      return false;
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        _DataTableCells.DataTableCell,
-	        this.props,
-	        this.getAssignedRoleTitle()
-	      );
+	      var plan = this.props.data[this.props.rowIndex];
+	
+	      if (plan.transition === 'deleting') {
+	        return _react2.default.createElement(
+	          _DataTableCells.DataTableCell,
+	          _extends({}, this.props, { colSpan: '2', className: plan.transition }),
+	          _react2.default.createElement(
+	            'em',
+	            null,
+	            'Deleting ',
+	            _react2.default.createElement(
+	              'strong',
+	              null,
+	              plan.name
+	            ),
+	            '…'
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          _DataTableCells.DataTableCell,
+	          this.props,
+	          this.getActiveIcon(plan.name),
+	          ' ',
+	          _react2.default.createElement(
+	            'a',
+	            { href: '',
+	              onClick: this.onPlanClick.bind(this) },
+	            plan.name
+	          )
+	        );
+	      }
 	    }
 	  }]);
 	
-	  return NodesTableRoleCell;
+	  return PlanNameCell;
 	}(_react2.default.Component);
 	
-	NodesTableRoleCell.propTypes = {
-	  data: _react2.default.PropTypes.array.isRequired,
-	  roles: _reactImmutableProptypes2.default.map.isRequired,
+	PlanNameCell.propTypes = {
+	  choosePlan: _react2.default.PropTypes.func,
+	  currentPlanName: _react2.default.PropTypes.string,
+	  data: _react2.default.PropTypes.array,
 	  rowIndex: _react2.default.PropTypes.number
 	};
 
 /***/ },
-/* 731 */
+/* 777 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70974,7 +75462,7 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _DataTableRow = __webpack_require__(732);
+	var _DataTableRow = __webpack_require__(778);
 	
 	var _DataTableRow2 = _interopRequireDefault(_DataTableRow);
 	
@@ -71139,7 +75627,7 @@
 	};
 
 /***/ },
-/* 732 */
+/* 778 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71198,7 +75686,7 @@
 	};
 
 /***/ },
-/* 733 */
+/* 779 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71218,9 +75706,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _TableCheckBox = __webpack_require__(734);
+	var _TableCheckBox = __webpack_require__(780);
 	
 	var _TableCheckBox2 = _interopRequireDefault(_TableCheckBox);
+	
+	var _Loader = __webpack_require__(560);
+	
+	var _Loader2 = _interopRequireDefault(_Loader);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -71344,9 +75836,11 @@
 	      return _react2.default.createElement(
 	        DataTableCell,
 	        this.props,
-	        _react2.default.createElement(_TableCheckBox2.default, { name: value,
-	          id: value,
-	          value: false })
+	        _react2.default.createElement(
+	          _Loader2.default,
+	          { loaded: !this.props.operationInProgress, component: 'span', inline: true },
+	          _react2.default.createElement(_TableCheckBox2.default, { name: value, id: value, value: false, disabled: this.props.disabled })
+	        )
 	      );
 	    }
 	  }]);
@@ -71356,12 +75850,18 @@
 	
 	DataTableCheckBoxCell.propTypes = {
 	  data: _react2.default.PropTypes.array.isRequired,
+	  disabled: _react2.default.PropTypes.bool.isRequired,
 	  field: _react2.default.PropTypes.string.isRequired,
+	  operationInProgress: _react2.default.PropTypes.bool.isRequired,
 	  rowIndex: _react2.default.PropTypes.number
+	};
+	DataTableCheckBoxCell.defaultProps = {
+	  disabled: false,
+	  operationInProgress: true
 	};
 
 /***/ },
-/* 734 */
+/* 780 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71372,7 +75872,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -71409,6 +75909,7 @@
 	        name: this.props.name,
 	        ref: this.props.id,
 	        id: this.props.id,
+	        disabled: this.props.disabled,
 	        onChange: this.changeValue.bind(this),
 	        checked: !!this.props.getValue(),
 	        value: this.props.getValue() });
@@ -71419,6 +75920,7 @@
 	}(_react2.default.Component);
 	
 	TableCheckBox.propTypes = {
+	  disabled: _react2.default.PropTypes.bool.isRequired,
 	  getValue: _react2.default.PropTypes.func,
 	  id: _react2.default.PropTypes.string.isRequired,
 	  name: _react2.default.PropTypes.string.isRequired,
@@ -71426,12 +75928,13 @@
 	  type: _react2.default.PropTypes.string
 	};
 	TableCheckBox.defaultProps = {
+	  disabled: false,
 	  type: 'checkbox'
 	};
 	exports.default = _formsyReact2.default.HOC(TableCheckBox);
 
 /***/ },
-/* 735 */
+/* 781 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71482,4283 +75985,7 @@
 	};
 
 /***/ },
-/* 736 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(504);
-	
-	var _NavTab = __webpack_require__(709);
-	
-	var _NavTab2 = _interopRequireDefault(_NavTab);
-	
-	var _Modal = __webpack_require__(562);
-	
-	var _Modal2 = _interopRequireDefault(_Modal);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var DeploymentConfiguration = function (_React$Component) {
-	  _inherits(DeploymentConfiguration, _React$Component);
-	
-	  function DeploymentConfiguration() {
-	    _classCallCheck(this, DeploymentConfiguration);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DeploymentConfiguration).apply(this, arguments));
-	  }
-	
-	  _createClass(DeploymentConfiguration, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _Modal2.default,
-	        { dialogClasses: 'modal-lg' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'modal-header' },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: this.props.parentPath,
-	              type: 'button',
-	              className: 'close' },
-	            _react2.default.createElement('span', { 'aria-hidden': 'true', className: 'pficon pficon-close' })
-	          ),
-	          _react2.default.createElement(
-	            'h4',
-	            { className: 'modal-title' },
-	            'Deployment Configuration'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'nav nav-tabs' },
-	          _react2.default.createElement(
-	            _NavTab2.default,
-	            { to: '/deployment-plan/configuration/environment' },
-	            'Overall Settings'
-	          ),
-	          _react2.default.createElement(
-	            _NavTab2.default,
-	            { to: '/deployment-plan/configuration/parameters' },
-	            'Parameters'
-	          )
-	        ),
-	        _react2.default.cloneElement(this.props.children, { currentPlanName: this.props.currentPlanName,
-	          parentPath: this.props.parentPath })
-	      );
-	    }
-	  }]);
-	
-	  return DeploymentConfiguration;
-	}(_react2.default.Component);
-	
-	exports.default = DeploymentConfiguration;
-	
-	DeploymentConfiguration.propTypes = {
-	  children: _react2.default.PropTypes.node,
-	  currentPlanName: _react2.default.PropTypes.string,
-	  parentPath: _react2.default.PropTypes.string };
-
-/***/ },
-/* 737 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	exports.mapStateToProps = mapStateToProps;
-	
-	var _reactRedux = __webpack_require__(291);
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _reactRouter = __webpack_require__(504);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _plans = __webpack_require__(738);
-	
-	var _nodes = __webpack_require__(739);
-	
-	var _DeploymentStatus = __webpack_require__(740);
-	
-	var _DeploymentStatus2 = _interopRequireDefault(_DeploymentStatus);
-	
-	var _DeploymentStep = __webpack_require__(741);
-	
-	var _DeploymentStep2 = _interopRequireDefault(_DeploymentStep);
-	
-	var _PlansDropdown = __webpack_require__(742);
-	
-	var _PlansDropdown2 = _interopRequireDefault(_PlansDropdown);
-	
-	var _Loader = __webpack_require__(560);
-	
-	var _Loader2 = _interopRequireDefault(_Loader);
-	
-	var _NodesActions = __webpack_require__(746);
-	
-	var _NodesActions2 = _interopRequireDefault(_NodesActions);
-	
-	var _NoPlans = __webpack_require__(752);
-	
-	var _NoPlans2 = _interopRequireDefault(_NoPlans);
-	
-	var _NotificationActions = __webpack_require__(665);
-	
-	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
-	
-	var _PlansActions = __webpack_require__(596);
-	
-	var _PlansActions2 = _interopRequireDefault(_PlansActions);
-	
-	var _Roles = __webpack_require__(753);
-	
-	var _Roles2 = _interopRequireDefault(_Roles);
-	
-	var _RolesActions = __webpack_require__(755);
-	
-	var _RolesActions2 = _interopRequireDefault(_RolesActions);
-	
-	var _TripleOApiService = __webpack_require__(679);
-	
-	var _TripleOApiService2 = _interopRequireDefault(_TripleOApiService);
-	
-	var _TripleOApiErrorHandler = __webpack_require__(706);
-	
-	var _TripleOApiErrorHandler2 = _interopRequireDefault(_TripleOApiErrorHandler);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var DeploymentPlan = function (_React$Component) {
-	  _inherits(DeploymentPlan, _React$Component);
-	
-	  function DeploymentPlan() {
-	    _classCallCheck(this, DeploymentPlan);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DeploymentPlan).call(this));
-	
-	    _this.state = {
-	      readyToDeploy: true
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(DeploymentPlan, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.props.fetchStacks();
-	    }
-	  }, {
-	    key: 'handleDeploy',
-	    value: function handleDeploy() {
-	      var _this2 = this;
-	
-	      _TripleOApiService2.default.deployPlan(this.props.currentPlanName).then(function (response) {
-	        _this2.setState({ parameters: response.parameters });
-	        _this2.props.fetchStacks();
-	        _NotificationActions2.default.notify({
-	          title: 'Deployment started',
-	          message: 'The Deployment has been successfully initiated',
-	          type: 'success'
-	        });
-	      }).catch(function (error) {
-	        var errorHandler = new _TripleOApiErrorHandler2.default(error);
-	        errorHandler.errors.forEach(function (error) {
-	          _NotificationActions2.default.notify(error);
-	        });
-	      });
-	    }
-	  }, {
-	    key: 'renderDeployStep',
-	    value: function renderDeployStep() {
-	      return !this.props.currentStack ? _react2.default.createElement(
-	        'div',
-	        { className: 'actions pull-left' },
-	        _react2.default.createElement(
-	          'a',
-	          { className: 'link btn btn-primary btn-lg ' + (this.state.readyToDeploy ? '' : 'disabled'),
-	            onClick: this.handleDeploy.bind(this) },
-	          _react2.default.createElement('span', { className: 'fa fa-send' }),
-	          ' Verify and Deploy'
-	        )
-	      ) : _react2.default.createElement(_DeploymentStatus2.default, { stack: this.props.currentStack,
-	        fetchStacks: this.props.fetchStacks });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var deploymentConfigLinks = [_react2.default.createElement(
-	        _reactRouter.Link,
-	        { className: 'btn btn-link',
-	          key: 'deploymentConfiguration',
-	          to: '/deployment-plan/configuration' },
-	        'Edit Configuration'
-	      )];
-	
-	      var registerAndAssignLinks = [_react2.default.createElement(
-	        _reactRouter.Link,
-	        { className: 'btn btn-default', key: 'registerNodes', to: '/nodes/registered/register' },
-	        _react2.default.createElement('span', { className: 'fa fa-plus' }),
-	        ' Register Nodes'
-	      ), _react2.default.createElement(
-	        'span',
-	        { key: 'space' },
-	        ' '
-	      ), _react2.default.createElement(_Loader2.default, { key: 'rolesLoader',
-	        loaded: !(this.props.rolesLoaded && this.props.isFetchingRoles),
-	        content: 'Loading Deployment Roles...',
-	        component: 'span',
-	        inline: true }), _react2.default.createElement(
-	        'span',
-	        { key: 'space2' },
-	        ' '
-	      ), _react2.default.createElement(
-	        _Loader2.default,
-	        { key: 'nodesLoader',
-	          loaded: !this.props.isFetchingNodes,
-	          content: 'Loading Nodes...',
-	          component: 'span',
-	          inline: true },
-	        'There are ',
-	        _react2.default.createElement(
-	          'strong',
-	          null,
-	          this.props.unassignedIntrospectedNodes.size
-	        ),
-	        ' of ',
-	        _react2.default.createElement(
-	          'strong',
-	          null,
-	          this.props.introspectedNodes.size
-	        ),
-	        ' Introspected Nodes available to assign'
-	      )];
-	
-	      var children = void 0;
-	      // Render children only when current plan is already selected
-	      if (this.props.children && this.props.currentPlanName) {
-	        children = _react2.default.cloneElement(this.props.children, { currentPlanName: this.props.currentPlanName,
-	          parentPath: '/' + this.props.route.path });
-	      }
-	
-	      // TODO: Detemerine the real deployment configuration descriptions string
-	      var deploymentConfigDescription = 'KVM, Neutron with VLAN, Ceph (Default)';
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          _Loader2.default,
-	          { loaded: (this.props.currentPlanName || !this.props.hasPlans) && !this.props.isFetchingPlans,
-	            content: 'Loading Deployments...',
-	            global: true },
-	          this.props.hasPlans ? _react2.default.createElement(
-	            'div',
-	            { className: 'col-sm-12 deployment-step-list' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'page-header page-header-bleed-right' },
-	              _react2.default.createElement(
-	                'h1',
-	                null,
-	                this.props.currentPlanName,
-	                _react2.default.createElement(_PlansDropdown2.default, { currentPlanName: this.props.currentPlanName,
-	                  plans: this.props.inactivePlans,
-	                  choosePlan: this.props.choosePlan })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'ol',
-	              { className: 'deployment-step-list' },
-	              _react2.default.createElement(_DeploymentStep2.default, { title: 'Specify Deployment Configuration',
-	                subTitle: deploymentConfigDescription,
-	                links: deploymentConfigLinks,
-	                disabled: this.props.currentStackDeploymentProgress }),
-	              _react2.default.createElement(
-	                _DeploymentStep2.default,
-	                { title: 'Register and Assign Nodes',
-	                  links: registerAndAssignLinks,
-	                  disabled: this.props.currentStackDeploymentProgress },
-	                _react2.default.createElement(_Roles2.default, { roles: this.props.roles.toList().toJS(),
-	                  introspectedNodes: this.props.introspectedNodes,
-	                  unassignedIntrospectedNodes: this.props.unassignedIntrospectedNodes,
-	                  fetchRoles: this.props.fetchRoles,
-	                  fetchNodes: this.props.fetchNodes,
-	                  isFetchingNodes: this.props.isFetchingNodes,
-	                  loaded: this.props.rolesLoaded })
-	              ),
-	              _react2.default.createElement(
-	                _DeploymentStep2.default,
-	                { title: 'Deploy' },
-	                this.renderDeployStep()
-	              )
-	            )
-	          ) : _react2.default.createElement(
-	            'div',
-	            { className: 'col-sm-12' },
-	            _react2.default.createElement(_NoPlans2.default, null)
-	          ),
-	          children
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return DeploymentPlan;
-	}(_react2.default.Component);
-	
-	DeploymentPlan.propTypes = {
-	  children: _react2.default.PropTypes.node,
-	  choosePlan: _react2.default.PropTypes.func,
-	  currentPlanName: _react2.default.PropTypes.string,
-	  currentStack: _reactImmutableProptypes2.default.record,
-	  currentStackDeploymentProgress: _react2.default.PropTypes.bool,
-	  fetchNodes: _react2.default.PropTypes.func,
-	  fetchRoles: _react2.default.PropTypes.func,
-	  fetchStacks: _react2.default.PropTypes.func,
-	  hasPlans: _react2.default.PropTypes.bool,
-	  inactivePlans: _reactImmutableProptypes2.default.map,
-	  introspectedNodes: _reactImmutableProptypes2.default.map,
-	  isFetchingNodes: _react2.default.PropTypes.bool,
-	  isFetchingPlans: _react2.default.PropTypes.bool,
-	  isFetchingRoles: _react2.default.PropTypes.bool,
-	  roles: _reactImmutableProptypes2.default.map,
-	  rolesLoaded: _react2.default.PropTypes.bool,
-	  route: _react2.default.PropTypes.object,
-	  unassignedIntrospectedNodes: _reactImmutableProptypes2.default.map
-	};
-	
-	function mapStateToProps(state) {
-	  return {
-	    currentPlanName: state.plans.get('currentPlanName'),
-	    currentStack: (0, _plans.getCurrentStack)(state),
-	    currentStackDeploymentProgress: (0, _plans.getCurrentStackDeploymentProgress)(state),
-	    isFetchingNodes: state.nodes.get('isFetching'),
-	    isFetchingPlans: state.plans.get('isFetchingPlans'),
-	    isFetchingRoles: state.roles.get('isFetching'),
-	    hasPlans: !state.plans.get('all').isEmpty(),
-	    inactivePlans: (0, _plans.getAllPlansButCurrent)(state),
-	    introspectedNodes: (0, _nodes.getIntrospectedNodes)(state),
-	    roles: state.roles.get('roles'),
-	    rolesLoaded: state.roles.get('loaded'),
-	    unassignedIntrospectedNodes: (0, _nodes.getUnassignedIntrospectedNodes)(state)
-	  };
-	}
-	
-	function mapDispatchToProps(dispatch) {
-	  return {
-	    choosePlan: function choosePlan(planName) {
-	      return dispatch(_PlansActions2.default.choosePlan(planName));
-	    },
-	    fetchNodes: function fetchNodes() {
-	      return dispatch(_NodesActions2.default.fetchNodes());
-	    },
-	    fetchRoles: function fetchRoles() {
-	      return dispatch(_RolesActions2.default.fetchRoles());
-	    },
-	    fetchStacks: function fetchStacks() {
-	      return dispatch(_PlansActions2.default.fetchStacks());
-	    }
-	  };
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(DeploymentPlan);
-
-/***/ },
-/* 738 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.getCurrentStackDeploymentProgress = exports.getCurrentStack = exports.getAllPlansButCurrent = undefined;
-	
-	var _reselect = __webpack_require__(558);
-	
-	var _plans = __webpack_require__(697);
-	
-	var plansSelector = function plansSelector(state) {
-	  return state.plans.get('all');
-	};
-	var stacksSelector = function stacksSelector(state) {
-	  return state.plans.get('stacks');
-	};
-	var currentPlanNameSelector = function currentPlanNameSelector(state) {
-	  return state.plans.get('currentPlanName');
-	};
-	
-	/**
-	 * Returns a Map o all plans except for the selected one
-	 */
-	// TODO(jtomasek): update this to list 3 last used plans
-	var getAllPlansButCurrent = exports.getAllPlansButCurrent = (0, _reselect.createSelector)([plansSelector, currentPlanNameSelector], function (plans, currentPlanName) {
-	  return plans.filter(function (plan) {
-	    return plan.name != currentPlanName;
-	  }).sortBy(function (plan) {
-	    return plan.name;
-	  });
-	});
-	
-	/**
-	 * Returns the stack associated with currentPlanName
-	 */
-	var getCurrentStack = exports.getCurrentStack = (0, _reselect.createSelector)([stacksSelector, currentPlanNameSelector], function (stacks, currentPlanName) {
-	  return stacks.get(currentPlanName);
-	});
-	
-	/**
-	 * Returns a flag for the deployment progress of the current plan
-	 * (true if the plan is currently being deployed, false it not).
-	 */
-	var getCurrentStackDeploymentProgress = exports.getCurrentStackDeploymentProgress = (0, _reselect.createSelector)([stacksSelector, currentPlanNameSelector], function (stacks, currentPlanName) {
-	  return stacks.get(currentPlanName, (0, _plans.Stack)({})).stack_status === 'CREATE_IN_PROGRESS';
-	});
-
-/***/ },
-/* 739 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.getAssignedNodes = exports.getUnassignedIntrospectedNodes = exports.getMaintenanceNodes = exports.getProvisionedNodes = exports.getIntrospectedNodes = exports.getRegisteredNodes = undefined;
-	
-	var _reselect = __webpack_require__(558);
-	
-	var nodes = function nodes(state) {
-	  return state.nodes.get('all');
-	};
-	
-	var getRegisteredNodes = exports.getRegisteredNodes = (0, _reselect.createSelector)(nodes, function (nodes) {
-	  return nodes.filter(function (node) {
-	    return node.get('provision_state') === 'available' && !node.get('provision_updated_at') || node.get('provision_state') === 'manageable';
-	  });
-	});
-	
-	var getIntrospectedNodes = exports.getIntrospectedNodes = (0, _reselect.createSelector)(nodes, function (nodes) {
-	  return nodes.filter(function (node) {
-	    return node.get('provision_state') === 'available' && !!node.get('provision_updated_at');
-	  });
-	});
-	
-	var getProvisionedNodes = exports.getProvisionedNodes = (0, _reselect.createSelector)(nodes, function (nodes) {
-	  return nodes.filter(function (node) {
-	    return node.get('instance_uuid');
-	  });
-	});
-	
-	var getMaintenanceNodes = exports.getMaintenanceNodes = (0, _reselect.createSelector)(nodes, function (nodes) {
-	  return nodes.filter(function (node) {
-	    return node.get('maintenance');
-	  });
-	});
-	
-	var getUnassignedIntrospectedNodes = exports.getUnassignedIntrospectedNodes = (0, _reselect.createSelector)(getIntrospectedNodes, function (introspectedNodes) {
-	  return introspectedNodes.filterNot(function (node) {
-	    return node.getIn(['properties', 'capabilities']).match(/.*profile:(\w+)/);
-	  });
-	});
-	
-	var getAssignedNodes = exports.getAssignedNodes = function getAssignedNodes(introspectedNodes, roleName) {
-	  return introspectedNodes.filter(function (node) {
-	    return node.getIn(['properties', 'capabilities']).includes('profile:' + roleName);
-	  });
-	};
-
-/***/ },
-/* 740 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var statusMessages = {
-	  CREATE_IN_PROGRESS: 'Deployment in progress.',
-	  CREATE_FAILED: 'The deployment failed.',
-	  DELETE_IN_PROGRESS: 'Deletion in progress.',
-	  UPDATE_IN_PROGRESS: 'Update in progress.',
-	  UPDATE_FAILED: 'The update failed.'
-	};
-	
-	var DeploymentStatus = function (_React$Component) {
-	  _inherits(DeploymentStatus, _React$Component);
-	
-	  function DeploymentStatus() {
-	    _classCallCheck(this, DeploymentStatus);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DeploymentStatus).call(this));
-	
-	    _this.state = {
-	      intervalId: undefined
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(DeploymentStatus, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-	
-	      var intervalId = setInterval(function () {
-	        _this2.props.fetchStacks();
-	      }, 5000);
-	      this.setState({ intervalId: intervalId });
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      clearInterval(this.state.intervalId);
-	    }
-	  }, {
-	    key: 'renderProgress',
-	    value: function renderProgress(stack) {
-	      var msg = statusMessages[stack.stack_status];
-	
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'progress-description' },
-	          _react2.default.createElement('div', { className: 'spinner spinner-xs spinner-inline' }),
-	          ' ',
-	          _react2.default.createElement(
-	            'strong',
-	            null,
-	            msg
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'progress progress-label-top-right' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'progress-bar',
-	              role: 'progressbar',
-	              'aria-valuenow': '50',
-	              'aria-valuemin': '0',
-	              'aria-valuemax': '100',
-	              style: { width: '42.7%' } },
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '50%'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }, {
-	    key: 'renderResult',
-	    value: function renderResult(stack, failed) {
-	      var statusClass = failed ? 'alert alert-danger' : 'alert alert-success';
-	      var iconClass = failed ? 'pficon pficon-error-circle-o' : 'pficon pficon-ok';
-	      var msg = statusMessages[stack.stack_status];
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: statusClass },
-	        _react2.default.createElement('span', { className: iconClass }),
-	        msg
-	      );
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var progress = !!this.props.stack.stack_status.match(/PROGRESS/);
-	      var failed = !!this.props.stack.stack_status.match(/FAILED/);
-	
-	      if (progress) {
-	        return this.renderProgress(this.props.stack);
-	      } else {
-	        return this.renderResult(this.props.stack, failed);
-	      }
-	    }
-	  }]);
-	
-	  return DeploymentStatus;
-	}(_react2.default.Component);
-	
-	exports.default = DeploymentStatus;
-	
-	
-	DeploymentStatus.propTypes = {
-	  fetchStacks: _react2.default.PropTypes.func.isRequired,
-	  stack: _reactImmutableProptypes2.default.record.isRequired
-	};
-
-/***/ },
-/* 741 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var DeploymentStep = function (_React$Component) {
-	  _inherits(DeploymentStep, _React$Component);
-	
-	  function DeploymentStep() {
-	    _classCallCheck(this, DeploymentStep);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DeploymentStep).apply(this, arguments));
-	  }
-	
-	  _createClass(DeploymentStep, [{
-	    key: "render",
-	    value: function render() {
-	      var links = !this.props.disabled ? this.props.links : null;
-	      return _react2.default.createElement(
-	        "li",
-	        null,
-	        _react2.default.createElement(
-	          "h3",
-	          null,
-	          _react2.default.createElement(
-	            "span",
-	            null,
-	            this.props.title
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "row" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-sm-12" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "deployment-step-subtitle" },
-	              _react2.default.createElement(
-	                "span",
-	                null,
-	                this.props.subTitle
-	              ),
-	              links
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-sm-12" },
-	            this.props.children
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return DeploymentStep;
-	}(_react2.default.Component);
-	
-	exports.default = DeploymentStep;
-	
-	
-	DeploymentStep.propTypes = {
-	  children: _react2.default.PropTypes.node,
-	  disabled: _react2.default.PropTypes.bool,
-	  links: _react2.default.PropTypes.array,
-	  subTitle: _react2.default.PropTypes.string,
-	  title: _react2.default.PropTypes.string.isRequired
-	};
-	
-	DeploymentStep.defaultProps = {
-	  disabled: false
-	};
-
-/***/ },
-/* 742 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(504);
-	
-	var _DropdownItem = __webpack_require__(743);
-	
-	var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
-	
-	var _DropdownButton = __webpack_require__(744);
-	
-	var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
-	
-	var _Dropdown = __webpack_require__(745);
-	
-	var _Dropdown2 = _interopRequireDefault(_Dropdown);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PlansDropdown = function (_React$Component) {
-	  _inherits(PlansDropdown, _React$Component);
-	
-	  function PlansDropdown() {
-	    _classCallCheck(this, PlansDropdown);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlansDropdown).apply(this, arguments));
-	  }
-	
-	  _createClass(PlansDropdown, [{
-	    key: 'renderRecentPlans',
-	    value: function renderRecentPlans() {
-	      var _this2 = this;
-	
-	      return this.props.plans.toList().map(function (plan) {
-	        return _react2.default.createElement(
-	          _DropdownItem2.default,
-	          { key: plan.name,
-	            onClick: _this2.props.choosePlan.bind(_this2, plan.name) },
-	          plan.name
-	        );
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (this.props.plans.isEmpty()) {
-	        return _react2.default.createElement(
-	          _reactRouter.Link,
-	          { className: 'btn btn-link', to: '/plans/list' },
-	          'Manage Deployments'
-	        );
-	      } else {
-	        return _react2.default.createElement(
-	          _Dropdown2.default,
-	          null,
-	          _react2.default.createElement(
-	            _DropdownButton2.default,
-	            { className: 'btn-link' },
-	            'Select Deployment'
-	          ),
-	          this.renderRecentPlans(),
-	          _react2.default.createElement(_DropdownItem2.default, { key: 'divider', divider: true }),
-	          _react2.default.createElement(
-	            _DropdownItem2.default,
-	            { key: 'plansLink', to: '/plans/list' },
-	            'Manage Deployments'
-	          )
-	        );
-	      }
-	    }
-	  }]);
-	
-	  return PlansDropdown;
-	}(_react2.default.Component);
-	
-	exports.default = PlansDropdown;
-	
-	PlansDropdown.propTypes = {
-	  choosePlan: _react2.default.PropTypes.func,
-	  plans: _reactImmutableProptypes2.default.map
-	};
-
-/***/ },
-/* 743 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _classnames = __webpack_require__(561);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _reactRouter = __webpack_require__(504);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var DropdownItem = function (_React$Component) {
-	  _inherits(DropdownItem, _React$Component);
-	
-	  function DropdownItem() {
-	    _classCallCheck(this, DropdownItem);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DropdownItem).apply(this, arguments));
-	  }
-	
-	  _createClass(DropdownItem, [{
-	    key: 'handleClick',
-	    value: function handleClick(e) {
-	      e.preventDefault();
-	      this.props.onClick(e);
-	      this.props.toggleDropdown(e);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-	
-	      if (this.props.divider) {
-	        return _react2.default.createElement('li', { className: 'divider' });
-	      }
-	
-	      var classes = {
-	        disabled: this.props.disabled,
-	        active: this.props.active
-	      };
-	
-	      if (this.props.to) {
-	        return _react2.default.createElement(
-	          'li',
-	          { className: (0, _classnames2.default)(this.props.className, classes) },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: this.props.to, onClick: function onClick() {
-	                return _this2.props.toggleDropdown();
-	              } },
-	            this.props.children
-	          )
-	        );
-	      }
-	
-	      if (this.props.onClick) {
-	        return _react2.default.createElement(
-	          'li',
-	          { className: (0, _classnames2.default)(this.props.className, classes) },
-	          _react2.default.createElement(
-	            'a',
-	            { className: 'link', onClick: this.handleClick.bind(this) },
-	            this.props.children
-	          )
-	        );
-	      }
-	
-	      return _react2.default.createElement(
-	        'li',
-	        { className: (0, _classnames2.default)(this.props.className, classes) },
-	        _react2.default.createElement(
-	          'a',
-	          { className: 'link' },
-	          this.props.children
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return DropdownItem;
-	}(_react2.default.Component);
-	
-	exports.default = DropdownItem;
-	
-	DropdownItem.propTypes = {
-	  active: _react2.default.PropTypes.bool,
-	  children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.node), _react2.default.PropTypes.node]),
-	  className: _react2.default.PropTypes.string,
-	  disabled: _react2.default.PropTypes.bool,
-	  divider: _react2.default.PropTypes.bool,
-	  onClick: _react2.default.PropTypes.func,
-	  to: _react2.default.PropTypes.string,
-	  toggleDropdown: _react2.default.PropTypes.func
-	};
-	DropdownItem.defaultProps = {
-	  active: false,
-	  disabled: false,
-	  divider: false
-	};
-
-/***/ },
-/* 744 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _classnames = __webpack_require__(561);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var DropdownButton = function (_React$Component) {
-	  _inherits(DropdownButton, _React$Component);
-	
-	  function DropdownButton() {
-	    _classCallCheck(this, DropdownButton);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DropdownButton).apply(this, arguments));
-	  }
-	
-	  _createClass(DropdownButton, [{
-	    key: 'handleClick',
-	    value: function handleClick(e) {
-	      e.preventDefault();
-	      this.props.toggleDropdown();
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'button',
-	        { className: (0, _classnames2.default)('btn dropdown-toggle', this.props.className),
-	          onClick: this.handleClick.bind(this),
-	          type: 'button' },
-	        this.props.children,
-	        _react2.default.createElement('span', { className: 'caret' })
-	      );
-	    }
-	  }]);
-	
-	  return DropdownButton;
-	}(_react2.default.Component);
-	
-	exports.default = DropdownButton;
-	
-	DropdownButton.propTypes = {
-	  children: _react2.default.PropTypes.node,
-	  className: _react2.default.PropTypes.string,
-	  toggleDropdown: _react2.default.PropTypes.func
-	};
-
-/***/ },
-/* 745 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _lodash = __webpack_require__(588);
-	
-	var _ = _interopRequireWildcard(_lodash);
-	
-	var _classnames = __webpack_require__(561);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Dropdown = function (_React$Component) {
-	  _inherits(Dropdown, _React$Component);
-	
-	  function Dropdown(props) {
-	    _classCallCheck(this, Dropdown);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Dropdown).call(this, props));
-	
-	    _this.state = {
-	      isOpen: false
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(Dropdown, [{
-	    key: 'toggleDropdown',
-	    value: function toggleDropdown() {
-	      this.setState({ isOpen: !this.state.isOpen });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-	
-	      var children = _react2.default.Children.toArray(this.props.children);
-	
-	      var toggle = _.first(children, function (child) {
-	        return child.type.name === 'DropdownButton';
-	      });
-	
-	      var items = _.map(_.filter(children, function (child) {
-	        return child.type.name === 'DropdownItem';
-	      }), function (item) {
-	        return _react2.default.cloneElement(item, { toggleDropdown: _this2.toggleDropdown.bind(_this2) });
-	      });
-	
-	      // Any other children are prepended to DropdownButton.
-	      // This can be used to add buttons to Dropdown button group
-	      var otherChildren = _.reject(children, function (child) {
-	        return _.includes(['DropdownButton', 'DropdownItem'], child.type.name);
-	      });
-	      var dropdownClasses = {
-	        open: this.state.isOpen
-	      };
-	
-	      return _react2.default.createElement(
-	        'span',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: (0, _classnames2.default)('dropdown btn-group', dropdownClasses, this.props.className) },
-	          otherChildren,
-	          _react2.default.cloneElement(toggle, { toggleDropdown: this.toggleDropdown.bind(this) }),
-	          _react2.default.createElement(
-	            'ul',
-	            { className: 'dropdown-menu', role: 'menu', ref: 'menu' },
-	            items
-	          )
-	        ),
-	        this.state.isOpen ? _react2.default.createElement('div', { onClick: this.toggleDropdown.bind(this),
-	          className: 'modal-backdrop fade' }) : null
-	      );
-	    }
-	  }]);
-	
-	  return Dropdown;
-	}(_react2.default.Component);
-	
-	exports.default = Dropdown;
-	
-	Dropdown.propTypes = {
-	  active: _react2.default.PropTypes.bool,
-	  children: _react2.default.PropTypes.node,
-	  className: _react2.default.PropTypes.string
-	};
-
-/***/ },
-/* 746 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _normalizr = __webpack_require__(597);
-	
-	var _immutable = __webpack_require__(556);
-	
-	var _when = __webpack_require__(565);
-	
-	var _when2 = _interopRequireDefault(_when);
-	
-	var _IronicApiErrorHandler = __webpack_require__(747);
-	
-	var _IronicApiErrorHandler2 = _interopRequireDefault(_IronicApiErrorHandler);
-	
-	var _IronicApiService = __webpack_require__(748);
-	
-	var _IronicApiService2 = _interopRequireDefault(_IronicApiService);
-	
-	var _MistralApiService = __webpack_require__(749);
-	
-	var _MistralApiService2 = _interopRequireDefault(_MistralApiService);
-	
-	var _MistralApiErrorHandler = __webpack_require__(750);
-	
-	var _MistralApiErrorHandler2 = _interopRequireDefault(_MistralApiErrorHandler);
-	
-	var _NodesConstants = __webpack_require__(691);
-	
-	var _NodesConstants2 = _interopRequireDefault(_NodesConstants);
-	
-	var _NotificationActions = __webpack_require__(665);
-	
-	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
-	
-	var _nodes = __webpack_require__(751);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  startOperation: function startOperation(workflowId) {
-	    return {
-	      type: _NodesConstants2.default.START_NODES_OPERATION
-	    };
-	  },
-	  finishOperation: function finishOperation() {
-	    return {
-	      type: _NodesConstants2.default.FINISH_NODES_OPERATION
-	    };
-	  },
-	  requestNodes: function requestNodes() {
-	    return {
-	      type: _NodesConstants2.default.REQUEST_NODES
-	    };
-	  },
-	  receiveNodes: function receiveNodes(nodes) {
-	    return {
-	      type: _NodesConstants2.default.RECEIVE_NODES,
-	      payload: nodes
-	    };
-	  },
-	  fetchNodes: function fetchNodes() {
-	    var _this = this;
-	
-	    return function (dispatch, getState) {
-	      dispatch(_this.requestNodes());
-	      _IronicApiService2.default.getNodes().then(function (response) {
-	        return _when2.default.all(response.nodes.map(function (node) {
-	          return _IronicApiService2.default.getNode(node.uuid);
-	        }));
-	      }).then(function (nodes) {
-	        var normalizedNodes = (0, _normalizr.normalize)(nodes, (0, _normalizr.arrayOf)(_nodes.nodeSchema)).entities.nodes || (0, _immutable.Map)();
-	        dispatch(_this.receiveNodes(normalizedNodes));
-	      }).catch(function (error) {
-	        dispatch(_this.receiveNodes({}));
-	        console.error('Error in NodesActions.fetchNodes', error.stack || error); //eslint-disable-line no-console
-	        var errorHandler = new _IronicApiErrorHandler2.default(error);
-	        errorHandler.errors.forEach(function (error) {
-	          dispatch(_NotificationActions2.default.notify(error));
-	        });
-	      });
-	    };
-	  },
-	  introspectNodes: function introspectNodes() {
-	    var _this2 = this;
-	
-	    return function (dispatch, getState) {
-	      dispatch(_this2.startOperation());
-	      _MistralApiService2.default.runWorkflow('tripleo.baremetal.bulk_introspect').then(function (response) {
-	        if (response.state === 'ERROR') {
-	          dispatch(_NotificationActions2.default.notify({ title: 'Error', message: response.state_info }));
-	          dispatch(_this2.finishOperation());
-	        } else {
-	          dispatch(_this2.pollForIntrospectionWorkflow(response.id));
-	        }
-	      }).catch(function (error) {
-	        var errorHandler = new _MistralApiErrorHandler2.default(error);
-	        errorHandler.errors.forEach(function (error) {
-	          dispatch(_NotificationActions2.default.notify(error));
-	        });
-	        dispatch(_this2.finishOperation());
-	      });
-	    };
-	  },
-	  pollForIntrospectionWorkflow: function pollForIntrospectionWorkflow(workflowExecutionId) {
-	    var _this3 = this;
-	
-	    return function (dispatch, getState) {
-	      _MistralApiService2.default.getWorkflowExecution(workflowExecutionId).then(function (response) {
-	        if (response.state === 'RUNNING') {
-	          dispatch(_this3.fetchNodes());
-	          setTimeout(function () {
-	            return dispatch(_this3.pollForIntrospectionWorkflow(workflowExecutionId));
-	          }, 7000);
-	        } else if (response.state === 'ERROR') {
-	          dispatch(_NotificationActions2.default.notify({ title: 'Error', message: response.state_info }));
-	          dispatch(_this3.finishOperation());
-	        } else {
-	          dispatch(_this3.finishOperation());
-	          dispatch(_NotificationActions2.default.notify({ type: 'success',
-	            title: 'Introspection finished',
-	            message: 'Nodes Introspection successfully finished' }));
-	        }
-	      }).catch(function (error) {
-	        var errorHandler = new _MistralApiErrorHandler2.default(error);
-	        errorHandler.errors.forEach(function (error) {
-	          dispatch(_NotificationActions2.default.notify(error));
-	        });
-	        dispatch(_this3.finishOperation());
-	      });
-	    };
-	  },
-	  updateNode: function updateNode(nodePatch) {
-	    var _this4 = this;
-	
-	    return function (dispatch, getState) {
-	      dispatch(_this4.updateNodePending(nodePatch.uuid));
-	      _IronicApiService2.default.patchNode(nodePatch).then(function (response) {
-	        dispatch(_this4.updateNodeSuccess(response));
-	      }).catch(function (error) {
-	        dispatch(_this4.updateNodeFailed(nodePatch.uuid));
-	        console.error('Error in NodesActions.UpdateNode', error.stack || error); //eslint-disable-line no-console
-	        var errorHandler = new _IronicApiErrorHandler2.default(error);
-	        errorHandler.errors.forEach(function (error) {
-	          dispatch(_NotificationActions2.default.notify(error));
-	        });
-	      });
-	    };
-	  },
-	  updateNodePending: function updateNodePending(nodeId) {
-	    return {
-	      type: _NodesConstants2.default.UPDATE_NODE_PENDING,
-	      payload: nodeId
-	    };
-	  },
-	  updateNodeFailed: function updateNodeFailed(nodeId) {
-	    return {
-	      type: _NodesConstants2.default.UPDATE_NODE_FAILED,
-	      payload: nodeId
-	    };
-	  },
-	  updateNodeSuccess: function updateNodeSuccess(node) {
-	    return {
-	      type: _NodesConstants2.default.UPDATE_NODE_SUCCESS,
-	      payload: node
-	    };
-	  }
-	};
-
-/***/ },
-/* 747 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _BaseHttpRequestErrorHandler = __webpack_require__(586);
-	
-	var _BaseHttpRequestErrorHandler2 = _interopRequireDefault(_BaseHttpRequestErrorHandler);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var IronicApiErrorHandler = function (_BaseHttpRequestError) {
-	  _inherits(IronicApiErrorHandler, _BaseHttpRequestError);
-	
-	  function IronicApiErrorHandler() {
-	    _classCallCheck(this, IronicApiErrorHandler);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(IronicApiErrorHandler).apply(this, arguments));
-	  }
-	
-	  _createClass(IronicApiErrorHandler, [{
-	    key: '_generateErrors',
-	    value: function _generateErrors(xmlHttpRequestError) {
-	      var errors = [];
-	      var error = void 0;
-	      switch (xmlHttpRequestError.status) {
-	        case 0:
-	          errors.push({
-	            title: 'Connection Error',
-	            message: 'Connection to Ironic is not available'
-	          });
-	          break;
-	        case 401:
-	          error = xmlHttpRequestError.responseText;
-	          errors.push({
-	            title: 'Unauthorized',
-	            message: error
-	          });
-	          break;
-	        default:
-	          error = xmlHttpRequestError.responseText;
-	          status = xmlHttpRequestError.status;
-	          errors.push({
-	            title: 'Error ' + status,
-	            message: error
-	          });
-	          break;
-	      }
-	      return errors;
-	    }
-	
-	    // TODO(jtomasek): remove this, I am leaving this here just for example reasons
-	    // this function should be implemented by form related subclass.
-	
-	  }, {
-	    key: '_generateFormFieldErrors',
-	    value: function _generateFormFieldErrors() {
-	      return {};
-	    }
-	  }]);
-	
-	  return IronicApiErrorHandler;
-	}(_BaseHttpRequestErrorHandler2.default);
-
-	exports.default = IronicApiErrorHandler;
-
-/***/ },
-/* 748 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _lodash = __webpack_require__(588);
-	
-	var _ = _interopRequireWildcard(_lodash);
-	
-	var _reqwest = __webpack_require__(590);
-	
-	var _reqwest2 = _interopRequireDefault(_reqwest);
-	
-	var _when = __webpack_require__(565);
-	
-	var _when2 = _interopRequireDefault(_when);
-	
-	var _utils = __webpack_require__(680);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var IronicApiService = function () {
-	  function IronicApiService() {
-	    _classCallCheck(this, IronicApiService);
-	  }
-	
-	  _createClass(IronicApiService, [{
-	    key: 'defaultRequest',
-	    value: function defaultRequest(additionalAttributes) {
-	      return _.merge({
-	        headers: {
-	          'X-Auth-Token': (0, _utils.getAuthTokenId)(),
-	          'X-OpenStack-Ironic-API-Version': '1.14'
-	        },
-	        crossOrigin: true,
-	        contentType: 'application/json',
-	        type: 'json',
-	        method: 'GET'
-	      }, additionalAttributes);
-	    }
-	
-	    /**
-	     * Ironic API: GET /v1/nodes
-	     * @returns {array} of nodes.
-	     */
-	
-	  }, {
-	    key: 'getNodes',
-	    value: function getNodes() {
-	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
-	        url: (0, _utils.getServiceUrl)('ironic') + '/nodes'
-	      })));
-	    }
-	
-	    /**
-	     * Ironic API: GET /v1/nodes/<uuid>
-	     * @returns node object.
-	     */
-	
-	  }, {
-	    key: 'getNode',
-	    value: function getNode(nodeId) {
-	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
-	        url: (0, _utils.getServiceUrl)('ironic') + '/nodes/' + nodeId
-	      })));
-	    }
-	  }, {
-	    key: 'patchNode',
-	    value: function patchNode(nodePatch) {
-	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
-	        method: 'PATCH',
-	        url: (0, _utils.getServiceUrl)('ironic') + '/nodes/' + nodePatch.uuid,
-	        data: JSON.stringify(nodePatch.patches)
-	      })));
-	    }
-	  }]);
-	
-	  return IronicApiService;
-	}();
-	
-	exports.default = new IronicApiService();
-
-/***/ },
-/* 749 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _lodash = __webpack_require__(588);
-	
-	var _ = _interopRequireWildcard(_lodash);
-	
-	var _reqwest = __webpack_require__(590);
-	
-	var _reqwest2 = _interopRequireDefault(_reqwest);
-	
-	var _when = __webpack_require__(565);
-	
-	var _when2 = _interopRequireDefault(_when);
-	
-	var _utils = __webpack_require__(680);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var MistralApiService = function () {
-	  function MistralApiService() {
-	    _classCallCheck(this, MistralApiService);
-	  }
-	
-	  _createClass(MistralApiService, [{
-	    key: 'defaultRequest',
-	    value: function defaultRequest(additionalAttributes) {
-	      return _.merge({
-	        headers: {
-	          'X-Auth-Token': (0, _utils.getAuthTokenId)()
-	        },
-	        crossOrigin: true,
-	        contentType: 'application/json',
-	        type: 'json',
-	        method: 'GET'
-	      }, additionalAttributes);
-	    }
-	
-	    /**
-	     * Gets a Workflow execution
-	     * Mistral API: GET /v2/executions/:execution_id
-	     * @param {string} mistralUrl - Mistral API service base url
-	     * @param {string} authTokenId - keystone authentication token ID
-	     * @return {object} Execution.
-	     */
-	
-	  }, {
-	    key: 'getWorkflowExecution',
-	    value: function getWorkflowExecution(executionId) {
-	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
-	        url: (0, _utils.getServiceUrl)('mistral') + '/executions/' + executionId
-	      })));
-	    }
-	
-	    /**
-	     * Starts a new Workflow execution
-	     * Mistral API: POST /v2/executions
-	     * @param {string} mistralUrl - Mistral API service base url
-	     * @param {string} authTokenId - keystone authentication token ID
-	     * @param {string} workflowName - Workflow name
-	     * @param {object} input - Workflow input object
-	     * @return {object} Execution.
-	     */
-	
-	  }, {
-	    key: 'runWorkflow',
-	    value: function runWorkflow(workflowName) {
-	      var input = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
-	        method: 'POST',
-	        url: (0, _utils.getServiceUrl)('mistral') + '/executions',
-	        data: JSON.stringify({
-	          workflow_name: workflowName,
-	          input: JSON.stringify(input)
-	        })
-	      })));
-	    }
-	
-	    /**
-	     * Starts a new Action execution
-	     * Mistral API: POST /v2/action_executions
-	     * @param {string} mistralUrl - Mistral API service base url
-	     * @param {string} authTokenId - keystone authentication token ID
-	     * @param {string} actionName - Name of the Action to be executed
-	     * @param {object} input - Action input object
-	     * @return {object} Action Execution.
-	     */
-	
-	  }, {
-	    key: 'runAction',
-	    value: function runAction(actionName) {
-	      var input = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	      return (0, _when2.default)((0, _reqwest2.default)(this.defaultRequest({
-	        method: 'POST',
-	        url: (0, _utils.getServiceUrl)('mistral') + '/action_executions',
-	        data: JSON.stringify({
-	          name: actionName,
-	          input: JSON.stringify(input)
-	        })
-	      })));
-	    }
-	  }]);
-	
-	  return MistralApiService;
-	}();
-	
-	exports.default = new MistralApiService();
-
-/***/ },
-/* 750 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _BaseHttpRequestErrorHandler = __webpack_require__(586);
-	
-	var _BaseHttpRequestErrorHandler2 = _interopRequireDefault(_BaseHttpRequestErrorHandler);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var MistralApiErrorHandler = function (_BaseHttpRequestError) {
-	  _inherits(MistralApiErrorHandler, _BaseHttpRequestError);
-	
-	  function MistralApiErrorHandler() {
-	    _classCallCheck(this, MistralApiErrorHandler);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(MistralApiErrorHandler).apply(this, arguments));
-	  }
-	
-	  _createClass(MistralApiErrorHandler, [{
-	    key: '_generateErrors',
-	    value: function _generateErrors(xmlHttpRequestError) {
-	      var errors = [];
-	      var error = void 0;
-	      switch (xmlHttpRequestError.status) {
-	        case 0:
-	          errors.push({
-	            title: 'Connection Error',
-	            message: 'Connection to Mistral API is not available'
-	          });
-	          break;
-	        case 401:
-	          error = JSON.parse(xmlHttpRequestError.responseText).error;
-	          errors.push({
-	            title: 'Unauthorized',
-	            message: error.message
-	          });
-	          break;
-	        default:
-	          error = JSON.parse(xmlHttpRequestError.responseText);
-	          errors.push({
-	            title: xmlHttpRequestError.statusText,
-	            message: error.faultstring
-	          });
-	          break;
-	      }
-	      return errors;
-	    }
-	  }]);
-	
-	  return MistralApiErrorHandler;
-	}(_BaseHttpRequestErrorHandler2.default);
-
-	exports.default = MistralApiErrorHandler;
-
-/***/ },
-/* 751 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.nodeSchema = undefined;
-	
-	var _normalizr = __webpack_require__(597);
-	
-	var nodeSchema = exports.nodeSchema = new _normalizr.Schema('nodes', { idAttribute: 'uuid' });
-
-/***/ },
-/* 752 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactRouter = __webpack_require__(504);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var NoPlans = function (_React$Component) {
-	  _inherits(NoPlans, _React$Component);
-	
-	  function NoPlans() {
-	    _classCallCheck(this, NoPlans);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NoPlans).apply(this, arguments));
-	  }
-	
-	  _createClass(NoPlans, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'blank-slate-pf' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'blank-slate-pf-icon' },
-	          _react2.default.createElement('span', { className: 'fa fa-ban' })
-	        ),
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'No Deployment Plans Available'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'There are no Deployment Plans available. Please create one first.'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'blank-slate-pf-main-action' },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/plans/new',
-	              query: { tab: 'newPlan' },
-	              className: 'btn btn-lg btn-primary' },
-	            _react2.default.createElement('span', { className: 'fa fa-plus' }),
-	            ' Create New Plan'
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return NoPlans;
-	}(_react2.default.Component);
-	
-	exports.default = NoPlans;
-
-/***/ },
-/* 753 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _nodes = __webpack_require__(739);
-	
-	var _Loader = __webpack_require__(560);
-	
-	var _Loader2 = _interopRequireDefault(_Loader);
-	
-	var _RoleCard = __webpack_require__(754);
-	
-	var _RoleCard2 = _interopRequireDefault(_RoleCard);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Roles = function (_React$Component) {
-	  _inherits(Roles, _React$Component);
-	
-	  function Roles() {
-	    _classCallCheck(this, Roles);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Roles).apply(this, arguments));
-	  }
-	
-	  _createClass(Roles, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.props.fetchRoles();
-	      this.props.fetchNodes();
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      if (!this.props.loaded) {
-	        this.props.fetchRoles();
-	        this.props.fetchNodes();
-	      }
-	    }
-	  }, {
-	    key: 'getAssignedNodes',
-	    value: function getAssignedNodes(introspectedNodes, roleName) {
-	      return introspectedNodes.filter(function (node) {
-	        return node.getIn(['properties', 'capabilities']).includes('profile:' + roleName);
-	      });
-	    }
-	  }, {
-	    key: 'renderRoleCards',
-	    value: function renderRoleCards() {
-	      var _this2 = this;
-	
-	      return this.props.roles.map(function (role) {
-	        return _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-6 col-sm-4 col-md-3 col-lg-2', key: role.name },
-	          _react2.default.createElement(_RoleCard2.default, { name: role.name,
-	            title: role.title,
-	            fetchNodes: _this2.props.fetchNodes,
-	            assignedNodesCount: (0, _nodes.getAssignedNodes)(_this2.props.introspectedNodes, role.name).size,
-	            availableNodesCount: _this2.props.introspectedNodes.size })
-	        );
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'panel panel-default roles-panel' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(
-	            _Loader2.default,
-	            { loaded: this.props.loaded,
-	              content: 'Loading Deployment Roles...',
-	              height: 40 },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'row-cards-pf' },
-	              this.renderRoleCards()
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Roles;
-	}(_react2.default.Component);
-	
-	exports.default = Roles;
-	
-	Roles.propTypes = {
-	  fetchNodes: _react2.default.PropTypes.func.isRequired,
-	  fetchRoles: _react2.default.PropTypes.func.isRequired,
-	  introspectedNodes: _reactImmutableProptypes2.default.map,
-	  isFetchingNodes: _react2.default.PropTypes.bool,
-	  loaded: _react2.default.PropTypes.bool.isRequired,
-	  roles: _react2.default.PropTypes.array.isRequired,
-	  unassignedIntrospectedNodes: _reactImmutableProptypes2.default.map
-	};
-
-/***/ },
-/* 754 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(504);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var RoleCard = function (_React$Component) {
-	  _inherits(RoleCard, _React$Component);
-	
-	  function RoleCard() {
-	    _classCallCheck(this, RoleCard);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(RoleCard).apply(this, arguments));
-	  }
-	
-	  _createClass(RoleCard, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'card-pf card-pf-accented role-card ' + this.props.name },
-	        _react2.default.createElement(
-	          'h2',
-	          { className: 'card-pf-title' },
-	          this.props.title
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'card-pf-body' },
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'card-pf-utilization-details' },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-pf-utilization-card-details-count' },
-	              this.props.assignedNodesCount
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-pf-utilization-card-details-description' },
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'card-pf-utilization-card-details-line-1' },
-	                'Nodes assigned'
-	              ),
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'card-pf-utilization-card-details-line-2' },
-	                'of ',
-	                this.props.availableNodesCount,
-	                ' available'
-	              )
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'card-pf-footer' },
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/deployment-plan/' + this.props.name + '/assignNodes',
-	                className: 'card-pf-link-with-icon' },
-	              _react2.default.createElement('span', { className: 'pficon pficon-add-circle-o' }),
-	              'Assign Nodes'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return RoleCard;
-	}(_react2.default.Component);
-	
-	exports.default = RoleCard;
-	
-	RoleCard.propTypes = {
-	  assignedNodesCount: _react2.default.PropTypes.number.isRequired,
-	  availableNodesCount: _react2.default.PropTypes.number.isRequired,
-	  name: _react2.default.PropTypes.string.isRequired,
-	  title: _react2.default.PropTypes.string.isRequired
-	};
-
-/***/ },
-/* 755 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _normalizr = __webpack_require__(597);
-	
-	var _immutable = __webpack_require__(556);
-	
-	var _RolesConstants = __webpack_require__(702);
-	
-	var _RolesConstants2 = _interopRequireDefault(_RolesConstants);
-	
-	var _roles = __webpack_require__(756);
-	
-	var _roles2 = _interopRequireDefault(_roles);
-	
-	var _roles3 = __webpack_require__(757);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  fetchRoles: function fetchRoles() {
-	    var _this = this;
-	
-	    return function (dispatch, getState) {
-	      dispatch(_this.fetchRolesPending());
-	
-	      // TODO(jtomasek): Replace this with an actual action which fetches Roles from HEAT
-	      // fake the reques/response delay
-	      var normalizedRoles = (0, _normalizr.normalize)(_roles2.default, (0, _normalizr.arrayOf)(_roles3.roleSchema)).entities.roles || (0, _immutable.Map)();
-	      setTimeout(function () {
-	        return dispatch(_this.fetchRolesSuccess(normalizedRoles));
-	      }, 500);
-	
-	      // TODO(jtomasek): Use this when roles are fetched from Heat
-	      // HeatApiService.getRoles().then((response) => {
-	      //   response = normalize(response, arrayOf(roleSchema));
-	      //   dispatch(this.fetchRolesSuccess(response));
-	      // }).catch((error) => {
-	      //   console.error('Error in RolesAction.fetchRoles', error.stack || error); //eslint-disable-line no-console
-	      //   dispatch(this.fetchRolesFailed());
-	      //   let errorHandler = new HeatApiErrorHandler(error);
-	      //   errorHandler.errors.forEach((error) => {
-	      //     dispatch(NotificationActions.notify(error));
-	      //   });
-	      // });
-	    };
-	  },
-	  fetchRolesPending: function fetchRolesPending() {
-	    return {
-	      type: _RolesConstants2.default.FETCH_ROLES_PENDING
-	    };
-	  },
-	  fetchRolesSuccess: function fetchRolesSuccess(roles) {
-	    return {
-	      type: _RolesConstants2.default.FETCH_ROLES_SUCCESS,
-	      payload: roles
-	    };
-	  },
-	  fetchRolesFailed: function fetchRolesFailed() {
-	    return {
-	      type: _RolesConstants2.default.FETCH_ROLES_FAILED
-	    };
-	  }
-	};
-
-	// import NotificationActions from './NotificationActions';
-
-/***/ },
-/* 756 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = [{
-	  name: 'control',
-	  title: 'Controller'
-	}, {
-	  name: 'compute',
-	  title: 'Compute'
-	}, {
-	  name: 'blockStorage',
-	  title: 'Block Storage'
-	}, {
-	  name: 'objectStorage',
-	  title: 'Object Storage'
-	}, {
-	  name: 'cephStorage',
-	  title: 'Ceph Storage'
-	}];
-
-/***/ },
-/* 757 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.roleSchema = undefined;
-	
-	var _normalizr = __webpack_require__(597);
-	
-	var roleSchema = exports.roleSchema = new _normalizr.Schema('roles', { idAttribute: 'name' });
-
-/***/ },
-/* 758 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactRedux = __webpack_require__(291);
-	
-	var _formsyReact = __webpack_require__(722);
-	
-	var _formsyReact2 = _interopRequireDefault(_formsyReact);
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _reactRouter = __webpack_require__(504);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _FormErrorList = __webpack_require__(729);
-	
-	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
-	
-	var _PlanEditFormTabs = __webpack_require__(759);
-	
-	var _PlanEditFormTabs2 = _interopRequireDefault(_PlanEditFormTabs);
-	
-	var _PlansActions = __webpack_require__(596);
-	
-	var _PlansActions2 = _interopRequireDefault(_PlansActions);
-	
-	var _Modal = __webpack_require__(562);
-	
-	var _Modal2 = _interopRequireDefault(_Modal);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var EditPlan = function (_React$Component) {
-	  _inherits(EditPlan, _React$Component);
-	
-	  function EditPlan() {
-	    _classCallCheck(this, EditPlan);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EditPlan).call(this));
-	
-	    _this.state = {
-	      planName: undefined,
-	      selectedFiles: undefined,
-	      canSubmit: false,
-	      formErrors: []
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(EditPlan, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.state.planName = this.getNameFromUrl();
-	      this.props.fetchPlan(this.state.planName);
-	    }
-	  }, {
-	    key: 'onPlanFilesChange',
-	    value: function onPlanFilesChange(currentValues) {
-	      if (currentValues && currentValues.planFiles) {
-	        this.setState({ selectedFiles: currentValues.planFiles });
-	      }
-	    }
-	  }, {
-	    key: 'onFormSubmit',
-	    value: function onFormSubmit(form) {
-	      var planFiles = {};
-	      this.state.selectedFiles.map(function (item) {
-	        planFiles[item.name] = {};
-	        planFiles[item.name].contents = item.content;
-	        // TODO(jtomasek): user can identify capabilities-map in the list of files
-	        // (dropdown select or sth)
-	        if (item.name.match('^capabilities[-|_]map\.yaml$')) {
-	          planFiles[item.name].meta = { 'file-type': 'capabilities-map' };
-	        }
-	      });
-	      this.props.updatePlan(this.state.planName, planFiles);
-	    }
-	  }, {
-	    key: 'onFormValid',
-	    value: function onFormValid() {
-	      this.setState({ canSubmit: true });
-	    }
-	  }, {
-	    key: 'onFormInvalid',
-	    value: function onFormInvalid() {
-	      this.setState({ canSubmit: false });
-	    }
-	  }, {
-	    key: 'getNameFromUrl',
-	    value: function getNameFromUrl() {
-	      var planName = this.props.params.planName || '';
-	      return planName.replace(/[^A-Za-z0-9_-]*/g, '');
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-	
-	      var plan = this.props.plans.filter(function (plan) {
-	        return plan.name === _this2.state.planName;
-	      }).first();
-	      var planFiles = plan ? plan.files : undefined;
-	
-	      return _react2.default.createElement(
-	        _Modal2.default,
-	        { dialogClasses: 'modal-lg' },
-	        _react2.default.createElement(
-	          _formsyReact2.default.Form,
-	          { ref: 'EditPlanForm',
-	            role: 'form',
-	            className: 'form-horizontal',
-	            onChange: this.onPlanFilesChange.bind(this),
-	            onValidSubmit: this.onFormSubmit.bind(this),
-	            onValid: this.onFormValid.bind(this),
-	            onInvalid: this.onFormInvalid.bind(this) },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'modal-header' },
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/plans/list',
-	                type: 'button',
-	                className: 'close' },
-	              _react2.default.createElement(
-	                'span',
-	                { 'aria-hidden': 'true' },
-	                '×'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              'Update ',
-	              this.state.planName,
-	              ' Files'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'modal-body' },
-	            _react2.default.createElement(_FormErrorList2.default, { errors: this.state.formErrors }),
-	            _react2.default.createElement(_PlanEditFormTabs2.default, { currentTab: this.props.location.query.tab || 'editPlan',
-	              planFiles: planFiles,
-	              selectedFiles: this.state.selectedFiles,
-	              planName: this.state.planName })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'modal-footer' },
-	            _react2.default.createElement(
-	              'button',
-	              { disabled: !this.state.canSubmit,
-	                className: 'btn btn-primary btn-lg',
-	                type: 'submit' },
-	              'Upload Files and Update Plan'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return EditPlan;
-	}(_react2.default.Component);
-	
-	EditPlan.propTypes = {
-	  fetchPlan: _react2.default.PropTypes.func,
-	  history: _react2.default.PropTypes.object,
-	  location: _react2.default.PropTypes.object,
-	  params: _react2.default.PropTypes.object,
-	  plans: _reactImmutableProptypes2.default.map,
-	  updatePlan: _react2.default.PropTypes.func
-	};
-	
-	function mapStateToProps(state) {
-	  return {
-	    plans: state.plans.get('all')
-	  };
-	}
-	
-	function mapDispatchToProps(dispatch) {
-	  return {
-	    fetchPlan: function fetchPlan(planName) {
-	      dispatch(_PlansActions2.default.fetchPlan(planName));
-	    },
-	    updatePlan: function updatePlan(planName, files) {
-	      dispatch(_PlansActions2.default.updatePlan(planName, files));
-	    }
-	  };
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(EditPlan);
-
-/***/ },
-/* 759 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _immutable = __webpack_require__(556);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _HorizontalStaticText = __webpack_require__(760);
-	
-	var _HorizontalStaticText2 = _interopRequireDefault(_HorizontalStaticText);
-	
-	var _NavTab = __webpack_require__(709);
-	
-	var _NavTab2 = _interopRequireDefault(_NavTab);
-	
-	var _PlanFileInput = __webpack_require__(761);
-	
-	var _PlanFileInput2 = _interopRequireDefault(_PlanFileInput);
-	
-	var _PlanFilesTab = __webpack_require__(762);
-	
-	var _PlanFilesTab2 = _interopRequireDefault(_PlanFilesTab);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PlanEditFormTabs = function (_React$Component) {
-	  _inherits(PlanEditFormTabs, _React$Component);
-	
-	  function PlanEditFormTabs() {
-	    _classCallCheck(this, PlanEditFormTabs);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlanEditFormTabs).apply(this, arguments));
-	  }
-	
-	  _createClass(PlanEditFormTabs, [{
-	    key: 'setActiveTab',
-	    value: function setActiveTab(tabName) {
-	      return this.props.currentTab === tabName ? 'active' : '';
-	    }
-	  }, {
-	    key: 'getFileCount',
-	    value: function getFileCount() {
-	      var planFiles = this.props.planFiles || (0, _immutable.List)();
-	      var selectedFiles = this.props.selectedFiles || [];
-	      return selectedFiles.length > planFiles.size ? selectedFiles.length : planFiles.size;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'nav nav-tabs' },
-	          _react2.default.createElement(
-	            _NavTab2.default,
-	            { to: '/plans/' + this.props.planName + '/edit',
-	              query: { tab: 'editPlan' } },
-	            'Update Plan'
-	          ),
-	          _react2.default.createElement(
-	            _NavTab2.default,
-	            { to: '/plans/' + this.props.planName + '/edit',
-	              query: { tab: 'planFiles' } },
-	            'Files ',
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'badge' },
-	              this.getFileCount.bind(this)()
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'tab-content' },
-	          _react2.default.createElement(PlanFormTab, { active: this.setActiveTab('editPlan'),
-	            planName: this.props.planName }),
-	          _react2.default.createElement(_PlanFilesTab2.default, { active: this.setActiveTab('planFiles'),
-	            planFiles: this.props.planFiles,
-	            selectedFiles: this.props.selectedFiles })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return PlanEditFormTabs;
-	}(_react2.default.Component);
-	
-	exports.default = PlanEditFormTabs;
-	
-	PlanEditFormTabs.propTypes = {
-	  currentTab: _react2.default.PropTypes.string,
-	  planFiles: _reactImmutableProptypes2.default.map,
-	  planName: _react2.default.PropTypes.string,
-	  selectedFiles: _react2.default.PropTypes.array
-	};
-	PlanEditFormTabs.defaultProps = {
-	  currentTtab: 'editPlan'
-	};
-	
-	var PlanFormTab = function (_React$Component2) {
-	  _inherits(PlanFormTab, _React$Component2);
-	
-	  function PlanFormTab() {
-	    _classCallCheck(this, PlanFormTab);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlanFormTab).apply(this, arguments));
-	  }
-	
-	  _createClass(PlanFormTab, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'tab-pane ' + this.props.active },
-	        _react2.default.createElement(_HorizontalStaticText2.default, { title: 'Plan Name',
-	          text: this.props.planName,
-	          valueColumnClasses: 'col-sm-7',
-	          labelColumnClasses: 'col-sm-3' }),
-	        _react2.default.createElement(_PlanFileInput2.default, { name: 'planFiles',
-	          title: 'Upload Files',
-	          inputColumnClasses: 'col-sm-7',
-	          labelColumnClasses: 'col-sm-3',
-	          multiple: true,
-	          required: true })
-	      );
-	    }
-	  }]);
-	
-	  return PlanFormTab;
-	}(_react2.default.Component);
-	
-	PlanFormTab.propTypes = {
-	  active: _react2.default.PropTypes.string,
-	  planName: _react2.default.PropTypes.string
-	};
-
-/***/ },
-/* 760 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var HorizontalStaticText = function (_React$Component) {
-	  _inherits(HorizontalStaticText, _React$Component);
-	
-	  function HorizontalStaticText() {
-	    _classCallCheck(this, HorizontalStaticText);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(HorizontalStaticText).apply(this, arguments));
-	  }
-	
-	  _createClass(HorizontalStaticText, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "form-group" },
-	        _react2.default.createElement(
-	          "label",
-	          { className: this.props.labelColumnClasses + " control-label" },
-	          this.props.title
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: this.props.valueColumnClasses },
-	          _react2.default.createElement(
-	            "p",
-	            { className: "form-control-static" },
-	            this.props.text
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return HorizontalStaticText;
-	}(_react2.default.Component);
-	
-	exports.default = HorizontalStaticText;
-	
-	HorizontalStaticText.propTypes = {
-	  labelColumnClasses: _react2.default.PropTypes.string,
-	  text: _react2.default.PropTypes.string,
-	  title: _react2.default.PropTypes.string,
-	  valueColumnClasses: _react2.default.PropTypes.string
-	};
-
-/***/ },
-/* 761 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _classnames = __webpack_require__(561);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _formsyReact = __webpack_require__(722);
-	
-	var _formsyReact2 = _interopRequireDefault(_formsyReact);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PlanFileInput = function (_React$Component) {
-	  _inherits(PlanFileInput, _React$Component);
-	
-	  function PlanFileInput() {
-	    _classCallCheck(this, PlanFileInput);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PlanFileInput).call(this));
-	
-	    _this.state = {
-	      progress: 0
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(PlanFileInput, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      // Attributes not in react's whitelist need to be added after mounting.
-	      this.refs[this.props.name].setAttribute('webkitdirectory', 'webkitdirectory');
-	    }
-	  }, {
-	    key: 'processFiles',
-	    value: function processFiles(event) {
-	      var _this2 = this;
-	
-	      var files = [];
-	      var processedFilesCount = 0;
-	
-	      var _loop = function _loop(i, l) {
-	        var reader = new FileReader();
-	        var file = event.target.files[i];
-	        reader.onload = function (f) {
-	          return function (e) {
-	            if (file.name.match(/(\.yaml|\.json|\.pp|\.sh)$/)) {
-	              var obj = {
-	                name: f.webkitRelativePath.replace(/^[^\/]*\//, ''),
-	                content: e.target.result
-	              };
-	              files.push(obj);
-	            }
-	            processedFilesCount += 1;
-	            _this2.setState({ progress: Math.round(100 / l * processedFilesCount) }, function () {
-	              // if the last file is processed, setValue -> triggers onChange on Formsy.Form
-	              if (processedFilesCount === l) {
-	                _this2.props.setValue(files);
-	                _this2.setState({ progress: 0 });
-	              }
-	            });
-	          };
-	        }(file);
-	        reader.readAsText(file);
-	      };
-	
-	      for (var i = 0, l = event.target.files.length; i < l; i++) {
-	        _loop(i, l);
-	      }
-	    }
-	  }, {
-	    key: 'renderErrorMessage',
-	    value: function renderErrorMessage() {
-	      var errorMessage = this.props.getErrorMessage();
-	      return errorMessage ? _react2.default.createElement(
-	        'span',
-	        { className: 'help-block' },
-	        errorMessage
-	      ) : false;
-	    }
-	  }, {
-	    key: 'renderDescription',
-	    value: function renderDescription() {
-	      var description = this.props.description;
-	      return description ? _react2.default.createElement(
-	        'small',
-	        { className: 'help-block' },
-	        description
-	      ) : false;
-	    }
-	  }, {
-	    key: 'renderProgress',
-	    value: function renderProgress() {
-	      return this.state.progress > 0 ? _react2.default.createElement(
-	        'div',
-	        { className: 'progress active help-block' },
-	        _react2.default.createElement('div', { className: 'progress-bar', style: { width: this.state.progress + '%' } })
-	      ) : false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var divClasses = (0, _classnames2.default)({
-	        'form-group': true,
-	        'has-error': this.props.showError(),
-	        'has-success': this.props.isValid(),
-	        'required': this.props.isRequired()
-	      });
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: divClasses },
-	        _react2.default.createElement(
-	          'label',
-	          { htmlFor: this.props.name,
-	            className: this.props.labelColumnClasses + ' control-label' },
-	          this.props.title
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: this.props.inputColumnClasses },
-	          _react2.default.createElement('input', { type: 'file',
-	            name: this.props.name,
-	            ref: this.props.name,
-	            id: this.props.name,
-	            onChange: this.processFiles.bind(this),
-	            multiple: true }),
-	          this.renderProgress(),
-	          this.renderErrorMessage(),
-	          this.renderDescription()
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return PlanFileInput;
-	}(_react2.default.Component);
-	
-	PlanFileInput.propTypes = {
-	  description: _react2.default.PropTypes.string,
-	  getErrorMessage: _react2.default.PropTypes.func,
-	  getValue: _react2.default.PropTypes.func,
-	  inputColumnClasses: _react2.default.PropTypes.string.isRequired,
-	  isRequired: _react2.default.PropTypes.func,
-	  isValid: _react2.default.PropTypes.func,
-	  labelColumnClasses: _react2.default.PropTypes.string.isRequired,
-	  name: _react2.default.PropTypes.string.isRequired,
-	  setValue: _react2.default.PropTypes.func,
-	  showError: _react2.default.PropTypes.func,
-	  title: _react2.default.PropTypes.string.isRequired
-	};
-	PlanFileInput.defaultProps = {
-	  inputColumnClasses: 'col-sm-10',
-	  labelColumnClasses: 'col-sm-2'
-	};
-	
-	exports.default = _formsyReact2.default.HOC(PlanFileInput);
-
-/***/ },
-/* 762 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _FileList = __webpack_require__(763);
-	
-	var _FileList2 = _interopRequireDefault(_FileList);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PlanFilesTab = function (_React$Component) {
-	  _inherits(PlanFilesTab, _React$Component);
-	
-	  function PlanFilesTab() {
-	    _classCallCheck(this, PlanFilesTab);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlanFilesTab).apply(this, arguments));
-	  }
-	
-	  _createClass(PlanFilesTab, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'tab-pane ' + this.props.active },
-	        _react2.default.createElement(_FileList2.default, { planFiles: this.props.planFiles,
-	          selectedFiles: this.props.selectedFiles })
-	      );
-	    }
-	  }]);
-	
-	  return PlanFilesTab;
-	}(_react2.default.Component);
-	
-	exports.default = PlanFilesTab;
-	
-	PlanFilesTab.propTypes = {
-	  active: _react2.default.PropTypes.string,
-	  planFiles: _reactImmutableProptypes2.default.map,
-	  selectedFiles: _react2.default.PropTypes.array
-	};
-
-/***/ },
-/* 763 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _classnames = __webpack_require__(561);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _immutable = __webpack_require__(556);
-	
-	var _plans = __webpack_require__(697);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var FileList = function (_React$Component) {
-	  _inherits(FileList, _React$Component);
-	
-	  function FileList() {
-	    _classCallCheck(this, FileList);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FileList).apply(this, arguments));
-	  }
-	
-	  _createClass(FileList, [{
-	    key: 'getMergedFiles',
-	    value: function getMergedFiles(planFiles, selectedFiles) {
-	      var files = {};
-	      if (!planFiles.isEmpty()) {
-	        planFiles.map(function (file) {
-	          files[file.name] = file;
-	        });
-	      }
-	      if (selectedFiles.length > 0) {
-	        selectedFiles.forEach(function (file) {
-	          var existing = files[file.name];
-	          var info = void 0;
-	          if (!existing) {
-	            info = (0, _immutable.Map)({
-	              newFile: planFiles.isEmpty() ? false : true,
-	              changed: false
-	            });
-	          } else {
-	            info = (0, _immutable.Map)({
-	              newFile: false,
-	              changed: file.content !== existing.contents
-	            });
-	          }
-	          files[file.name] = (0, _plans.PlanFile)({ name: file.name, info: info });
-	        });
-	      }
-	      return (0, _immutable.Map)(files).sort(function (fileA, fileB) {
-	        var aName = fileA.name;
-	        var aChangedOrNew = fileA.getIn(['info', 'changed']) || fileA.getIn(['info', 'newFile']);
-	        var bName = fileB.name;
-	        var bChangedOrNew = fileB.getIn(['info', 'changed']) || fileB.getIn(['info', 'newFile']);
-	
-	        if (aChangedOrNew && !bChangedOrNew) {
-	          return -1;
-	        } else if (!aChangedOrNew && bChangedOrNew) {
-	          return 1;
-	        } else {
-	          return aName > bName ? 1 : -1;
-	        }
-	      }).toArray();
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (this.props.planFiles.size === 0 && this.props.selectedFiles === 0) {
-	        return null;
-	      }
-	      var files = this.getMergedFiles(this.props.planFiles, this.props.selectedFiles).map(function (file) {
-	        var info = file.info.toJS() || {};
-	        var classes = (0, _classnames2.default)({
-	          'changed-plan-file': info.changed,
-	          'new-plan-file': info.newFile
-	        });
-	        return _react2.default.createElement(
-	          'tr',
-	          { key: file.name },
-	          _react2.default.createElement(
-	            'td',
-	            { className: classes },
-	            file.name
-	          )
-	        );
-	      });
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'panel panel-default' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-heading', role: 'tab', id: 'plan-files-list-panel' },
-	          _react2.default.createElement(
-	            'h4',
-	            { className: 'panel-title' },
-	            'Plan Files'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'table',
-	          { className: 'table upload-files' },
-	          _react2.default.createElement(
-	            'tbody',
-	            null,
-	            files
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return FileList;
-	}(_react2.default.Component);
-	
-	exports.default = FileList;
-	
-	
-	FileList.propTypes = {
-	  planFiles: _reactImmutableProptypes2.default.map,
-	  selectedFiles: _react2.default.PropTypes.array
-	};
-	
-	FileList.defaultProps = {
-	  planFiles: (0, _immutable.Map)(),
-	  selectedFiles: []
-	};
-
-/***/ },
-/* 764 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _lodash = __webpack_require__(588);
-	
-	var _ = _interopRequireWildcard(_lodash);
-	
-	var _reactRedux = __webpack_require__(291);
-	
-	var _formsyReact = __webpack_require__(722);
-	
-	var _formsyReact2 = _interopRequireDefault(_formsyReact);
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _reactRouter = __webpack_require__(504);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _EnvironmentConfigurationActions = __webpack_require__(765);
-	
-	var _EnvironmentConfigurationActions2 = _interopRequireDefault(_EnvironmentConfigurationActions);
-	
-	var _EnvironmentConfigurationTopic = __webpack_require__(766);
-	
-	var _EnvironmentConfigurationTopic2 = _interopRequireDefault(_EnvironmentConfigurationTopic);
-	
-	var _FormErrorList = __webpack_require__(729);
-	
-	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
-	
-	var _Loader = __webpack_require__(560);
-	
-	var _Loader2 = _interopRequireDefault(_Loader);
-	
-	var _Tab = __webpack_require__(770);
-	
-	var _Tab2 = _interopRequireDefault(_Tab);
-	
-	var _TabPane = __webpack_require__(771);
-	
-	var _TabPane2 = _interopRequireDefault(_TabPane);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var EnvironmentConfiguration = function (_React$Component) {
-	  _inherits(EnvironmentConfiguration, _React$Component);
-	
-	  function EnvironmentConfiguration() {
-	    _classCallCheck(this, EnvironmentConfiguration);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EnvironmentConfiguration).call(this));
-	
-	    _this.state = {
-	      canSubmit: false,
-	      activeTab: undefined
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(EnvironmentConfiguration, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.props.fetchEnvironmentConfiguration(this.props.currentPlanName, this.props.parentPath);
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      this.invalidateForm(this.props.formFieldErrors.toJS());
-	    }
-	  }, {
-	    key: 'enableButton',
-	    value: function enableButton() {
-	      this.setState({ canSubmit: true });
-	    }
-	  }, {
-	    key: 'disableButton',
-	    value: function disableButton() {
-	      this.setState({ canSubmit: false });
-	    }
-	  }, {
-	    key: 'invalidateForm',
-	    value: function invalidateForm(formFieldErrors) {
-	      this.refs.environmentConfigurationForm.updateInputsWithError(formFieldErrors);
-	    }
-	
-	    /*
-	    * Formsy splits data into objects by '.', file names include '.'
-	    * so we need to convert data back to e.g. { filename.yaml: true, ... }
-	    */
-	
-	  }, {
-	    key: '_convertFormData',
-	    value: function _convertFormData(formData) {
-	      return _.mapValues(_.mapKeys(formData, function (value, key) {
-	        return key + '.yaml';
-	      }), function (value) {
-	        return value.yaml;
-	      });
-	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(formData, resetForm, invalidateForm) {
-	      var data = this._convertFormData(formData);
-	      var formFields = Object.keys(this.refs.environmentConfigurationForm.inputs);
-	      this.disableButton();
-	      this.props.updateEnvironmentConfiguration(this.props.currentPlanName, data, formFields, this.props.parentPath);
-	    }
-	  }, {
-	    key: 'activateTab',
-	    value: function activateTab(tabName, e) {
-	      e.preventDefault();
-	      this.setState({ activeTab: tabName });
-	    }
-	  }, {
-	    key: 'isTabActive',
-	    value: function isTabActive(tabName) {
-	      var firstTabName = _.camelCase(this.props.environmentConfigurationTopics.first().get('title'));
-	      var currentTab = this.state.activeTab || firstTabName;
-	      return currentTab === tabName;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-	
-	      var topics = this.props.environmentConfigurationTopics.toArray().map(function (topic, index) {
-	        var tabName = _.camelCase(topic.get('title'));
-	        return _react2.default.createElement(
-	          _TabPane2.default,
-	          { isActive: _this2.isTabActive(tabName),
-	            key: index },
-	          _react2.default.createElement(_EnvironmentConfigurationTopic2.default, { key: index,
-	            title: topic.get('title'),
-	            description: topic.get('description'),
-	            environmentGroups: topic.get('environment_groups') })
-	        );
-	      });
-	
-	      var topicTabs = this.props.environmentConfigurationTopics.toArray().map(function (topic, index) {
-	        var tabName = _.camelCase(topic.get('title'));
-	        return _react2.default.createElement(
-	          _Tab2.default,
-	          { key: index, isActive: _this2.isTabActive(tabName) },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '', onClick: _this2.activateTab.bind(_this2, tabName) },
-	            topic.get('title')
-	          )
-	        );
-	      });
-	
-	      return _react2.default.createElement(
-	        _formsyReact2.default.Form,
-	        { ref: 'environmentConfigurationForm',
-	          role: 'form',
-	          className: 'form',
-	          onSubmit: this.handleSubmit.bind(this),
-	          onValid: this.enableButton.bind(this),
-	          onInvalid: this.disableButton.bind(this) },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container-fluid' },
-	          _react2.default.createElement(
-	            _Loader2.default,
-	            { height: 60,
-	              loaded: this.props.isLoaded },
-	            _react2.default.createElement(_FormErrorList2.default, { errors: this.props.formErrors.toJS() }),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'row row-eq-height' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-sm-4 sidebar-pf sidebar-pf-left' },
-	                _react2.default.createElement(
-	                  'ul',
-	                  { className: 'nav nav-pills nav-stacked nav-arrows' },
-	                  topicTabs
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-sm-8' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'tab-content' },
-	                  topics
-	                )
-	              )
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'modal-footer' },
-	          _react2.default.createElement(
-	            'button',
-	            { type: 'submit', disabled: !this.state.canSubmit,
-	              className: 'btn btn-primary' },
-	            'Save Changes'
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: this.props.parentPath, type: 'button', className: 'btn btn-default' },
-	            'Cancel'
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return EnvironmentConfiguration;
-	}(_react2.default.Component);
-	
-	EnvironmentConfiguration.propTypes = {
-	  currentPlanName: _react2.default.PropTypes.string,
-	  environmentConfigurationTopics: _reactImmutableProptypes2.default.list.isRequired,
-	  fetchEnvironmentConfiguration: _react2.default.PropTypes.func,
-	  formErrors: _reactImmutableProptypes2.default.list.isRequired,
-	  formFieldErrors: _reactImmutableProptypes2.default.map.isRequired,
-	  isLoaded: _react2.default.PropTypes.bool,
-	  location: _react2.default.PropTypes.object,
-	  parentPath: _react2.default.PropTypes.string.isRequired,
-	  updateEnvironmentConfiguration: _react2.default.PropTypes.func
-	};
-	
-	EnvironmentConfiguration.defaultProps = {
-	  parentPath: '/deployment-plan'
-	};
-	
-	function mapStateToProps(state) {
-	  return {
-	    currentPlanName: state.plans.get('currentPlanName'),
-	    environmentConfigurationTopics: state.environmentConfiguration.topics,
-	    formErrors: state.environmentConfiguration.getIn(['form', 'formErrors']),
-	    formFieldErrors: state.environmentConfiguration.getIn(['form', 'formFieldErrors']),
-	    isLoaded: state.environmentConfiguration.isLoaded
-	  };
-	}
-	
-	function mapDispatchToProps(dispatch) {
-	  return {
-	    fetchEnvironmentConfiguration: function fetchEnvironmentConfiguration(planName) {
-	      dispatch(_EnvironmentConfigurationActions2.default.fetchEnvironmentConfiguration(planName));
-	    },
-	    updateEnvironmentConfiguration: function updateEnvironmentConfiguration(planName, data, parentPath) {
-	      dispatch(_EnvironmentConfigurationActions2.default.updateEnvironmentConfiguration(planName, data, parentPath));
-	    }
-	  };
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(EnvironmentConfiguration);
-	
-	/**
-	* requiresEnvironments validation
-	* Invalidates input if it is selected and environment it requires is not.
-	* example: validations="requiredEnvironments:['some_environment.yaml']"
-	*/
-	
-	_formsyReact2.default.addValidationRule('requiresEnvironments', function (values, value, requiredEnvironmentFieldNames) {
-	  if (value) {
-	    return !_.filter(_.values(_.pick(values, requiredEnvironmentFieldNames)), function (val) {
-	      return val === false;
-	    }).length;
-	  }
-	  return true;
-	});
-
-/***/ },
-/* 765 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _EnvironmentConfigurationConstants = __webpack_require__(686);
-	
-	var _EnvironmentConfigurationConstants2 = _interopRequireDefault(_EnvironmentConfigurationConstants);
-	
-	var _history = __webpack_require__(551);
-	
-	var _history2 = _interopRequireDefault(_history);
-	
-	var _NotificationActions = __webpack_require__(665);
-	
-	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
-	
-	var _TripleOApiService = __webpack_require__(679);
-	
-	var _TripleOApiService2 = _interopRequireDefault(_TripleOApiService);
-	
-	var _TripleOApiErrorHandler = __webpack_require__(706);
-	
-	var _TripleOApiErrorHandler2 = _interopRequireDefault(_TripleOApiErrorHandler);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  fetchEnvironmentConfiguration: function fetchEnvironmentConfiguration(planName, parentPath) {
-	    var _this = this;
-	
-	    return function (dispatch) {
-	      dispatch(_this.fetchEnvironmentConfigurationPending());
-	      _TripleOApiService2.default.getPlanEnvironments(planName).then(function (response) {
-	        dispatch(_this.fetchEnvironmentConfigurationSuccess(response.environments));
-	      }).catch(function (error) {
-	        console.error('Error retrieving EnvironmentConfigurationActions.fetchEnvironment', error); //eslint-disable-line no-console
-	        _history2.default.pushState(null, parentPath);
-	        dispatch(_this.fetchEnvironmentConfigurationFailed());
-	        var errorHandler = new _TripleOApiErrorHandler2.default(error);
-	        errorHandler.errors.forEach(function (error) {
-	          dispatch(_NotificationActions2.default.notify(error));
-	        });
-	      });
-	    };
-	  },
-	  fetchEnvironmentConfigurationPending: function fetchEnvironmentConfigurationPending() {
-	    return {
-	      type: _EnvironmentConfigurationConstants2.default.FETCH_ENVIRONMENT_CONFIGURATION_PENDING
-	    };
-	  },
-	  fetchEnvironmentConfigurationSuccess: function fetchEnvironmentConfigurationSuccess(environment) {
-	    return {
-	      type: _EnvironmentConfigurationConstants2.default.FETCH_ENVIRONMENT_CONFIGURATION_SUCCESS,
-	      payload: environment
-	    };
-	  },
-	  fetchEnvironmentConfigurationFailed: function fetchEnvironmentConfigurationFailed(environment) {
-	    return {
-	      type: _EnvironmentConfigurationConstants2.default.FETCH_ENVIRONMENT_CONFIGURATION_FAILED
-	    };
-	  },
-	  updateEnvironmentConfiguration: function updateEnvironmentConfiguration(planName, data, formFields, parentPath) {
-	    var _this2 = this;
-	
-	    return function (dispatch) {
-	      dispatch(_this2.updateEnvironmentConfigurationPending());
-	      _TripleOApiService2.default.updatePlanEnvironments(planName, data).then(function (response) {
-	        dispatch(_this2.updateEnvironmentConfigurationSuccess(response.environments));
-	        _history2.default.pushState(null, parentPath);
-	        dispatch(_NotificationActions2.default.notify({
-	          title: 'Environment Configuration updated',
-	          message: 'The Environment Configuration has been successfully updated',
-	          type: 'success'
-	        }));
-	      }).catch(function (error) {
-	        console.error('Error in EnvironmentConfigurationActions.updateEnvironment', //eslint-disable-line no-console
-	        error.stack || error);
-	        var errorHandler = new _TripleOApiErrorHandler2.default(error, formFields);
-	        dispatch(_this2.updateEnvironmentConfigurationFailed(errorHandler.errors, errorHandler.formFieldErrors));
-	      });
-	    };
-	  },
-	  updateEnvironmentConfigurationPending: function updateEnvironmentConfigurationPending() {
-	    return {
-	      type: _EnvironmentConfigurationConstants2.default.UPDATE_ENVIRONMENT_CONFIGURATION_PENDING
-	    };
-	  },
-	  updateEnvironmentConfigurationSuccess: function updateEnvironmentConfigurationSuccess(environment) {
-	    return {
-	      type: _EnvironmentConfigurationConstants2.default.UPDATE_ENVIRONMENT_CONFIGURATION_SUCCESS,
-	      payload: environment
-	    };
-	  },
-	  updateEnvironmentConfigurationFailed: function updateEnvironmentConfigurationFailed(formErrors, formFieldErrors) {
-	    return {
-	      type: _EnvironmentConfigurationConstants2.default.UPDATE_ENVIRONMENT_CONFIGURATION_FAILED,
-	      payload: {
-	        formErrors: formErrors,
-	        formFieldErrors: formFieldErrors
-	      }
-	    };
-	  }
-	};
-
-/***/ },
-/* 766 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _EnvironmentGroup = __webpack_require__(767);
-	
-	var _EnvironmentGroup2 = _interopRequireDefault(_EnvironmentGroup);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var EnvironmentConfigurationTopic = function (_React$Component) {
-	  _inherits(EnvironmentConfigurationTopic, _React$Component);
-	
-	  function EnvironmentConfigurationTopic() {
-	    _classCallCheck(this, EnvironmentConfigurationTopic);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(EnvironmentConfigurationTopic).apply(this, arguments));
-	  }
-	
-	  _createClass(EnvironmentConfigurationTopic, [{
-	    key: 'render',
-	    value: function render() {
-	      var environmentGroups = this.props.environmentGroups.toArray().map(function (envGroup, index) {
-	        return _react2.default.createElement(_EnvironmentGroup2.default, { key: index,
-	          title: envGroup.get('title'),
-	          description: envGroup.get('description'),
-	          environments: envGroup.get('environments') });
-	      });
-	
-	      return _react2.default.createElement(
-	        'fieldset',
-	        { className: 'environment-topic' },
-	        environmentGroups
-	      );
-	    }
-	  }]);
-	
-	  return EnvironmentConfigurationTopic;
-	}(_react2.default.Component);
-	
-	exports.default = EnvironmentConfigurationTopic;
-	
-	EnvironmentConfigurationTopic.propTypes = {
-	  description: _react2.default.PropTypes.string,
-	  environmentGroups: _reactImmutableProptypes2.default.list,
-	  title: _react2.default.PropTypes.string.isRequired
-	};
-
-/***/ },
-/* 767 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _GenericCheckBox = __webpack_require__(768);
-	
-	var _GenericCheckBox2 = _interopRequireDefault(_GenericCheckBox);
-	
-	var _GroupedCheckBox = __webpack_require__(769);
-	
-	var _GroupedCheckBox2 = _interopRequireDefault(_GroupedCheckBox);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var EnvironmentGroup = function (_React$Component) {
-	  _inherits(EnvironmentGroup, _React$Component);
-	
-	  function EnvironmentGroup(props) {
-	    _classCallCheck(this, EnvironmentGroup);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EnvironmentGroup).call(this, props));
-	
-	    var firstCheckedEnvironment = props.environments.filter(function (env) {
-	      return env.get('enabled') === true;
-	    }).first();
-	    _this.state = {
-	      checkedEnvironment: firstCheckedEnvironment ? firstCheckedEnvironment.file : null
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(EnvironmentGroup, [{
-	    key: 'onGroupedCheckBoxChange',
-	    value: function onGroupedCheckBoxChange(checked, environmentFile) {
-	      this.setState({ checkedEnvironment: checked ? environmentFile : null });
-	    }
-	  }, {
-	    key: '_generateInputs',
-	    value: function _generateInputs() {
-	      var _this2 = this;
-	
-	      var environments = this.props.environments;
-	      if (environments.size > 1) {
-	        return environments.toArray().map(function (environment, index) {
-	          var checkBoxValue = _this2.state.checkedEnvironment === environment.get('file') ? true : false;
-	          var requiresEnvironments = environment.get('requires') ? environment.get('requires').toArray() : undefined;
-	          return _react2.default.createElement(_GroupedCheckBox2.default, { key: index,
-	            name: environment.get('file'),
-	            id: environment.get('file'),
-	            title: environment.get('title'),
-	            value: checkBoxValue,
-	            validations: { requiresEnvironments: requiresEnvironments },
-	            validationError: 'This environment requires\n                                             \'' + requiresEnvironments + '\'',
-	            checked: _this2.state.checkedEnvironment === environment.get('file'),
-	            onChange: _this2.onGroupedCheckBoxChange.bind(_this2),
-	            description: environment.get('description') });
-	        });
-	      } else {
-	        var environment = environments.first();
-	        var requiresEnvironments = environment.get('requires') ? environment.get('requires').toArray() : undefined;
-	        return _react2.default.createElement(_GenericCheckBox2.default, { name: environment.get('file'),
-	          id: environment.get('file'),
-	          title: environment.get('title'),
-	          value: environment.get('enabled') || false,
-	          validations: { requiresEnvironments: requiresEnvironments },
-	          validationError: 'This environment requires\n                                           \'' + requiresEnvironments + '\'',
-	          description: environment.get('description') });
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var environments = this._generateInputs();
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'environment-group' },
-	        _react2.default.createElement(EnvironmentGroupHeading, { title: this.props.title,
-	          description: this.props.description }),
-	        environments
-	      );
-	    }
-	  }]);
-	
-	  return EnvironmentGroup;
-	}(_react2.default.Component);
-	
-	exports.default = EnvironmentGroup;
-	
-	EnvironmentGroup.propTypes = {
-	  description: _react2.default.PropTypes.string,
-	  environments: _reactImmutableProptypes2.default.list,
-	  title: _react2.default.PropTypes.string
-	};
-	
-	var EnvironmentGroupHeading = function (_React$Component2) {
-	  _inherits(EnvironmentGroupHeading, _React$Component2);
-	
-	  function EnvironmentGroupHeading() {
-	    _classCallCheck(this, EnvironmentGroupHeading);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(EnvironmentGroupHeading).apply(this, arguments));
-	  }
-	
-	  _createClass(EnvironmentGroupHeading, [{
-	    key: 'render',
-	    value: function render() {
-	      if (this.props.title) {
-	        return _react2.default.createElement(
-	          'h4',
-	          null,
-	          this.props.title,
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'small',
-	            null,
-	            this.props.description
-	          )
-	        );
-	      } else if (this.props.description) {
-	        return _react2.default.createElement(
-	          'p',
-	          null,
-	          this.props.description
-	        );
-	      } else {
-	        return false;
-	      }
-	    }
-	  }]);
-	
-	  return EnvironmentGroupHeading;
-	}(_react2.default.Component);
-	
-	EnvironmentGroupHeading.propTypes = {
-	  description: _react2.default.PropTypes.string,
-	  title: _react2.default.PropTypes.string
-	};
-
-/***/ },
-/* 768 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _classnames = __webpack_require__(561);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _formsyReact = __webpack_require__(722);
-	
-	var _formsyReact2 = _interopRequireDefault(_formsyReact);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var GenericCheckBox = function (_React$Component) {
-	  _inherits(GenericCheckBox, _React$Component);
-	
-	  function GenericCheckBox() {
-	    _classCallCheck(this, GenericCheckBox);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GenericCheckBox).apply(this, arguments));
-	  }
-	
-	  _createClass(GenericCheckBox, [{
-	    key: 'changeValue',
-	    value: function changeValue(event) {
-	      this.props.setValue(event.target.checked);
-	    }
-	  }, {
-	    key: 'renderErrorMessage',
-	    value: function renderErrorMessage() {
-	      var errorMessage = this.props.getErrorMessage();
-	      return errorMessage ? _react2.default.createElement(
-	        'span',
-	        { className: 'help-block' },
-	        errorMessage
-	      ) : false;
-	    }
-	  }, {
-	    key: 'renderDescription',
-	    value: function renderDescription() {
-	      var description = this.props.description;
-	      return description ? _react2.default.createElement(
-	        'small',
-	        { className: 'help-block' },
-	        description
-	      ) : false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var divClasses = (0, _classnames2.default)({
-	        'checkbox': this.props.type === 'checkbox',
-	        'radio': this.props.type === 'radio',
-	        'has-error': this.props.showError(),
-	        'required': this.props.showRequired()
-	      });
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: divClasses },
-	        _react2.default.createElement(
-	          'label',
-	          { htmlFor: this.props.id, className: 'control-label' },
-	          _react2.default.createElement('input', { type: this.props.type,
-	            name: this.props.name,
-	            ref: this.props.id,
-	            id: this.props.id,
-	            onChange: this.changeValue.bind(this),
-	            checked: !!this.props.getValue(),
-	            value: this.props.getValue() }),
-	          this.props.title
-	        ),
-	        this.renderErrorMessage(),
-	        this.renderDescription()
-	      );
-	    }
-	  }]);
-	
-	  return GenericCheckBox;
-	}(_react2.default.Component);
-	
-	GenericCheckBox.propTypes = {
-	  description: _react2.default.PropTypes.string,
-	  getErrorMessage: _react2.default.PropTypes.func,
-	  getValue: _react2.default.PropTypes.func,
-	  id: _react2.default.PropTypes.string.isRequired,
-	  isRequired: _react2.default.PropTypes.func,
-	  isValid: _react2.default.PropTypes.func,
-	  name: _react2.default.PropTypes.string.isRequired,
-	  placeholder: _react2.default.PropTypes.string,
-	  setValue: _react2.default.PropTypes.func,
-	  showError: _react2.default.PropTypes.func,
-	  showRequired: _react2.default.PropTypes.func,
-	  title: _react2.default.PropTypes.string,
-	  type: _react2.default.PropTypes.string
-	};
-	GenericCheckBox.defaultProps = {
-	  type: 'checkbox'
-	};
-	exports.default = _formsyReact2.default.HOC(GenericCheckBox);
-
-/***/ },
-/* 769 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _classnames = __webpack_require__(561);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _formsyReact = __webpack_require__(722);
-	
-	var _formsyReact2 = _interopRequireDefault(_formsyReact);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var GroupedCheckBox = function (_React$Component) {
-	  _inherits(GroupedCheckBox, _React$Component);
-	
-	  function GroupedCheckBox() {
-	    _classCallCheck(this, GroupedCheckBox);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GroupedCheckBox).apply(this, arguments));
-	  }
-	
-	  _createClass(GroupedCheckBox, [{
-	    key: 'changeValue',
-	    value: function changeValue(event) {
-	      this.props.onChange(event.target.checked, this.props.name);
-	      this.props.setValue(event.target.checked);
-	    }
-	  }, {
-	    key: 'renderErrorMessage',
-	    value: function renderErrorMessage() {
-	      var errorMessage = this.props.getErrorMessage();
-	      return errorMessage ? _react2.default.createElement(
-	        'span',
-	        { className: 'help-block' },
-	        errorMessage
-	      ) : false;
-	    }
-	  }, {
-	    key: 'renderDescription',
-	    value: function renderDescription() {
-	      var description = this.props.description;
-	      return description ? _react2.default.createElement(
-	        'small',
-	        { className: 'help-block' },
-	        description
-	      ) : false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var divClasses = (0, _classnames2.default)({
-	        'checkbox': this.props.type === 'checkbox',
-	        'radio': this.props.type === 'radio',
-	        'has-error': this.props.showError(),
-	        'required': this.props.showRequired()
-	      });
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: divClasses },
-	        _react2.default.createElement(
-	          'label',
-	          { htmlFor: this.props.id, className: 'control-label' },
-	          _react2.default.createElement('input', { type: this.props.type,
-	            name: this.props.name,
-	            ref: this.props.id,
-	            id: this.props.id,
-	            onChange: this.changeValue.bind(this),
-	            checked: !!this.props.getValue(),
-	            value: this.props.getValue() }),
-	          this.props.title
-	        ),
-	        this.renderErrorMessage(),
-	        this.renderDescription()
-	      );
-	    }
-	  }]);
-	
-	  return GroupedCheckBox;
-	}(_react2.default.Component);
-	
-	GroupedCheckBox.propTypes = {
-	  description: _react2.default.PropTypes.string,
-	  getErrorMessage: _react2.default.PropTypes.func,
-	  getValue: _react2.default.PropTypes.func,
-	  id: _react2.default.PropTypes.string.isRequired,
-	  isRequired: _react2.default.PropTypes.func,
-	  isValid: _react2.default.PropTypes.func,
-	  name: _react2.default.PropTypes.string.isRequired,
-	  onChange: _react2.default.PropTypes.func.isRequired,
-	  placeholder: _react2.default.PropTypes.string,
-	  setValue: _react2.default.PropTypes.func,
-	  showError: _react2.default.PropTypes.func,
-	  showRequired: _react2.default.PropTypes.func,
-	  title: _react2.default.PropTypes.string.isRequired,
-	  type: _react2.default.PropTypes.string
-	};
-	GroupedCheckBox.defaultProps = {
-	  type: 'checkbox'
-	};
-	exports.default = _formsyReact2.default.HOC(GroupedCheckBox);
-
-/***/ },
-/* 770 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Tab = function (_React$Component) {
-	  _inherits(Tab, _React$Component);
-	
-	  function Tab() {
-	    _classCallCheck(this, Tab);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Tab).apply(this, arguments));
-	  }
-	
-	  _createClass(Tab, [{
-	    key: 'render',
-	    value: function render() {
-	      var className = this.props.isActive ? 'active' : '';
-	      return _react2.default.createElement(
-	        'li',
-	        { className: className },
-	        this.props.children
-	      );
-	    }
-	  }]);
-	
-	  return Tab;
-	}(_react2.default.Component);
-	
-	exports.default = Tab;
-	
-	Tab.propTypes = {
-	  children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.node), _react2.default.PropTypes.node]),
-	  isActive: _react2.default.PropTypes.bool.isRequired
-	};
-
-/***/ },
-/* 771 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _classnames = __webpack_require__(561);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var TabPane = function (_React$Component) {
-	  _inherits(TabPane, _React$Component);
-	
-	  function TabPane() {
-	    _classCallCheck(this, TabPane);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TabPane).apply(this, arguments));
-	  }
-	
-	  _createClass(TabPane, [{
-	    key: 'renderChildren',
-	    value: function renderChildren() {
-	      if (this.props.renderOnlyActive) {
-	        return this.props.isActive ? this.props.children : null;
-	      }
-	      return this.props.children;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var classes = (0, _classnames2.default)({
-	        'tab-pane': true,
-	        'active': this.props.isActive
-	      });
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: classes },
-	        this.renderChildren()
-	      );
-	    }
-	  }]);
-	
-	  return TabPane;
-	}(_react2.default.Component);
-	
-	exports.default = TabPane;
-	
-	TabPane.propTypes = {
-	  children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.node), _react2.default.PropTypes.node]),
-	  isActive: _react2.default.PropTypes.bool.isRequired,
-	  renderOnlyActive: _react2.default.PropTypes.bool.isRequired
-	};
-	TabPane.defaultProps = {
-	  renderOnlyActive: false
-	};
-
-/***/ },
-/* 772 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.PlanNameCell = undefined;
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactRedux = __webpack_require__(291);
-	
-	var _reactRouter = __webpack_require__(504);
-	
-	var _reactImmutableProptypes = __webpack_require__(555);
-	
-	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
-	
-	var _react = __webpack_require__(293);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _DataTable = __webpack_require__(731);
-	
-	var _DataTable2 = _interopRequireDefault(_DataTable);
-	
-	var _DataTableCells = __webpack_require__(733);
-	
-	var _DataTableColumn = __webpack_require__(735);
-	
-	var _DataTableColumn2 = _interopRequireDefault(_DataTableColumn);
-	
-	var _PageHeader = __webpack_require__(773);
-	
-	var _PlansActions = __webpack_require__(596);
-	
-	var _PlansActions2 = _interopRequireDefault(_PlansActions);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ListPlans = function (_React$Component) {
-	  _inherits(ListPlans, _React$Component);
-	
-	  function ListPlans() {
-	    _classCallCheck(this, ListPlans);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ListPlans).call(this));
-	  }
-	
-	  _createClass(ListPlans, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.props.fetchPlans();
-	    }
-	  }, {
-	    key: 'renderNoPlans',
-	    value: function renderNoPlans() {
-	      return _react2.default.createElement(
-	        'tr',
-	        null,
-	        _react2.default.createElement(
-	          'td',
-	          { colSpan: '2' },
-	          _react2.default.createElement('p', null),
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'text-center' },
-	            'There are currently no Plans'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'text-center' },
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/plans/new',
-	                query: { tab: 'newPlan' },
-	                className: 'btn btn-success' },
-	              'Create New Plan'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }, {
-	    key: 'renderTableActions',
-	    value: function renderTableActions() {
-	      return _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/plans/new',
-	          query: { tab: 'newPlan' },
-	          className: 'btn btn-primary' },
-	        _react2.default.createElement('span', { className: 'fa fa-plus' }),
-	        ' Create New Plan'
-	      );
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var plans = this.props.plans.sortBy(function (plan) {
-	        return plan.name;
-	      }).toArray();
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _PageHeader.PageHeader,
-	          null,
-	          'Plans'
-	        ),
-	        _react2.default.createElement(
-	          _DataTable2.default,
-	          { data: plans,
-	            rowsCount: plans.length,
-	            noRowsRenderer: this.renderNoPlans.bind(this),
-	            tableActions: this.renderTableActions },
-	          _react2.default.createElement(_DataTableColumn2.default, { header: _react2.default.createElement(
-	              _DataTableCells.DataTableHeaderCell,
-	              { key: 'name' },
-	              'Name'
-	            ),
-	            cell: _react2.default.createElement(PlanNameCell, {
-	              data: plans,
-	              currentPlanName: this.props.currentPlanName,
-	              choosePlan: this.props.choosePlan }) }),
-	          _react2.default.createElement(_DataTableColumn2.default, { header: _react2.default.createElement(
-	              _DataTableCells.DataTableHeaderCell,
-	              { key: 'actions' },
-	              'Actions'
-	            ),
-	            cell: _react2.default.createElement(RowActionsCell, { className: 'actions text-right',
-	              data: plans }) })
-	        ),
-	        this.props.children
-	      );
-	    }
-	  }]);
-	
-	  return ListPlans;
-	}(_react2.default.Component);
-	
-	ListPlans.propTypes = {
-	  children: _react2.default.PropTypes.node,
-	  choosePlan: _react2.default.PropTypes.func,
-	  conflict: _react2.default.PropTypes.string,
-	  currentPlanName: _react2.default.PropTypes.string,
-	  fetchPlans: _react2.default.PropTypes.func,
-	  plans: _reactImmutableProptypes2.default.map
-	};
-	
-	function mapStateToProps(state) {
-	  return {
-	    currentPlanName: state.plans.get('currentPlanName'),
-	    conflict: state.plans.get('conflict'),
-	    plans: state.plans.get('all')
-	  };
-	}
-	
-	function mapDispatchToProps(dispatch) {
-	  return {
-	    fetchPlans: function fetchPlans() {
-	      dispatch(_PlansActions2.default.fetchPlans());
-	    },
-	    choosePlan: function choosePlan(planName) {
-	      dispatch(_PlansActions2.default.choosePlan(planName));
-	    }
-	  };
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ListPlans);
-	
-	var RowActionsCell = function (_React$Component2) {
-	  _inherits(RowActionsCell, _React$Component2);
-	
-	  function RowActionsCell() {
-	    _classCallCheck(this, RowActionsCell);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(RowActionsCell).apply(this, arguments));
-	  }
-	
-	  _createClass(RowActionsCell, [{
-	    key: 'render',
-	    value: function render() {
-	      var plan = this.props.data[this.props.rowIndex];
-	
-	      if (plan.transition) {
-	        // TODO(jtomasek): this causes DOMNesting validation error which should eventually go away
-	        // in future React versions. See https://github.com/facebook/react/issues/5506
-	        return null;
-	      } else {
-	        return _react2.default.createElement(
-	          _DataTableCells.DataTableCell,
-	          this.props,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { key: 'edit',
-	              to: '/plans/' + plan.name + '/edit',
-	              query: { tab: 'editPlan' },
-	              className: 'btn btn-xs btn-default' },
-	            'Edit'
-	          ),
-	          ' ',
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { key: 'delete',
-	              to: '/plans/' + plan.name + '/delete',
-	              className: 'btn btn-xs btn-danger' },
-	            'Delete'
-	          )
-	        );
-	      }
-	    }
-	  }]);
-	
-	  return RowActionsCell;
-	}(_react2.default.Component);
-	
-	RowActionsCell.propTypes = {
-	  data: _react2.default.PropTypes.array,
-	  rowIndex: _react2.default.PropTypes.number
-	};
-	
-	var PlanNameCell = exports.PlanNameCell = function (_React$Component3) {
-	  _inherits(PlanNameCell, _React$Component3);
-	
-	  function PlanNameCell() {
-	    _classCallCheck(this, PlanNameCell);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlanNameCell).apply(this, arguments));
-	  }
-	
-	  _createClass(PlanNameCell, [{
-	    key: 'onPlanClick',
-	    value: function onPlanClick(e) {
-	      e.preventDefault();
-	      this.props.choosePlan(e.target.textContent);
-	    }
-	  }, {
-	    key: 'getActiveIcon',
-	    value: function getActiveIcon(planName) {
-	      if (planName === this.props.currentPlanName) {
-	        return _react2.default.createElement('span', { className: 'pficon pficon-flag' });
-	      }
-	      return false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var plan = this.props.data[this.props.rowIndex];
-	
-	      if (plan.transition === 'deleting') {
-	        return _react2.default.createElement(
-	          _DataTableCells.DataTableCell,
-	          _extends({}, this.props, { colSpan: '2', className: plan.transition }),
-	          _react2.default.createElement(
-	            'em',
-	            null,
-	            'Deleting ',
-	            _react2.default.createElement(
-	              'strong',
-	              null,
-	              plan.name
-	            ),
-	            '…'
-	          )
-	        );
-	      } else {
-	        return _react2.default.createElement(
-	          _DataTableCells.DataTableCell,
-	          this.props,
-	          this.getActiveIcon(plan.name),
-	          ' ',
-	          _react2.default.createElement(
-	            'a',
-	            { href: '',
-	              onClick: this.onPlanClick.bind(this) },
-	            plan.name
-	          )
-	        );
-	      }
-	    }
-	  }]);
-	
-	  return PlanNameCell;
-	}(_react2.default.Component);
-	
-	PlanNameCell.propTypes = {
-	  choosePlan: _react2.default.PropTypes.func,
-	  currentPlanName: _react2.default.PropTypes.string,
-	  data: _react2.default.PropTypes.array,
-	  rowIndex: _react2.default.PropTypes.number
-	};
-
-/***/ },
-/* 773 */
+/* 782 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -75814,7 +76041,7 @@
 	};
 
 /***/ },
-/* 774 */
+/* 783 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75831,7 +76058,7 @@
 	
 	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -75843,11 +76070,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _FormErrorList = __webpack_require__(729);
+	var _FormErrorList = __webpack_require__(763);
 	
 	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
 	
-	var _LoginInput = __webpack_require__(775);
+	var _LoginInput = __webpack_require__(784);
 	
 	var _LoginInput2 = _interopRequireDefault(_LoginInput);
 	
@@ -75855,7 +76082,7 @@
 	
 	var _LoginActions2 = _interopRequireDefault(_LoginActions);
 	
-	var _NotificationsToaster = __webpack_require__(710);
+	var _NotificationsToaster = __webpack_require__(715);
 	
 	var _NotificationsToaster2 = _interopRequireDefault(_NotificationsToaster);
 	
@@ -76031,7 +76258,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Login);
 
 /***/ },
-/* 775 */
+/* 784 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76042,7 +76269,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -76128,7 +76355,7 @@
 	exports.default = _formsyReact2.default.HOC(LoginInput);
 
 /***/ },
-/* 776 */
+/* 785 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76143,9 +76370,11 @@
 	
 	var _ = _interopRequireWildcard(_lodash);
 	
+	var _reactRedux = __webpack_require__(291);
+	
 	var _immutable = __webpack_require__(556);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -76157,13 +76386,15 @@
 	
 	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
 	
-	var _FormErrorList = __webpack_require__(729);
+	var _FormErrorList = __webpack_require__(763);
 	
 	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
 	
-	var _NodesTable = __webpack_require__(730);
+	var _NodesTable = __webpack_require__(786);
 	
 	var _NodesTable2 = _interopRequireDefault(_NodesTable);
+	
+	var _nodes = __webpack_require__(730);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -76238,10 +76469,11 @@
 	          onValid: this.canSubmit.bind(this),
 	          onInvalid: this.disableButton.bind(this) },
 	        _react2.default.createElement(_FormErrorList2.default, { errors: this.props.formErrors.toJS() }),
-	        _react2.default.createElement(_NodesTable2.default, { nodes: this.props.nodes.get('maintenance'),
+	        _react2.default.createElement(_NodesTable2.default, { nodes: this.props.maintenanceNodes,
 	          roles: this.props.roles,
-	          isFetchingNodes: this.props.nodes.get('isFetching'),
-	          dataOperationInProgress: this.props.nodes.get('dataOperationInProgress') })
+	          nodesInProgress: this.props.nodesInProgress,
+	          isFetchingNodes: this.props.isFetchingNodes,
+	          dataOperationInProgress: this.props.nodesOperationInProgress })
 	      );
 	    }
 	  }]);
@@ -76249,21 +76481,310 @@
 	  return MaintenanceNodesTabPane;
 	}(_react2.default.Component);
 	
-	exports.default = MaintenanceNodesTabPane;
-	
 	MaintenanceNodesTabPane.propTypes = {
-	  formErrors: _reactImmutableProptypes2.default.list,
-	  formFieldErrors: _reactImmutableProptypes2.default.map,
-	  nodes: _reactImmutableProptypes2.default.map,
+	  formErrors: _reactImmutableProptypes2.default.list.isRequired,
+	  formFieldErrors: _reactImmutableProptypes2.default.map.isRequired,
+	  isFetchingNodes: _react2.default.PropTypes.bool.isRequired,
+	  maintenanceNodes: _reactImmutableProptypes2.default.map.isRequired,
+	  nodesInProgress: _reactImmutableProptypes2.default.set.isRequired,
+	  nodesOperationInProgress: _react2.default.PropTypes.bool.isRequired,
 	  roles: _reactImmutableProptypes2.default.map
 	};
 	MaintenanceNodesTabPane.defaultProps = {
 	  formErrors: (0, _immutable.List)(),
 	  formFieldErrors: (0, _immutable.Map)()
 	};
+	
+	function mapStateToProps(state) {
+	  return {
+	    roles: state.roles.get('roles'),
+	    maintenanceNodes: (0, _nodes.getMaintenanceNodes)(state),
+	    nodesInProgress: state.nodes.get('nodesInProgress'),
+	    nodesOperationInProgress: (0, _nodes.getNodesOperationInProgress)(state),
+	    isFetchingNodes: state.nodes.get('isFetching')
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(MaintenanceNodesTabPane);
 
 /***/ },
-/* 777 */
+/* 786 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NodesTableRoleCell = exports.NodesTableCheckBoxCell = undefined;
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _lodash = __webpack_require__(588);
+	
+	var _ = _interopRequireWildcard(_lodash);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactImmutableProptypes = __webpack_require__(555);
+	
+	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
+	
+	var _DataTable = __webpack_require__(777);
+	
+	var _DataTable2 = _interopRequireDefault(_DataTable);
+	
+	var _DataTableCells = __webpack_require__(779);
+	
+	var _DataTableColumn = __webpack_require__(781);
+	
+	var _DataTableColumn2 = _interopRequireDefault(_DataTableColumn);
+	
+	var _Loader = __webpack_require__(560);
+	
+	var _Loader2 = _interopRequireDefault(_Loader);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NodesTable = function (_React$Component) {
+	  _inherits(NodesTable, _React$Component);
+	
+	  function NodesTable() {
+	    _classCallCheck(this, NodesTable);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NodesTable).call(this));
+	
+	    _this.state = {
+	      filterString: '',
+	      sortBy: '',
+	      sortDir: 'asc'
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(NodesTable, [{
+	    key: 'renderNoNodesFound',
+	    value: function renderNoNodesFound() {
+	      return _react2.default.createElement(
+	        'tr',
+	        null,
+	        _react2.default.createElement(
+	          'td',
+	          { className: 'no-results', colSpan: '9' },
+	          _react2.default.createElement(
+	            _Loader2.default,
+	            { loaded: !this.props.isFetchingNodes,
+	              height: 40,
+	              content: 'Loading Nodes...' },
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'text-center' },
+	              'There are no Nodes available'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'onFilter',
+	    value: function onFilter(filterString) {
+	      this.setState({
+	        filterString: filterString
+	      });
+	    }
+	  }, {
+	    key: '_filterData',
+	    value: function _filterData(filterString, data) {
+	      var dataKeys = ['uuid'];
+	      return filterString ? data.filter(function (row) {
+	        var result = dataKeys.filter(function (dataKey) {
+	          return row[dataKey].toLowerCase().includes(filterString.toLowerCase());
+	        });
+	        return result.length > 0;
+	      }) : data;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var filteredData = this._filterData(this.state.filterString, this.props.nodes.toList().toJS());
+	      return _react2.default.createElement(
+	        _DataTable2.default,
+	        _extends({}, this.props, {
+	          data: this.props.nodes.toList().toJS(),
+	          rowsCount: filteredData.length,
+	          noRowsRenderer: this.renderNoNodesFound.bind(this),
+	          onFilter: this.onFilter.bind(this),
+	          filterString: this.state.filterString }),
+	        _react2.default.createElement(_DataTableColumn2.default, {
+	          key: 'select',
+	          header: _react2.default.createElement(_DataTableCells.DataTableHeaderCell, { key: 'select', className: 'shrink' }),
+	          cell: _react2.default.createElement(NodesTableCheckBoxCell, { data: filteredData,
+	            nodesInProgress: this.props.nodesInProgress,
+	            field: 'uuid',
+	            className: 'shrink' }) }),
+	        _react2.default.createElement(_DataTableColumn2.default, {
+	          key: 'uuid',
+	          header: _react2.default.createElement(
+	            _DataTableCells.DataTableHeaderCell,
+	            { key: 'uuid' },
+	            'UUID'
+	          ),
+	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'uuid' }) }),
+	        _react2.default.createElement(_DataTableColumn2.default, {
+	          key: 'role',
+	          header: _react2.default.createElement(
+	            _DataTableCells.DataTableHeaderCell,
+	            { key: 'role' },
+	            'Role'
+	          ),
+	          cell: _react2.default.createElement(NodesTableRoleCell, { data: filteredData, roles: this.props.roles }) }),
+	        _react2.default.createElement(_DataTableColumn2.default, {
+	          key: 'properties.cpu_arch',
+	          header: _react2.default.createElement(
+	            _DataTableCells.DataTableHeaderCell,
+	            { key: 'properties.cpu_arch' },
+	            'CPU Arch.'
+	          ),
+	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'properties.cpu_arch' }) }),
+	        _react2.default.createElement(_DataTableColumn2.default, {
+	          key: 'properties.cpus',
+	          header: _react2.default.createElement(
+	            _DataTableCells.DataTableHeaderCell,
+	            { key: 'properties.cpus' },
+	            'CPU (cores)'
+	          ),
+	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'properties.cpus' }) }),
+	        _react2.default.createElement(_DataTableColumn2.default, {
+	          key: 'properties.local_gb',
+	          header: _react2.default.createElement(
+	            _DataTableCells.DataTableHeaderCell,
+	            { key: 'properties.local_gb' },
+	            'Disk (GB)'
+	          ),
+	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'properties.local_gb' }) }),
+	        _react2.default.createElement(_DataTableColumn2.default, {
+	          key: 'properties.memory_mb',
+	          header: _react2.default.createElement(
+	            _DataTableCells.DataTableHeaderCell,
+	            { key: 'properties.memory_mb' },
+	            'Memory (MB)'
+	          ),
+	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'properties.memory_mb' }) }),
+	        _react2.default.createElement(_DataTableColumn2.default, {
+	          key: 'power_state',
+	          header: _react2.default.createElement(
+	            _DataTableCells.DataTableHeaderCell,
+	            { key: 'power_state' },
+	            'Power State'
+	          ),
+	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'power_state' }) }),
+	        _react2.default.createElement(_DataTableColumn2.default, {
+	          key: 'provision_state',
+	          header: _react2.default.createElement(
+	            _DataTableCells.DataTableHeaderCell,
+	            { key: 'provision_state' },
+	            'Provision State'
+	          ),
+	          cell: _react2.default.createElement(_DataTableCells.DataTableDataFieldCell, { data: filteredData, field: 'provision_state' }) })
+	      );
+	    }
+	  }]);
+	
+	  return NodesTable;
+	}(_react2.default.Component);
+	
+	exports.default = NodesTable;
+	
+	NodesTable.propTypes = {
+	  isFetchingNodes: _react2.default.PropTypes.bool.isRequired,
+	  nodes: _reactImmutableProptypes2.default.map.isRequired,
+	  nodesInProgress: _reactImmutableProptypes2.default.set.isRequired,
+	  roles: _reactImmutableProptypes2.default.map.isRequired
+	};
+	
+	var NodesTableCheckBoxCell = exports.NodesTableCheckBoxCell = function (_React$Component2) {
+	  _inherits(NodesTableCheckBoxCell, _React$Component2);
+	
+	  function NodesTableCheckBoxCell() {
+	    _classCallCheck(this, NodesTableCheckBoxCell);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NodesTableCheckBoxCell).apply(this, arguments));
+	  }
+	
+	  _createClass(NodesTableCheckBoxCell, [{
+	    key: 'render',
+	    value: function render() {
+	      var nodeId = _.result(this.props.data[this.props.rowIndex], this.props.field);
+	      return _react2.default.createElement(_DataTableCells.DataTableCheckBoxCell, _extends({}, this.props, {
+	        operationInProgress: this.props.nodesInProgress.includes(nodeId) }));
+	    }
+	  }]);
+	
+	  return NodesTableCheckBoxCell;
+	}(_react2.default.Component);
+	
+	NodesTableCheckBoxCell.propTypes = {
+	  data: _react2.default.PropTypes.array.isRequired,
+	  field: _react2.default.PropTypes.string.isRequired,
+	  nodesInProgress: _reactImmutableProptypes2.default.set.isRequired,
+	  rowIndex: _react2.default.PropTypes.number
+	};
+	
+	var NodesTableRoleCell = exports.NodesTableRoleCell = function (_React$Component3) {
+	  _inherits(NodesTableRoleCell, _React$Component3);
+	
+	  function NodesTableRoleCell() {
+	    _classCallCheck(this, NodesTableRoleCell);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NodesTableRoleCell).apply(this, arguments));
+	  }
+	
+	  _createClass(NodesTableRoleCell, [{
+	    key: 'getAssignedRoleTitle',
+	    value: function getAssignedRoleTitle() {
+	      var fieldValue = _.result(this.props.data[this.props.rowIndex], 'properties.capabilities');
+	      var capabilitiesMatch = fieldValue.match(/.*profile:(\w+)/);
+	      if (capabilitiesMatch && Array.isArray(capabilitiesMatch) && capabilitiesMatch.length > 1) {
+	        var role = this.props.roles.get(capabilitiesMatch[1]);
+	        return role ? role.title : 'Not assigned';
+	      } else {
+	        return 'Not assigned';
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _DataTableCells.DataTableCell,
+	        this.props,
+	        this.getAssignedRoleTitle()
+	      );
+	    }
+	  }]);
+	
+	  return NodesTableRoleCell;
+	}(_react2.default.Component);
+	
+	NodesTableRoleCell.propTypes = {
+	  data: _react2.default.PropTypes.array.isRequired,
+	  roles: _reactImmutableProptypes2.default.map.isRequired,
+	  rowIndex: _react2.default.PropTypes.number
+	};
+
+/***/ },
+/* 787 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76276,7 +76797,7 @@
 	
 	var _reactRedux = __webpack_require__(291);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -76286,7 +76807,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _FormErrorList = __webpack_require__(729);
+	var _FormErrorList = __webpack_require__(763);
 	
 	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
 	
@@ -76294,7 +76815,7 @@
 	
 	var _PlansActions2 = _interopRequireDefault(_PlansActions);
 	
-	var _PlanFormTabs = __webpack_require__(778);
+	var _PlanFormTabs = __webpack_require__(788);
 	
 	var _PlanFormTabs2 = _interopRequireDefault(_PlanFormTabs);
 	
@@ -76383,11 +76904,7 @@
 	              { to: '/plans/list',
 	                type: 'button',
 	                className: 'close' },
-	              _react2.default.createElement(
-	                'span',
-	                { 'aria-hidden': 'true' },
-	                '×'
-	              )
+	              _react2.default.createElement('span', { 'aria-hidden': 'true', className: 'pficon pficon-close' })
 	            ),
 	            _react2.default.createElement(
 	              'h4',
@@ -76442,7 +76959,7 @@
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(NewPlan);
 
 /***/ },
-/* 778 */
+/* 788 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76457,19 +76974,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _HorizontalInput = __webpack_require__(779);
+	var _HorizontalInput = __webpack_require__(789);
 	
 	var _HorizontalInput2 = _interopRequireDefault(_HorizontalInput);
 	
-	var _NavTab = __webpack_require__(709);
+	var _NavTab = __webpack_require__(714);
 	
 	var _NavTab2 = _interopRequireDefault(_NavTab);
 	
-	var _PlanFileInput = __webpack_require__(761);
+	var _PlanFileInput = __webpack_require__(766);
 	
 	var _PlanFileInput2 = _interopRequireDefault(_PlanFileInput);
 	
-	var _PlanFilesTab = __webpack_require__(762);
+	var _PlanFilesTab = __webpack_require__(767);
 	
 	var _PlanFilesTab2 = _interopRequireDefault(_PlanFilesTab);
 	
@@ -76586,7 +77103,7 @@
 	};
 
 /***/ },
-/* 779 */
+/* 789 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76601,7 +77118,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -76637,7 +77154,7 @@
 	    value: function renderErrorMessage() {
 	      var errorMessage = this.props.getErrorMessage();
 	      return errorMessage ? _react2.default.createElement(
-	        'small',
+	        'span',
 	        { className: 'help-block' },
 	        errorMessage
 	      ) : false;
@@ -76721,7 +77238,7 @@
 	exports.default = _formsyReact2.default.HOC(HorizontalInput);
 
 /***/ },
-/* 780 */
+/* 790 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76746,19 +77263,19 @@
 	
 	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
 	
-	var _NavTab = __webpack_require__(709);
+	var _NavTab = __webpack_require__(714);
 	
 	var _NavTab2 = _interopRequireDefault(_NavTab);
 	
-	var _NodesActions = __webpack_require__(746);
+	var _NodesActions = __webpack_require__(741);
 	
 	var _NodesActions2 = _interopRequireDefault(_NodesActions);
 	
-	var _RolesActions = __webpack_require__(755);
+	var _RolesActions = __webpack_require__(752);
 	
 	var _RolesActions2 = _interopRequireDefault(_RolesActions);
 	
-	var _nodes = __webpack_require__(739);
+	var _nodes = __webpack_require__(730);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -76789,11 +77306,6 @@
 	      e.preventDefault();
 	      this.props.dispatch(_NodesActions2.default.fetchNodes());
 	      this.props.dispatch(_RolesActions2.default.fetchRoles());
-	    }
-	  }, {
-	    key: 'introspectNodes',
-	    value: function introspectNodes() {
-	      this.props.dispatch(_NodesActions2.default.introspectNodes());
 	    }
 	  }, {
 	    key: 'render',
@@ -76846,22 +77358,12 @@
 	            ),
 	            _react2.default.createElement(
 	              _NavTab2.default,
-	              { to: '/nodes/introspected' },
-	              'Introspected',
+	              { to: '/nodes/deployed' },
+	              'Deployed',
 	              _react2.default.createElement(
 	                'span',
 	                { className: 'badge' },
-	                this.props.nodes.get('introspected').size
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _NavTab2.default,
-	              { to: '/nodes/provisioned' },
-	              'Provisioned',
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'badge' },
-	                this.props.nodes.get('provisioned').size
+	                this.props.nodes.get('deployed').size
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -76878,9 +77380,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'tab-pane' },
-	            _react2.default.cloneElement(this.props.children, { nodes: this.props.nodes,
-	              roles: this.props.roles,
-	              introspectNodes: this.introspectNodes.bind(this) })
+	            this.props.children
 	          )
 	        )
 	      );
@@ -76893,17 +77393,15 @@
 	Nodes.propTypes = {
 	  children: _react2.default.PropTypes.node.isRequired,
 	  dispatch: _react2.default.PropTypes.func.isRequired,
-	  nodes: _reactImmutableProptypes2.default.map.isRequired,
-	  roles: _reactImmutableProptypes2.default.map
+	  nodes: _reactImmutableProptypes2.default.map.isRequired
 	};
 	
 	function mapStateToProps(state) {
 	  return {
-	    roles: state.roles.get('roles'),
 	    nodes: state.nodes.merge((0, _immutable.Map)({
 	      registered: (0, _nodes.getRegisteredNodes)(state),
 	      introspected: (0, _nodes.getIntrospectedNodes)(state),
-	      provisioned: (0, _nodes.getProvisionedNodes)(state),
+	      deployed: (0, _nodes.getDeployedNodes)(state),
 	      maintenance: (0, _nodes.getMaintenanceNodes)(state)
 	    }))
 	  };
@@ -76912,7 +77410,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Nodes);
 
 /***/ },
-/* 781 */
+/* 791 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76929,7 +77427,7 @@
 	
 	var _reactRedux = __webpack_require__(291);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -76945,17 +77443,21 @@
 	
 	var _immutable = __webpack_require__(556);
 	
-	var _nodes = __webpack_require__(739);
+	var _nodes = __webpack_require__(730);
 	
-	var _FormErrorList = __webpack_require__(729);
+	var _FormErrorList = __webpack_require__(763);
 	
 	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
 	
-	var _NodesActions = __webpack_require__(746);
+	var _Modal = __webpack_require__(562);
+	
+	var _Modal2 = _interopRequireDefault(_Modal);
+	
+	var _NodesActions = __webpack_require__(741);
 	
 	var _NodesActions2 = _interopRequireDefault(_NodesActions);
 	
-	var _NodesTable = __webpack_require__(730);
+	var _NodesTable = __webpack_require__(786);
 	
 	var _NodesTable2 = _interopRequireDefault(_NodesTable);
 	
@@ -77072,67 +77574,55 @@
 	      });
 	
 	      return _react2.default.createElement(
-	        'div',
-	        null,
+	        _Modal2.default,
+	        { dialogClasses: 'modal-xl' },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'modal modal-routed in', role: 'dialog' },
+	          _formsyReact2.default.Form,
+	          { ref: 'nodesAssignmentForm',
+	            role: 'form',
+	            className: 'form',
+	            onSubmit: this.handleSubmit.bind(this),
+	            onValid: this.canSubmit.bind(this),
+	            onInvalid: this.disableButton.bind(this) },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'modal-dialog modal-lg' },
+	            { className: 'modal-header' },
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'modal-content' },
-	              _react2.default.createElement(
-	                _formsyReact2.default.Form,
-	                { ref: 'nodesAssignmentForm',
-	                  role: 'form',
-	                  className: 'form',
-	                  onSubmit: this.handleSubmit.bind(this),
-	                  onValid: this.canSubmit.bind(this),
-	                  onInvalid: this.disableButton.bind(this) },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'modal-header' },
-	                  _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/deployment-plan',
-	                      type: 'button',
-	                      className: 'close' },
-	                    _react2.default.createElement('span', { 'aria-hidden': 'true', className: 'pficon pficon-close' })
-	                  ),
-	                  _react2.default.createElement(
-	                    'h4',
-	                    { className: 'modal-title' },
-	                    'Assign Nodes to ',
-	                    role ? role.title : roleName,
-	                    ' Role'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'modal-body' },
-	                  _react2.default.createElement(_FormErrorList2.default, { errors: this.props.formErrors.toJS() }),
-	                  _react2.default.createElement(_NodesTable2.default, { nodes: nodesToAssign,
-	                    roles: this.props.roles,
-	                    isFetchingNodes: this.props.isFetchingNodes,
-	                    dataOperationInProgress: this.props.nodesOperationInProgress,
-	                    tableActions: this.getTableActions.bind(this) })
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'modal-footer' },
-	                  _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/deployment-plan', type: 'button', className: 'btn btn-default' },
-	                    'Done'
-	                  )
-	                )
-	              )
+	              _reactRouter.Link,
+	              { to: '/deployment-plan',
+	                type: 'button',
+	                className: 'close' },
+	              _react2.default.createElement('span', { 'aria-hidden': 'true', className: 'pficon pficon-close' })
+	            ),
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'modal-title' },
+	              'Assign Nodes to ',
+	              role ? role.title : roleName,
+	              ' Role'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-body' },
+	            _react2.default.createElement(_FormErrorList2.default, { errors: this.props.formErrors.toJS() }),
+	            _react2.default.createElement(_NodesTable2.default, { nodes: nodesToAssign,
+	              roles: this.props.roles,
+	              isFetchingNodes: this.props.isFetchingNodes,
+	              dataOperationInProgress: this.props.nodesOperationInProgress,
+	              nodesInProgress: this.props.nodesInProgress,
+	              tableActions: this.getTableActions.bind(this) })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-footer' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/deployment-plan', type: 'button', className: 'btn btn-default' },
+	              'Done'
 	            )
 	          )
-	        ),
-	        _react2.default.createElement('div', { className: 'modal-backdrop in' })
+	        )
 	      );
 	    }
 	  }]);
@@ -77148,6 +77638,7 @@
 	  formFieldErrors: _reactImmutableProptypes2.default.map.isRequired,
 	  introspectedNodes: _reactImmutableProptypes2.default.map,
 	  isFetchingNodes: _react2.default.PropTypes.bool,
+	  nodesInProgress: _reactImmutableProptypes2.default.set,
 	  nodesOperationInProgress: _react2.default.PropTypes.bool,
 	  params: _react2.default.PropTypes.object.isRequired,
 	  roles: _reactImmutableProptypes2.default.map.isRequired,
@@ -77163,7 +77654,8 @@
 	  return {
 	    introspectedNodes: (0, _nodes.getIntrospectedNodes)(state),
 	    isFetchingNodes: state.nodes.get('isFetching'),
-	    nodesOperationInProgress: state.nodes.get('dataOperationInProgress'),
+	    nodesInProgress: state.nodes.get('nodesInProgress'),
+	    nodesOperationInProgress: (0, _nodes.getNodesOperationInProgress)(state),
 	    roles: state.roles.get('roles'),
 	    unassignedIntrospectedNodes: (0, _nodes.getUnassignedIntrospectedNodes)(state)
 	  };
@@ -77183,7 +77675,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NodesAssignment);
 
 /***/ },
-/* 782 */
+/* 792 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77200,7 +77692,7 @@
 	
 	var _reactRedux = __webpack_require__(291);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -77218,11 +77710,11 @@
 	
 	var _Loader2 = _interopRequireDefault(_Loader);
 	
-	var _ParametersActions = __webpack_require__(783);
+	var _ParametersActions = __webpack_require__(793);
 	
 	var _ParametersActions2 = _interopRequireDefault(_ParametersActions);
 	
-	var _ParameterTree = __webpack_require__(784);
+	var _ParameterTree = __webpack_require__(794);
 	
 	var _ParameterTree2 = _interopRequireDefault(_ParameterTree);
 	
@@ -77378,7 +77870,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Parameters);
 
 /***/ },
-/* 783 */
+/* 793 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77391,19 +77883,19 @@
 	
 	var _history2 = _interopRequireDefault(_history);
 	
-	var _NotificationActions = __webpack_require__(665);
+	var _NotificationActions = __webpack_require__(666);
 	
 	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
 	
-	var _ParametersConstants = __webpack_require__(694);
+	var _ParametersConstants = __webpack_require__(697);
 	
 	var _ParametersConstants2 = _interopRequireDefault(_ParametersConstants);
 	
-	var _TripleOApiService = __webpack_require__(679);
+	var _TripleOApiService = __webpack_require__(680);
 	
 	var _TripleOApiService2 = _interopRequireDefault(_TripleOApiService);
 	
-	var _TripleOApiErrorHandler = __webpack_require__(706);
+	var _TripleOApiErrorHandler = __webpack_require__(712);
 	
 	var _TripleOApiErrorHandler2 = _interopRequireDefault(_TripleOApiErrorHandler);
 	
@@ -77484,7 +77976,7 @@
 	};
 
 /***/ },
-/* 784 */
+/* 794 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77499,15 +77991,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _FormErrorList = __webpack_require__(729);
+	var _FormErrorList = __webpack_require__(763);
 	
 	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
 	
-	var _ResourceGroupTab = __webpack_require__(785);
+	var _ResourceGroupTab = __webpack_require__(795);
 	
 	var _ResourceGroupTab2 = _interopRequireDefault(_ResourceGroupTab);
 	
-	var _ParametersTabPane = __webpack_require__(787);
+	var _ParametersTabPane = __webpack_require__(797);
 	
 	var _ParametersTabPane2 = _interopRequireDefault(_ParametersTabPane);
 	
@@ -77594,7 +78086,7 @@
 	};
 
 /***/ },
-/* 785 */
+/* 795 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77617,7 +78109,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ResourceGroupList = __webpack_require__(786);
+	var _ResourceGroupList = __webpack_require__(796);
 	
 	var _ResourceGroupList2 = _interopRequireDefault(_ResourceGroupList);
 	
@@ -77729,7 +78221,7 @@
 	};
 
 /***/ },
-/* 786 */
+/* 796 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77748,7 +78240,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ResourceGroupTab = __webpack_require__(785);
+	var _ResourceGroupTab = __webpack_require__(795);
 	
 	var _ResourceGroupTab2 = _interopRequireDefault(_ResourceGroupTab);
 	
@@ -77824,7 +78316,7 @@
 	};
 
 /***/ },
-/* 787 */
+/* 797 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77843,19 +78335,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _HorizontalInput = __webpack_require__(779);
+	var _HorizontalInput = __webpack_require__(789);
 	
 	var _HorizontalInput2 = _interopRequireDefault(_HorizontalInput);
 	
-	var _HorizontalTextarea = __webpack_require__(788);
+	var _HorizontalTextarea = __webpack_require__(798);
 	
 	var _HorizontalTextarea2 = _interopRequireDefault(_HorizontalTextarea);
 	
-	var _HorizontalCheckBox = __webpack_require__(789);
+	var _HorizontalCheckBox = __webpack_require__(799);
 	
 	var _HorizontalCheckBox2 = _interopRequireDefault(_HorizontalCheckBox);
 	
-	var _HorizontalStaticText = __webpack_require__(760);
+	var _HorizontalStaticText = __webpack_require__(765);
 	
 	var _HorizontalStaticText2 = _interopRequireDefault(_HorizontalStaticText);
 	
@@ -77986,7 +78478,7 @@
 	};
 
 /***/ },
-/* 788 */
+/* 798 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78001,7 +78493,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -78119,7 +78611,7 @@
 	exports.default = _formsyReact2.default.HOC(HorizontalTextarea);
 
 /***/ },
-/* 789 */
+/* 799 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78134,7 +78626,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -78253,7 +78745,7 @@
 	exports.default = _formsyReact2.default.HOC(HorizontalCheckBox);
 
 /***/ },
-/* 790 */
+/* 800 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -78311,7 +78803,7 @@
 	};
 
 /***/ },
-/* 791 */
+/* 801 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78326,9 +78818,11 @@
 	
 	var _ = _interopRequireWildcard(_lodash);
 	
+	var _reactRedux = __webpack_require__(291);
+	
 	var _immutable = __webpack_require__(556);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -78340,11 +78834,13 @@
 	
 	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
 	
-	var _FormErrorList = __webpack_require__(729);
+	var _nodes = __webpack_require__(730);
+	
+	var _FormErrorList = __webpack_require__(763);
 	
 	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
 	
-	var _NodesTable = __webpack_require__(730);
+	var _NodesTable = __webpack_require__(786);
 	
 	var _NodesTable2 = _interopRequireDefault(_NodesTable);
 	
@@ -78358,13 +78854,13 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var ProvisionedNodesTabPane = function (_React$Component) {
-	  _inherits(ProvisionedNodesTabPane, _React$Component);
+	var DeployedNodesTabPane = function (_React$Component) {
+	  _inherits(DeployedNodesTabPane, _React$Component);
 	
-	  function ProvisionedNodesTabPane() {
-	    _classCallCheck(this, ProvisionedNodesTabPane);
+	  function DeployedNodesTabPane() {
+	    _classCallCheck(this, DeployedNodesTabPane);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProvisionedNodesTabPane).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DeployedNodesTabPane).call(this));
 	
 	    _this.state = {
 	      canSubmit: false
@@ -78372,7 +78868,7 @@
 	    return _this;
 	  }
 	
-	  _createClass(ProvisionedNodesTabPane, [{
+	  _createClass(DeployedNodesTabPane, [{
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
 	      this.invalidateForm(this.props.formFieldErrors.toJS());
@@ -78380,7 +78876,7 @@
 	  }, {
 	    key: 'canSubmit',
 	    value: function canSubmit() {
-	      if (_.includes(_.values(this.refs.provisionedNodesTableForm.getCurrentValues()), true)) {
+	      if (_.includes(_.values(this.refs.deployedNodesTableForm.getCurrentValues()), true)) {
 	        this.enableButton();
 	      } else {
 	        this.disableButton();
@@ -78399,13 +78895,13 @@
 	  }, {
 	    key: 'invalidateForm',
 	    value: function invalidateForm(formFieldErrors) {
-	      this.refs.provisionedNodesTableForm.updateInputsWithError(formFieldErrors);
+	      this.refs.deployedNodesTableForm.updateInputsWithError(formFieldErrors);
 	    }
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(formData, resetForm, invalidateForm) {
 	      // const data = this._convertFormData(formData);
-	      // const formFields = Object.keys(this.refs.provisionedNodesTableForm.inputs);
+	      // const formFields = Object.keys(this.refs.deployedNodesTableForm.inputs);
 	      this.disableButton();
 	      resetForm();
 	    }
@@ -78414,39 +78910,53 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _formsyReact2.default.Form,
-	        { ref: 'provisionedNodesTableForm',
+	        { ref: 'deployedNodesTableForm',
 	          role: 'form',
 	          className: 'form',
 	          onSubmit: this.handleSubmit.bind(this),
 	          onValid: this.canSubmit.bind(this),
 	          onInvalid: this.disableButton.bind(this) },
 	        _react2.default.createElement(_FormErrorList2.default, { errors: this.props.formErrors.toJS() }),
-	        _react2.default.createElement(_NodesTable2.default, { nodes: this.props.nodes.get('provisioned'),
+	        _react2.default.createElement(_NodesTable2.default, { nodes: this.props.deployedNodes,
 	          roles: this.props.roles,
-	          isFetchingNodes: this.props.nodes.get('isFetching'),
-	          dataOperationInProgress: this.props.nodes.get('dataOperationInProgress') })
+	          nodesInProgress: this.props.nodesInProgress,
+	          isFetchingNodes: this.props.isFetchingNodes,
+	          dataOperationInProgress: this.props.nodesOperationInProgress })
 	      );
 	    }
 	  }]);
 	
-	  return ProvisionedNodesTabPane;
+	  return DeployedNodesTabPane;
 	}(_react2.default.Component);
 	
-	exports.default = ProvisionedNodesTabPane;
-	
-	ProvisionedNodesTabPane.propTypes = {
-	  formErrors: _reactImmutableProptypes2.default.list,
-	  formFieldErrors: _reactImmutableProptypes2.default.map,
-	  nodes: _reactImmutableProptypes2.default.map,
+	DeployedNodesTabPane.propTypes = {
+	  deployedNodes: _reactImmutableProptypes2.default.map.isRequired,
+	  formErrors: _reactImmutableProptypes2.default.list.isRequired,
+	  formFieldErrors: _reactImmutableProptypes2.default.map.isRequired,
+	  isFetchingNodes: _react2.default.PropTypes.bool.isRequired,
+	  nodesInProgress: _reactImmutableProptypes2.default.set.isRequired,
+	  nodesOperationInProgress: _react2.default.PropTypes.bool.isRequired,
 	  roles: _reactImmutableProptypes2.default.map
 	};
-	ProvisionedNodesTabPane.defaultProps = {
+	DeployedNodesTabPane.defaultProps = {
 	  formErrors: (0, _immutable.List)(),
 	  formFieldErrors: (0, _immutable.Map)()
 	};
+	
+	function mapStateToProps(state) {
+	  return {
+	    deployedNodes: (0, _nodes.getDeployedNodes)(state),
+	    isFetchingNodes: state.nodes.get('isFetching'),
+	    nodesInProgress: state.nodes.get('nodesInProgress'),
+	    nodesOperationInProgress: (0, _nodes.getNodesOperationInProgress)(state),
+	    roles: state.roles.get('roles')
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(DeployedNodesTabPane);
 
 /***/ },
-/* 792 */
+/* 802 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78475,31 +78985,39 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _BlankSlate = __webpack_require__(717);
+	var _shortid = __webpack_require__(667);
+	
+	var _shortid2 = _interopRequireDefault(_shortid);
+	
+	var _BlankSlate = __webpack_require__(722);
 	
 	var _BlankSlate2 = _interopRequireDefault(_BlankSlate);
 	
-	var _registerNodes = __webpack_require__(793);
+	var _registerNodes = __webpack_require__(803);
 	
-	var _nodes = __webpack_require__(699);
+	var _nodes = __webpack_require__(702);
 	
-	var _NotificationActions = __webpack_require__(665);
+	var _Loader = __webpack_require__(560);
+	
+	var _Loader2 = _interopRequireDefault(_Loader);
+	
+	var _NotificationActions = __webpack_require__(666);
 	
 	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
 	
-	var _RegisterNodesActions = __webpack_require__(794);
+	var _RegisterNodesActions = __webpack_require__(804);
 	
 	var _RegisterNodesActions2 = _interopRequireDefault(_RegisterNodesActions);
 	
-	var _RegisterNodeForm = __webpack_require__(795);
+	var _RegisterNodeForm = __webpack_require__(805);
 	
 	var _RegisterNodeForm2 = _interopRequireDefault(_RegisterNodeForm);
 	
-	var _Tab = __webpack_require__(770);
+	var _Tab = __webpack_require__(774);
 	
 	var _Tab2 = _interopRequireDefault(_Tab);
 	
-	var _TabPane = __webpack_require__(771);
+	var _TabPane = __webpack_require__(775);
 	
 	var _TabPane2 = _interopRequireDefault(_TabPane);
 	
@@ -78527,7 +79045,7 @@
 	  _createClass(RegisterNodesDialog, [{
 	    key: 'onNodeChange',
 	    value: function onNodeChange(updatedNode) {
-	      this.props.dispatch(_RegisterNodesActions2.default.updateNode(updatedNode));
+	      this.props.updateNode(updatedNode);
 	    }
 	  }, {
 	    key: 'addNodesFromInstackenvJSON',
@@ -78539,9 +79057,10 @@
 	        switch (node.pm_type) {
 	          case 'pxe_ssh':
 	            _this2.addNode(new _nodes.NodeToRegister({
-	              id: Date.now(),
+	              id: _shortid2.default.generate(),
+	              name: node.name,
 	              driver: node.pm_type,
-	              nicMacAddress: node.mac.toString(),
+	              nicMacAddresses: (0, _immutable.List)(node.mac),
 	              driver_info: (0, _immutable.Map)({
 	                ssh_virt_type: 'virsh',
 	                ssh_address: node.pm_addr,
@@ -78573,15 +79092,15 @@
 	          } else if (file.name.match(/(\.csv)$/)) {
 	            // TODO(jtomasek): add CSV file support
 	            // this.addNodesFromCSV(e.target.result);
-	            _this3.props.dispatch(_NotificationActions2.default.notify({
+	            _this3.props.notify({
 	              title: 'CSV Upload Unsupported',
 	              message: 'The selected file format is not supported yet'
-	            }));
+	            });
 	          } else {
-	            _this3.props.dispatch(_NotificationActions2.default.notify({
+	            _this3.props.notify({
 	              title: 'Unsuported File Format',
 	              message: 'Please provide csv file or instackenv.json'
-	            }));
+	            });
 	          }
 	        };
 	      }(file);
@@ -78602,28 +79121,28 @@
 	  }, {
 	    key: 'addNode',
 	    value: function addNode() {
-	      var newNode = arguments.length <= 0 || arguments[0] === undefined ? new _nodes.NodeToRegister({ id: Date.now() }) : arguments[0];
+	      var newNode = arguments.length <= 0 || arguments[0] === undefined ? new _nodes.NodeToRegister({ id: _shortid2.default.generate() }) : arguments[0];
 	
-	      this.props.dispatch(_RegisterNodesActions2.default.addNode(newNode));
-	      this.props.dispatch(_RegisterNodesActions2.default.selectNode(newNode.id));
+	      this.props.addNode(newNode);
+	      this.props.selectNode(newNode.id);
 	    }
 	  }, {
 	    key: 'removeNode',
 	    value: function removeNode(id, e) {
 	      e.preventDefault();
 	      e.stopPropagation();
-	      this.props.dispatch(_RegisterNodesActions2.default.removeNode(id));
+	      this.props.removeNode(id);
 	    }
 	  }, {
 	    key: 'selectNode',
 	    value: function selectNode(id) {
-	      this.props.dispatch(_RegisterNodesActions2.default.selectNode(id));
+	      this.props.selectNode(id);
 	    }
 	  }, {
 	    key: 'renderNode',
 	    value: function renderNode(node, index) {
 	      // TODO(jtomasek): fix the name setting here
-	      var nodeName = node.driver_info.get('ssh_address') || node.driver_info.get('ipmi_address') || 'Undefined Node';
+	      var nodeName = node.name || node.driver_info.get('ssh_address') || 'Undefined Node';
 	      var validationIconClasses = (0, _classnames2.default)({
 	        'pficon': true,
 	        'pficon-error-circle-o': !node.valid
@@ -78674,9 +79193,11 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this5 = this;
+	
 	      return _react2.default.createElement(
 	        _Modal2.default,
-	        { dialogClasses: 'modal-lg' },
+	        { dialogClasses: 'modal-xl' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'modal-header' },
@@ -78701,7 +79222,7 @@
 	            { className: 'row row-eq-height' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'col-sm-4 sidebar-pf sidebar-pf-left' },
+	              { className: 'col-sm-4 col-lg-3 sidebar-pf sidebar-pf-left' },
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'nav-stacked-actions' },
@@ -78740,11 +79261,18 @@
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'col-sm-8' },
+	              { className: 'col-sm-8 col-lg-9' },
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'tab-content' },
-	                this.renderTabPanes()
+	                _react2.default.createElement(
+	                  _Loader2.default,
+	                  { loaded: !this.props.isRegistering,
+	                    size: 'lg',
+	                    content: 'Registering Nodes...',
+	                    height: 220 },
+	                  this.renderTabPanes()
+	                )
 	              )
 	            )
 	          )
@@ -78762,8 +79290,11 @@
 	          _react2.default.createElement(
 	            'button',
 	            { disabled: !this.props.canSubmit,
+	              onClick: function onClick() {
+	                return _this5.props.registerNodes(_this5.props.ironicNodes, '/nodes/registered');
+	              },
 	              className: 'btn btn-primary',
-	              type: 'submit' },
+	              type: 'button' },
 	            'Register Nodes'
 	          )
 	        )
@@ -78775,24 +79306,56 @@
 	}(_react2.default.Component);
 	
 	RegisterNodesDialog.propTypes = {
+	  addNode: _react2.default.PropTypes.func.isRequired,
 	  canSubmit: _react2.default.PropTypes.bool.isRequired,
-	  dispatch: _react2.default.PropTypes.func.isRequired,
+	  ironicNodes: _reactImmutableProptypes2.default.map.isRequired,
+	  isRegistering: _react2.default.PropTypes.bool.isRequired,
 	  nodesToRegister: _reactImmutableProptypes2.default.map.isRequired,
-	  selectedNodeId: _react2.default.PropTypes.number
+	  notify: _react2.default.PropTypes.func.isRequired,
+	  registerNodes: _react2.default.PropTypes.func.isRequired,
+	  removeNode: _react2.default.PropTypes.func.isRequired,
+	  selectNode: _react2.default.PropTypes.func.isRequired,
+	  selectedNodeId: _react2.default.PropTypes.string,
+	  updateNode: _react2.default.PropTypes.func.isRequired
 	};
 	
 	function mapStateToProps(state) {
 	  return {
-	    canSubmit: (0, _registerNodes.allNodesToRegisterAreValid)(state),
+	    canSubmit: (0, _registerNodes.allNodesToRegisterAreValid)(state) && !state.registerNodes.get('isRegistering'),
+	    isRegistering: state.registerNodes.get('isRegistering'),
 	    nodesToRegister: state.registerNodes.get('nodesToRegister'),
-	    selectedNodeId: state.registerNodes.get('selectedNodeId')
+	    selectedNodeId: state.registerNodes.get('selectedNodeId'),
+	    ironicNodes: (0, _registerNodes.getIronicNodesfromNodesToRegister)(state)
 	  };
 	}
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(RegisterNodesDialog);
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    addNode: function addNode(node) {
+	      return dispatch(_RegisterNodesActions2.default.addNode(node));
+	    },
+	    selectNode: function selectNode(nodeId) {
+	      return dispatch(_RegisterNodesActions2.default.selectNode(nodeId));
+	    },
+	    registerNodes: function registerNodes(nodes, redirectPath) {
+	      dispatch(_RegisterNodesActions2.default.registerNodes(nodes, redirectPath));
+	    },
+	    removeNode: function removeNode(nodeId) {
+	      return dispatch(_RegisterNodesActions2.default.removeNode(nodeId));
+	    },
+	    updateNode: function updateNode(node) {
+	      return dispatch(_RegisterNodesActions2.default.updateNode(node));
+	    },
+	    notify: function notify(notification) {
+	      return dispatch(_NotificationActions2.default.notify(notification));
+	    }
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(RegisterNodesDialog);
 
 /***/ },
-/* 793 */
+/* 803 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78800,9 +79363,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.allNodesToRegisterAreValid = undefined;
+	exports.getIronicNodesfromNodesToRegister = exports.allNodesToRegisterAreValid = undefined;
 	
 	var _reselect = __webpack_require__(558);
+	
+	var _nodes = __webpack_require__(702);
 	
 	var nodesToRegister = function nodesToRegister(state) {
 	  return state.registerNodes.get('nodesToRegister');
@@ -78817,9 +79382,19 @@
 	    return node.valid;
 	  }) && !nodesToRegister.isEmpty();
 	});
+	
+	/**
+	 * Converts nodesToRegister to map of nodes comsumable by register workflow
+	 * @return OrderedMap of IronicNodes
+	 */
+	var getIronicNodesfromNodesToRegister = exports.getIronicNodesfromNodesToRegister = (0, _reselect.createSelector)(nodesToRegister, function (nodesToRegister) {
+	  return nodesToRegister.map(function (node) {
+	    return new _nodes.IronicNode(node);
+	  });
+	});
 
 /***/ },
-/* 794 */
+/* 804 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78828,9 +79403,25 @@
 	  value: true
 	});
 	
-	var _RegisterNodesConstants = __webpack_require__(700);
+	var _history = __webpack_require__(551);
+	
+	var _history2 = _interopRequireDefault(_history);
+	
+	var _RegisterNodesConstants = __webpack_require__(703);
 	
 	var _RegisterNodesConstants2 = _interopRequireDefault(_RegisterNodesConstants);
+	
+	var _MistralApiErrorHandler = __webpack_require__(745);
+	
+	var _MistralApiErrorHandler2 = _interopRequireDefault(_MistralApiErrorHandler);
+	
+	var _MistralApiService = __webpack_require__(744);
+	
+	var _MistralApiService2 = _interopRequireDefault(_MistralApiService);
+	
+	var _NotificationActions = __webpack_require__(666);
+	
+	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -78858,11 +79449,51 @@
 	      type: _RegisterNodesConstants2.default.UPDATE_NODE,
 	      payload: node
 	    };
+	  },
+	  registerNodes: function registerNodes(nodes, redirectPath) {
+	    var _this = this;
+	
+	    return function (dispatch, getState) {
+	      dispatch(_this.registerNodesPending(nodes));
+	      _MistralApiService2.default.runWorkflow('tripleo.baremetal.v1.bulk_register', { nodes: nodes.toList().toJS() }).then(function (response) {
+	        if (response.state === 'ERROR') {
+	          dispatch(_NotificationActions2.default.notify({ title: 'Error', message: response.state_info }));
+	          dispatch(_this.registerNodesFailed());
+	        } else {
+	          dispatch(_NotificationActions2.default.notify({ title: 'Success',
+	            message: 'Nodes registration initiated' }));
+	          _history2.default.pushState(null, redirectPath);
+	          dispatch(_this.registerNodesSuccess());
+	        }
+	      }).catch(function (error) {
+	        var errorHandler = new _MistralApiErrorHandler2.default(error);
+	        errorHandler.errors.forEach(function (error) {
+	          dispatch(_NotificationActions2.default.notify(error));
+	        });
+	        dispatch(_this.registerNodesFailed());
+	      });
+	    };
+	  },
+	  registerNodesPending: function registerNodesPending(nodes) {
+	    return {
+	      type: _RegisterNodesConstants2.default.REGISTER_NODES_PENDING,
+	      payload: nodes
+	    };
+	  },
+	  registerNodesSuccess: function registerNodesSuccess() {
+	    return {
+	      type: _RegisterNodesConstants2.default.REGISTER_NODES_SUCCESS
+	    };
+	  },
+	  registerNodesFailed: function registerNodesFailed() {
+	    return {
+	      type: _RegisterNodesConstants2.default.REGISTER_NODES_FAILED
+	    };
 	  }
 	};
 
 /***/ },
-/* 795 */
+/* 805 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78873,7 +79504,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -78881,19 +79512,23 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _HorizontalInput = __webpack_require__(779);
+	var _HorizontalInput = __webpack_require__(789);
 	
 	var _HorizontalInput2 = _interopRequireDefault(_HorizontalInput);
 	
-	var _HorizontalSelect = __webpack_require__(796);
+	var _HorizontalArrayInput = __webpack_require__(806);
+	
+	var _HorizontalArrayInput2 = _interopRequireDefault(_HorizontalArrayInput);
+	
+	var _HorizontalSelect = __webpack_require__(807);
 	
 	var _HorizontalSelect2 = _interopRequireDefault(_HorizontalSelect);
 	
-	var _PXEAndSSHDriverFields = __webpack_require__(797);
+	var _PXEAndSSHDriverFields = __webpack_require__(808);
 	
 	var _PXEAndSSHDriverFields2 = _interopRequireDefault(_PXEAndSSHDriverFields);
 	
-	var _PXEAndIPMIToolDriverFields = __webpack_require__(798);
+	var _PXEAndIPMIToolDriverFields = __webpack_require__(809);
 	
 	var _PXEAndIPMIToolDriverFields2 = _interopRequireDefault(_PXEAndIPMIToolDriverFields);
 	
@@ -78916,9 +79551,9 @@
 	    _this.driverOptions = ['pxe_ipmitool', 'pxe_ssh'];
 	
 	    _this.macAddressValidator = {
-	      matchRegexp: /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/
+	      matchRegexp: /^([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}(,([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2})*$/
 	    };
-	    _this.macAddressValidatorMessage = 'Please enter a valid MAC Address';
+	    _this.macAddressValidatorMessage = 'Please enter a valid MAC Addresses';
 	    return _this;
 	  }
 	
@@ -78989,6 +79624,20 @@
 	            _react2.default.createElement(
 	              'legend',
 	              null,
+	              'General'
+	            ),
+	            _react2.default.createElement(_HorizontalInput2.default, { name: 'name',
+	              title: 'Name',
+	              inputColumnClasses: 'col-sm-7',
+	              labelColumnClasses: 'col-sm-5',
+	              value: this.props.selectedNode.name })
+	          ),
+	          _react2.default.createElement(
+	            'fieldset',
+	            null,
+	            _react2.default.createElement(
+	              'legend',
+	              null,
 	              'Management'
 	            ),
 	            _react2.default.createElement(_HorizontalSelect2.default, { name: 'driver',
@@ -79007,13 +79656,14 @@
 	              null,
 	              'Networking'
 	            ),
-	            _react2.default.createElement(_HorizontalInput2.default, { name: 'nicMacAddress',
-	              title: 'NIC MAC Address',
+	            _react2.default.createElement(_HorizontalArrayInput2.default, { name: 'nicMacAddresses',
+	              title: 'NIC MAC Addresses',
 	              inputColumnClasses: 'col-sm-7',
 	              labelColumnClasses: 'col-sm-5',
-	              value: this.props.selectedNode.nicMacAddress,
+	              value: this.props.selectedNode.nicMacAddresses.toArray(),
 	              validations: this.macAddressValidator,
 	              validationError: this.macAddressValidatorMessage,
+	              description: 'Comma separated list of MAC Addresses',
 	              required: true })
 	          )
 	        )
@@ -79032,7 +79682,7 @@
 	};
 
 /***/ },
-/* 796 */
+/* 806 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79043,7 +79693,147 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _formsyReact = __webpack_require__(722);
+	var _classnames = __webpack_require__(561);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _formsyReact = __webpack_require__(756);
+	
+	var _formsyReact2 = _interopRequireDefault(_formsyReact);
+	
+	var _react = __webpack_require__(293);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var HorizontalArrayInput = function (_React$Component) {
+	  _inherits(HorizontalArrayInput, _React$Component);
+	
+	  function HorizontalArrayInput() {
+	    _classCallCheck(this, HorizontalArrayInput);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(HorizontalArrayInput).apply(this, arguments));
+	  }
+	
+	  _createClass(HorizontalArrayInput, [{
+	    key: 'changeValue',
+	    value: function changeValue(event) {
+	      event.stopPropagation(); // https://github.com/christianalfoni/formsy-react/issues/203
+	      this.props.setValue(event.target.value.split(','));
+	    }
+	  }, {
+	    key: 'getValue',
+	    value: function getValue() {
+	      return this.props.getValue().toString();
+	    }
+	  }, {
+	    key: 'renderErrorMessage',
+	    value: function renderErrorMessage() {
+	      var errorMessage = this.props.getErrorMessage();
+	      return errorMessage ? _react2.default.createElement(
+	        'span',
+	        { className: 'help-block' },
+	        errorMessage
+	      ) : false;
+	    }
+	  }, {
+	    key: 'renderDescription',
+	    value: function renderDescription() {
+	      var description = this.props.description;
+	      return description ? _react2.default.createElement(
+	        'small',
+	        { className: 'help-block' },
+	        description
+	      ) : false;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var divClasses = (0, _classnames2.default)({
+	        'form-group': true,
+	        'has-error': this.props.showError(),
+	        // 'has-success': this.props.isValid(),
+	        'required': this.props.isRequired()
+	      });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: divClasses },
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: this.props.name,
+	            className: this.props.labelColumnClasses + ' control-label' },
+	          this.props.title
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.props.inputColumnClasses },
+	          _react2.default.createElement('input', { type: this.props.type,
+	            name: this.props.name,
+	            ref: this.props.name,
+	            id: this.props.name,
+	            className: 'form-control',
+	            onChange: this.changeValue.bind(this),
+	            value: this.getValue(),
+	            placeholder: this.props.placeholder,
+	            min: this.props.min,
+	            max: this.props.max,
+	            disabled: this.props.disabled }),
+	          this.renderErrorMessage(),
+	          this.renderDescription()
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return HorizontalArrayInput;
+	}(_react2.default.Component);
+	
+	HorizontalArrayInput.propTypes = {
+	  description: _react2.default.PropTypes.string,
+	  disabled: _react2.default.PropTypes.bool,
+	  getErrorMessage: _react2.default.PropTypes.func,
+	  getValue: _react2.default.PropTypes.func,
+	  inputColumnClasses: _react2.default.PropTypes.string.isRequired,
+	  isRequired: _react2.default.PropTypes.func,
+	  isValid: _react2.default.PropTypes.func,
+	  labelColumnClasses: _react2.default.PropTypes.string.isRequired,
+	  max: _react2.default.PropTypes.number,
+	  min: _react2.default.PropTypes.number,
+	  name: _react2.default.PropTypes.string.isRequired,
+	  placeholder: _react2.default.PropTypes.string,
+	  setValue: _react2.default.PropTypes.func,
+	  showError: _react2.default.PropTypes.func,
+	  title: _react2.default.PropTypes.string.isRequired,
+	  type: _react2.default.PropTypes.string
+	};
+	HorizontalArrayInput.defaultProps = {
+	  inputColumnClasses: 'col-sm-10',
+	  labelColumnClasses: 'col-sm-2',
+	  type: 'text'
+	};
+	exports.default = _formsyReact2.default.HOC(HorizontalArrayInput);
+
+/***/ },
+/* 807 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -79155,7 +79945,7 @@
 	exports.default = _formsyReact2.default.HOC(HorizontalSelect);
 
 /***/ },
-/* 797 */
+/* 808 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79174,15 +79964,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _HorizontalInput = __webpack_require__(779);
+	var _HorizontalInput = __webpack_require__(789);
 	
 	var _HorizontalInput2 = _interopRequireDefault(_HorizontalInput);
 	
-	var _HorizontalSelect = __webpack_require__(796);
+	var _HorizontalSelect = __webpack_require__(807);
 	
 	var _HorizontalSelect2 = _interopRequireDefault(_HorizontalSelect);
 	
-	var _HorizontalTextarea = __webpack_require__(788);
+	var _HorizontalTextarea = __webpack_require__(798);
 	
 	var _HorizontalTextarea2 = _interopRequireDefault(_HorizontalTextarea);
 	
@@ -79263,7 +80053,7 @@
 	};
 
 /***/ },
-/* 798 */
+/* 809 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79282,7 +80072,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _HorizontalInput = __webpack_require__(779);
+	var _HorizontalInput = __webpack_require__(789);
 	
 	var _HorizontalInput2 = _interopRequireDefault(_HorizontalInput);
 	
@@ -79343,7 +80133,7 @@
 	};
 
 /***/ },
-/* 799 */
+/* 810 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79358,6 +80148,8 @@
 	
 	var _ = _interopRequireWildcard(_lodash);
 	
+	var _reactRedux = __webpack_require__(291);
+	
 	var _immutable = __webpack_require__(556);
 	
 	var _react = __webpack_require__(293);
@@ -79368,15 +80160,21 @@
 	
 	var _reactImmutableProptypes2 = _interopRequireDefault(_reactImmutableProptypes);
 	
-	var _formsyReact = __webpack_require__(722);
+	var _formsyReact = __webpack_require__(756);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _FormErrorList = __webpack_require__(729);
+	var _nodes = __webpack_require__(730);
+	
+	var _FormErrorList = __webpack_require__(763);
 	
 	var _FormErrorList2 = _interopRequireDefault(_FormErrorList);
 	
-	var _NodesTable = __webpack_require__(730);
+	var _NodesActions = __webpack_require__(741);
+	
+	var _NodesActions2 = _interopRequireDefault(_NodesActions);
+	
+	var _NodesTable = __webpack_require__(786);
 	
 	var _NodesTable2 = _interopRequireDefault(_NodesTable);
 	
@@ -79436,7 +80234,6 @@
 	  }, {
 	    key: 'getTableActions',
 	    value: function getTableActions() {
-	      var dataOperationInProgress = this.props.nodes.get('dataOperationInProgress');
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'btn-group' },
@@ -79444,7 +80241,7 @@
 	          'button',
 	          { className: 'btn btn-primary',
 	            type: 'submit',
-	            disabled: !this.state.canSubmit || dataOperationInProgress },
+	            disabled: !this.state.canSubmit || this.props.nodesOperationInProgress },
 	          'Introspect Nodes'
 	        )
 	      );
@@ -79452,18 +80249,12 @@
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(formData, resetForm, invalidateForm) {
-	      // const data = this._convertFormData(formData);
-	      // const formFields = Object.keys(this.refs.registeredNodesTableForm.inputs);
 	      this.disableButton();
-	      this.props.introspectNodes();
+	      var nodeIds = _.keys(_.pickBy(formData, function (value) {
+	        return !!value;
+	      }));
+	      this.props.introspectNodes(nodeIds);
 	      resetForm();
-	      // TODO(jtomasek): use this when Introspection workflow uses provided nodes selection
-	      // this.props.introspectNodes(
-	      //   this.props.currentPlanName,
-	      //   data,
-	      //   formFields,
-	      //   this.props.parentPath
-	      // );
 	    }
 	  }, {
 	    key: 'render',
@@ -79480,10 +80271,11 @@
 	            onValid: this.canSubmit.bind(this),
 	            onInvalid: this.disableButton.bind(this) },
 	          _react2.default.createElement(_FormErrorList2.default, { errors: this.props.formErrors.toJS() }),
-	          _react2.default.createElement(_NodesTable2.default, { nodes: this.props.nodes.get('registered'),
+	          _react2.default.createElement(_NodesTable2.default, { nodes: this.props.registeredNodes,
 	            roles: this.props.roles,
-	            dataOperationInProgress: this.props.nodes.get('dataOperationInProgress'),
-	            isFetchingNodes: this.props.nodes.get('isFetching'),
+	            dataOperationInProgress: this.props.nodesOperationInProgress,
+	            nodesInProgress: this.props.nodesInProgress,
+	            isFetchingNodes: this.props.isFetchingNodes,
 	            tableActions: this.getTableActions.bind(this) })
 	        ),
 	        this.props.children
@@ -79494,20 +80286,41 @@
 	  return RegisteredNodesTabPane;
 	}(_react2.default.Component);
 	
-	exports.default = RegisteredNodesTabPane;
-	
 	RegisteredNodesTabPane.propTypes = {
 	  children: _react2.default.PropTypes.node,
 	  formErrors: _reactImmutableProptypes2.default.list,
 	  formFieldErrors: _reactImmutableProptypes2.default.map,
-	  introspectNodes: _react2.default.PropTypes.func,
-	  nodes: _reactImmutableProptypes2.default.map,
+	  introspectNodes: _react2.default.PropTypes.func.isRequired,
+	  isFetchingNodes: _react2.default.PropTypes.bool.isRequired,
+	  nodesInProgress: _reactImmutableProptypes2.default.set,
+	  nodesOperationInProgress: _react2.default.PropTypes.bool.isRequired,
+	  registeredNodes: _reactImmutableProptypes2.default.map,
 	  roles: _reactImmutableProptypes2.default.map
 	};
 	RegisteredNodesTabPane.defaultProps = {
 	  formErrors: (0, _immutable.List)(),
 	  formFieldErrors: (0, _immutable.Map)()
 	};
+	
+	function mapStateToProps(state) {
+	  return {
+	    roles: state.roles.get('roles'),
+	    registeredNodes: (0, _nodes.getRegisteredNodes)(state),
+	    nodesInProgress: state.nodes.get('nodesInProgress'),
+	    nodesOperationInProgress: (0, _nodes.getNodesOperationInProgress)(state),
+	    isFetchingNodes: state.nodes.get('isFetching')
+	  };
+	}
+	
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    introspectNodes: function introspectNodes(nodeIds) {
+	      return dispatch(_NodesActions2.default.introspectNodes(nodeIds));
+	    }
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(RegisteredNodesTabPane);
 
 /***/ }
 /******/ ]);
