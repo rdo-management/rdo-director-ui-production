@@ -47,17 +47,16 @@ cfg.CONF.register_opts([cfg.StrOpt('keystone',
                                    help='Swift API URL'),
                         cfg.StrOpt('validations',
                                    default=None,
-                                   help='Validations API URL')],
+                                   help='Validations API URL'),
                         cfg.StrOpt('mistral',
                                    default=None,
-                                   help='Mistral API URL')],
+                                   help='Mistral API URL'),
                         cfg.StrOpt('zaqar_websocket_url',
                                    default=None,
-                                   help='Zaqar Websocket URL')],
+                                   help='Zaqar Websocket URL'),
                         cfg.StrOpt('zaqar_default_queue',
                                    default="tripleo",
                                    help='Zaqar Default Queue')],
-                       group='app')
                        group='app')
 
 app = Flask(__name__, static_folder='static')
